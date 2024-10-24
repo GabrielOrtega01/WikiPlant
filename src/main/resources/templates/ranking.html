@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Ranking de Clientes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://cdn.pixabay.com/photo/2016/02/06/09/56/science-1182713_640.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #f8f9fa;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        h1 {
+            color: #ffc107;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .table {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+            margin-bottom: 50px; /* Ajusta este valor según lo necesites */
+            transition: box-shadow 0.3s ease-in-out; /* Transición para el efecto de brillo */
+        }
+
+        .container {
+            padding-bottom: 100px; /* Espacio para evitar el solapamiento con el footer */
+        }
+
+        .table:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.5); /* Efecto de brillo al pasar el ratón */
+        }
+
+        .table thead th {
+            background-color: rgba(0, 123, 255, 0.8);
+            color: white;
+        }
+
+        .table tbody tr {
+            transition: background-color 0.3s;
+        }
+
+        .table tbody tr:hover {
+            background-color: rgba(226, 230, 234, 0.8);
+        }
+
+        footer {
+            background-color: rgba(52, 58, 64, 0.8);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 2;
+        }
+
+        .header {
+            background-color: rgba(0, 123, 255, 0.8);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-back {
+            margin-bottom: 20px;
+            z-index: 2;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            border-radius: 5px;
+            background-color: transparent; /* Fondo transparente para el efecto de borde */
+            color: #ffc107; /* Color del texto del botón */
+            transition: all 0.3s ease; /* Transición suave */
+        }
+
+        .btn-back::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background-color: rgba(0, 123, 255, 0.5); /* Color azul para el efecto */
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease;
+            z-index: 0;
+        }
+
+        .btn-back:hover::before {
+            transform: translate(-50%, -50%) scale(1); /* Efecto de expansión */
+        }
+
+        .btn-back:hover {
+            color: white; /* Cambia el color del texto al pasar el ratón */
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Ranking de Clientes</h1>
+    </header>
+
+    <div class="container mt-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Posición</th>
+                    <th>Nombre</th>
+                    <th>Puntaje</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cliente, iterStat : ${ranking}">
+                    <td th:text="${iterStat.index + 1}"></td>
+                    <td th:text="${cliente.primerNombre + ' ' + cliente.primerApellido}"></td>
+                    <td th:text="${cliente.numeroRegistro == -1 ? 'Anulado' : cliente.numeroRegistro}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div>        <button class="btn btn-light btn-back" onclick="window.history.back()">Volver</button></div>
+    </div>
+
+
+    <footer>
+        <p>&copy; 2024 Gabriel Ortega. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
