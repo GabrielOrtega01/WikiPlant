@@ -1,0 +1,10 @@
+C:\mongo\MongoWikiPlant\src\main\java\com\mongowikiplant\app\controller\ControllerRestAdministrador.java
+C:\mongo\MongoWikiPlant\src\main\java\com\mongowikiplant\app\controller\ControllerWebAdministrador.java
+C:\mongo\MongoWikiPlant\src\main\java\com\mongowikiplant\app\controller\ControllerWebCliente.java
+C:\mongo\MongoWikiPlant\src\main\java\com\mongowikiplant\app\controller\ControllerWebCompartido.java
+C:\mongo\MongoWikiPlant\src\main\java\com\mongowikiplant\app\entity\Administrador.java
+C:\mongo\MongoWikiPlant\src\main\java\com\mongowikiplant\app\entity\Cliente.java
+C:\mongo\MongoWikiPlant\src\main\java\com\mongowikiplant\app\exception\NotFoundException.java
+C:\mongo\MongoWikiPlant\src\main\java\com\mongowikiplant\app\MongoWikiPlantApplication.java
+C:\mongo\MongoWikiPlant\src\main\java\com\mongowikiplant\app\repository\AdministradorRepository.java
+C:\mongo\MongoWikiPlant\src\main\java\com\mongowikiplant\app\repository\ClienteRepository.java

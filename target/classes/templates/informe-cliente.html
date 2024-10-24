@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Informe del Cliente</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		/* Reset de márgenes y padding */
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: Arial, sans-serif;
+			background: url('https://cdn.pixabay.com/photo/2016/02/06/09/56/science-1182713_640.jpg') no-repeat center center fixed;
+			background-size: cover;
+			color: #1d1f21;
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+			position: relative;
+			z-index: 1;
+		}
+
+		body::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			/* Capa oscura */
+			z-index: -1;
+			/* Asegúrate de que esté detrás del contenido */
+		}
+
+		.navbar {
+			background-color: rgba(101, 35, 35, 0.9);
+			padding: 8px 16px !important;
+			margin-bottom: 10px;
+		}
+
+		.header {
+			background-color: rgba(38, 31, 89, 0.8);
+			color: white;
+			padding: 15px 0;
+			text-align: center;
+			position: relative;
+			z-index: 2;
+		}
+
+		.aprobado {
+			color: green;
+			/* Color verde para aprobado */
+			font-weight: bold;
+			/* Resaltar texto */
+		}
+
+		.reprobado {
+			color: red;
+			/* Color rojo para reprobado */
+			font-weight: bold;
+			/* Resaltar texto */
+		}
+
+		.container {
+			max-width: 1000px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		/* Efecto hover en el contenedor principal */
+		.container:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+		}
+
+		h1 {
+			text-align: center;
+			color: #4CAF50;
+			margin-bottom: 20px;
+			text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+			animation: pulso 2s infinite;
+		}
+
+		h2 {
+			color: #333;
+			margin-bottom: 15px;
+		}
+
+		.info p,
+		.scores p {
+			font-size: 18px;
+			margin-bottom: 10px;
+		}
+
+		strong {
+			color: #333;
+		}
+
+		/* Colores para los niveles */
+		.nivel-1 {
+			color: #f44336;
+		}
+
+		.nivel-2 {
+			color: #ff9800;
+		}
+
+		.nivel-3 {
+			color: #ffeb3b;
+		}
+
+		.nivel-4 {
+			color: #4CAF50;
+		}
+
+		.text-success {
+			color: green;
+			/* Color verde para aprobado */
+		}
+
+		.text-danger {
+			color: red;
+			/* Color rojo para reprobado o anulado */
+		}
+
+		/* Animación de brillo en header y footer */
+		@keyframes pulso {
+			0% {
+				text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+			}
+
+			50% {
+				text-shadow: 0 0 20px rgba(76, 175, 80, 1);
+			}
+
+			100% {
+				text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+			}
+		}
+
+		footer {
+			margin-top: 30px;
+			text-align: center;
+			padding: 10px 0;
+			background-color: #333;
+			color: #fff;
+			border-radius: 8px;
+			text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+			animation: pulsoFooter 2.5s infinite;
+		}
+
+		@keyframes pulsoFooter {
+			0% {
+				text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+			}
+
+			50% {
+				text-shadow: 0 0 15px rgba(255, 255, 255, 1);
+			}
+
+			100% {
+				text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+			}
+		}
+
+		/* Responsividad: ajustes para diferentes pantallas */
+		@media (max-width: 768px) {
+			.container {
+				padding: 10px;
+			}
+
+			.info p,
+			.scores p {
+				font-size: 16px;
+			}
+		}
+
+		@media (max-width: 480px) {
+
+			.info p,
+			.scores p {
+				font-size: 14px;
+			}
+
+			h1 {
+				font-size: 24px;
+			}
+
+			h2 {
+				font-size: 20px;
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<div class="navbar-title">
+				<h1>WikiPlant</h1>
+			</div>
+		</nav>
+
+
+		<div class="container">
+			<h1>Informe del Cliente</h1>
+
+			<div class="info">
+				<p><strong>Nombre:</strong> <span th:text="${nombre}"></span></p>
+				<p><strong>Apellido:</strong> <span th:text="${apellido}"></span></p>
+			</div>
+			<button class="btn-volver" onclick="window.history.back()">Volver</button>
+		</div>
+		</div>
+		</p>
+		</div>
+
+		<footer>
+			<p>© 2024 - Sistema de Evaluación Universitaria</p>
+		</footer>
+
+	</body>
+
+</html>
