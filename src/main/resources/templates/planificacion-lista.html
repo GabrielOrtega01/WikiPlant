@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Planificaciones</title>
+</head>
+<body>
+    <h1>Lista de Planificaciones</h1>
+    <a th:href="@{/planificacion/crear}">Crear Nueva Planificación</a>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+        <tr th:each="planificacion : ${planificaciones}">
+            <td th:text="${planificacion.nombre}">Nombre</td>
+            <td th:text="${planificacion.fecha}">Fecha</td>
+            <td>
+                <a th:href="@{/planificacion/editar/{id}(id=${planificacion.id})}">Editar</a>
+                <a th:href="@{/planificacion/eliminar/{id}(id=${planificacion.id})}">Eliminar</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

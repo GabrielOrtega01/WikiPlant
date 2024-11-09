@@ -1,0 +1,35 @@
+<!-- cultivo-lista.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Cultivos</title>
+</head>
+<body>
+    <h2>Lista de Cultivos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Tipo de Planta</th>
+                <th>Duración</th>
+                <th>Temporada</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="cultivo : ${cultivos}">
+                <td th:text="${cultivo.nombre}">Nombre</td>
+                <td th:text="${cultivo.tipoPlanta}">Tipo de Planta</td>
+                <td th:text="${cultivo.duracion}">Duración</td>
+                <td th:text="${cultivo.temporada}">Temporada</td>
+                <td>
+                    <a th:href="@{'/cultivo/editar/' + ${cultivo.id}}">Editar</a>
+                    <a th:href="@{'/cultivo/eliminar/' + ${cultivo.id}}">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/cultivo/crear">Agregar nuevo cultivo</a>
+</body>
+</html>

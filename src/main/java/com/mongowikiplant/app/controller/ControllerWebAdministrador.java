@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mongowikiplant.app.entity.Administrador;
 import com.mongowikiplant.app.entity.Cliente;
+import com.mongowikiplant.app.entity.Planta;
 import com.mongowikiplant.app.exception.NotFoundException;
 import com.mongowikiplant.app.repository.AdministradorRepository;
 import com.mongowikiplant.app.repository.ClienteRepository;
+import com.mongowikiplant.app.repository.PlantaRepository;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -28,12 +30,14 @@ public class ControllerWebAdministrador {
     @Autowired
     private ClienteRepository clienteRepository;
     
+    @Autowired
+    private PlantaRepository plantaRepository;
+    
     @GetMapping("/index")
     public String administradorIndexTemplate(Model model, HttpSession session) {
-        // Obtener el usuario logeado de la sesión
+        
     	Administrador administrador = (Administrador) session.getAttribute("usuarioLogeado");
         
-        // Verificar si el usuario está logeado antes de agregarlo al modelo
         if (administrador != null) {
             model.addAttribute("usuario", administrador.getUsuario());
             model.addAttribute("nombre", administrador.getNombre());
@@ -49,7 +53,7 @@ public class ControllerWebAdministrador {
     
     @PostMapping("/logear")
     public String administradorLogearTemplate(@RequestParam String usuario, @RequestParam String contrasena, Model model, HttpSession session) {
-        // Buscar al administrador por nombre de usuario en la base de datos
+       
         Administrador administrador = null;
         for (Administrador c : administradorRepository.findAll()) {
             if (c.getUsuario().equals(usuario)) {
@@ -58,14 +62,12 @@ public class ControllerWebAdministrador {
             }
         }
         
-        // Verificar si se encontró al administrador y si la contraseña es correcta
         if (administrador != null && administrador.getContrasena().equals(contrasena)) {
-            // Guardar el usuario logeado en la sesión
+            
             session.setAttribute("usuarioLogeado", administrador);
-            // Si las credenciales son correctas, redirigir a la página de inicio
             return "redirect:/administrador/index";
         } else {
-            // Si las credenciales son incorrectas, mostrar un mensaje de error y volver al formulario de login
+        	
             model.addAttribute("error", true);
             return "login-administrador";
         }
@@ -104,4 +106,43 @@ public class ControllerWebAdministrador {
 		clienteRepository.deleteById(id);
 		return "redirect:/administrador/lista";
 	}
+	
+
+	
+	@GetMapping("/planta/crear")
+	public String plantaCrearTemplate(Model model) {
+	    model.addAttribute("planta", new Planta());
+	    return "planta-form";
+	}
+
+	@GetMapping("/lista2")
+	public String plantaListTemplate(Model model) {
+	    model.addAttribute("plantas", plantaRepository.findAll());
+	    return "planta-lista";
+	}
+
+	@GetMapping("/planta/edit/{id}")
+	public String plantaEditTemplate(@PathVariable("id") String id, Model model) {
+	    model.addAttribute("planta",
+	            plantaRepository.findById(id).orElseThrow(() -> new NotFoundException("planta no encontrada")));
+	    return "planta-form";
+	}
+
+	@PostMapping("/planta/save")
+	public String plantaSaveProcess(@ModelAttribute("planta") Planta planta) {
+	    if (planta.getId().isEmpty()) {
+	        planta.setId(null);
+	    }
+	    plantaRepository.save(planta);
+	    return "redirect:/administrador/index";
+	}
+
+	@GetMapping("/planta/delete/{id}")
+	public String plantaDeleteProcess(@PathVariable("id") String id) {
+	    plantaRepository.deleteById(id);
+	    return "redirect:/administrador/lista";
+	}
+
+	
+	
 }

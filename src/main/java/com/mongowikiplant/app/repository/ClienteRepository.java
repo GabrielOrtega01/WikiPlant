@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.repository.Query;
 import com.mongowikiplant.app.entity.Cliente;
 
 public interface ClienteRepository extends MongoRepository<Cliente, String> {
-	@Query("SELECT e FROM Estudiante e ORDER BY e.id DESC") // Cambia 'puntaje' al nombre correcto del campo que guarda la puntuación
+	@Query("SELECT c FROM Cliente c ORDER BY e.id DESC") 
     List<Cliente> findTop3ByOrderByPuntajeDesc();
 
 }

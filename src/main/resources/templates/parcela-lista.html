@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Parcelas</title>
+</head>
+<body>
+    <h1>Lista de Parcelas</h1>
+    <a th:href="@{/parcela/crear}">Crear Nueva Parcela</a>
+    <table>
+        <tr>
+            <th>Ubicación</th>
+            <th>Tamaño</th>
+            <th>Acciones</th>
+        </tr>
+        <tr th:each="parcela : ${parcelas}">
+            <td th:text="${parcela.ubicacion}">Ubicación</td>
+            <td th:text="${parcela.tamano}">Tamaño</td>
+            <td>
+                <a th:href="@{/parcela/editar/{id}(id=${parcela.id})}">Editar</a>
+                <a th:href="@{/parcela/eliminar/{id}(id=${parcela.id})}">Eliminar</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

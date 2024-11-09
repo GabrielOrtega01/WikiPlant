@@ -17,7 +17,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: url('https://cdn.pixabay.com/photo/2016/02/06/09/56/science-1182713_640.jpg') no-repeat center center fixed;
+            background: url('https://images.unsplash.com/photo-1483794344563-d27a8d18014e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZvbmRvJTIwZGUlMjBwbGFudGFzfGVufDB8fDB8fHww') no-repeat center center fixed;
             background-size: cover;
             color: #424f5c;
             display: flex;
@@ -71,7 +71,7 @@
         }
 
         .container {
-            margin-top: 14%;
+            margin-top: 5%;
         }
 
         .card {
@@ -97,7 +97,6 @@
         }
     </style>
 </head>
-
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="navbar-title">
@@ -117,67 +116,81 @@
     </nav>
 
     <div class="container">
-		<div class="card">
-        <div class="title">
-            <h1>¡Bienvenid@, <span th:text="${nombre}"></span> <span th:text="${apellido}"></span>!</h1>
-            <h1>MENÚ</h1>
-            <h2>Selecciona la opción que necesites</h2>
+        <div class="card">
+            <div class="title">
+                <h1>¡Bienvenid@, <span th:text="${nombre}"></span> <span th:text="${apellido}"></span>!</h1>
+                <h1>MENÚ</h1>
+                <h2>Selecciona la opción que necesites</h2>
+            </div>
         </div>
-	</div>
-        <div class="row btn-container">
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <a th:href="@{/cliente/resultadoTotal}" title="Resultado Total" class="btn btn-large">
-                            <i class="bi bi-clipboard-check-fill" style="font-size: 40px;"></i>
-                            <p>Resultado Total</p>
-                        </a>
-                    </div>
+
+        <form action="#" th:action="@{/cliente/buscarPlanta}" method="post">
+            <div class="form-row">
+                <div class="col-md-8">
+                    <label for="plantaSelect">Buscar Planta</label>
+                    <select name="plantaId" id="plantaSelect" class="form-control">
+                        <option th:each="planta : ${plantas}" th:value="${planta.id}" th:text="${planta.nomComun}">
+                            <!-- Muestra el nombre común de la planta en cada opción -->
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary mt-4">Buscar</button>
                 </div>
             </div>
+        </form>
 
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <a th:href="@{/cliente/resultadoUnico}" title="Resultado Único" class="btn btn-large">
-                            <i class="bi bi-clipboard-data-fill" style="font-size: 40px;"></i>
-                            <p>Resultado Único</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
+		<!-- Mostrar los detalles de la planta seleccionada en una tarjeta -->
+		<div th:if="${planta != null}" class="mt-4">
+		    <h2>Planta Seleccionada</h2>
+		    <div class="card text-center" style="width: 18rem; margin: 0 auto;">
+		        <img th:src="${planta.imagen}" alt="Imagen de la planta" class="card-img-top" style="max-height: 200px;">
+		        <div class="card-body">
+		            <h5 class="card-title" th:text="${planta.nomComun}"></h5>
+		            <p class="card-text" th:text="${planta.nomCientifico}"></p>
+		            <a th:href="@{/cliente/plantaDetalle(plantaId=${planta.id})}" class="btn btn-primary">Ver Detalles</a>
+		        </div>
+		    </div>
+		</div>
+		<div class="col-md-4 mb-4">
+		    <div class="card">
+		        <div class="card-body text-center">
+		            <a th:href="@{/}" title="Regresar" class="btn btn-danger btn-large">
+						<i class="bi bi-flower2" style="font-size: 40px;"></i>
+		                <p>Simulaciones de Cultivo</p>
+		            </a>
+		        </div>
+		    </div>
+		</div>		
+		<div class="col-md-4 mb-4">
+		    <div class="card">
+		        <div class="card-body text-center">
+		            <a th:href="@{/}" title="Regresar" class="btn btn-danger btn-large">
+		                <i class="bi bi-clock-history" style="font-size: 40px;"></i>
+		                <p>Historial</p>
+		            </a>
+		        </div>
+		    </div>
+		</div>
+		<!-- Botón Regresar -->
+		          <div class="col-md-4 mb-4">
+		              <div class="card">
+		                  <div class="card-body text-center">
+		                      <a th:href="@{/}" title="Regresar" class="btn btn-danger btn-large">
+		                          <i class="bi bi-arrow-return-left" style="font-size: 40px;"></i>
+		                          <p>Regresar</p>
+		                      </a>
+		                  </div>
+		              </div>
+		          </div>
 
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <a th:href="@{/cliente/ranking}" title="Ranking" class="btn btn-large">
-                            <i class="bi bi-star-fill" style="font-size: 40px;"></i>
-                            <p>Ranking</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Botón Regresar -->
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <a th:href="@{/}" title="Regresar" class="btn btn-danger btn-large">
-                            <i class="bi bi-arrow-return-left" style="font-size: 40px;"></i>
-                            <p>Regresar</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
     </div>
 
     <footer class="footer">
         <p>&copy; 2024 Desarrollado por El equipo de Pruebas Saber Pro</p>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

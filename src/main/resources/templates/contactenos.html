@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contáctenos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="/WEBMVC/style.css">
+	 <link type="image/png" sizes="32x32" rel="icon" href="https://cdn-icons-png.flaticon.com/128/628/628324.png">
+	 <link rel="stylesheet" type="text/css" href="static/css/index.css" 	th:href="@{/css/index.css}">
+
+
+  </head>
+
+<body>
+  <header class="bg-darkgreen text-light text-center py-3">
+    <div class="container">
+      <a class="navbar-brand" >
+        <img src="https://lh4.googleusercontent.com/proxy/heN60yvGR-WbvVyaBKdAp_uQ3092mUF34lhm2ITvC2HPxA0rqko5RwFifTeT_iBwvi3scg"  class="img-fluid" style="max-width: 100%;">
+      </a>
+    </div>
+  </header> 
+<div class="nav-container">
+  <nav class="navbar navbar-expand-md navbar-light bg-pink">
+    <div class="container"> <!-- Agregado un contenedor para centrar el contenido -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+		<ul class="navbar-nav">
+		               <li class="nav-item"><a class="nav-link" th:href="@{/}"><i class="fas fa-home"></i> Inicio</a></li>
+		               <li class="nav-item"><a class="nav-link" th:href="@{/nosotros}"><i class="fas fa-users"></i> Nosotros</a></li>
+		               <li class="nav-item"><a class="nav-link" th:href="@{/servicios}"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
+		               <li class="nav-item"><a class="nav-link" th:href="@{/administrador/login}"><i class="fas fa-user-shield"></i> Admin</a></li>
+		               <li class="nav-item"><a class="nav-link" th:href="@{/cliente/login}"><i class="fas fa-user"></i> Cliente</a></li>
+		               <li class="nav-item"><a class="nav-link" th:href="@{/contactenos}"><i class="fas fa-envelope"></i> Contáctenos</a></li>
+		           </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+<div class="welcome-container">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="contact-info">
+          <h1 class="text-lg mb-4">Contáctenos</h1>
+          <p class="lead text-lg">Puede contactarnos a través de los siguientes medios:</p>
+          <ul>
+            <li class="lead text-lg">Correo Electrónico: <a href="mailto:gaortega@uts.edu.co">gaortega@uts.edu.co</a><br>
+              <a href="mailto:dvmillan@uts.edu.co">dvmillan@uts.edu.co</a><br>
+              <a href="mailto:dcramos@uts.edu.co">dcramos@uts.edu.co</a></li>
+            
+			  
+			 <li class="lead text-lg">WhatsApp: <a href="https://wa.me/573044836511">304 483 6511, </a>
+			    <a href="https://wa.me/573222189347">322 218 9347, </a>
+			   <a href="https://wa.me/5733227732546">322 773 2546</a></l>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Rosa_%27Ambiente%27%2C_Bad_W%C3%B6rishofen%2C_Alemania%2C_2019-06-20%2C_DD_25.jpg/800px-Rosa_%27Ambiente%27%2C_Bad_W%C3%B6rishofen%2C_Alemania%2C_2019-06-20%2C_DD_25.jpg" class="img-fluid" alt="Imagen de Contacto">
+      </div>
+    </div>
+  </div>
+
+  <p></p>
+  <footer class="bg-dark text-light text-center py-3">
+    <div class="container">
+      <p>&copy; 2024 WikiPlant. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario de Planificación</title>
+</head>
+<body>
+    <h1>Formulario de Planificación</h1>
+    <form th:action="@{/planificacion/guardar}" th:object="${planificacion}" method="post">
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" />
+
+        <label>Fecha:</label>
+        <input type="date" th:field="*{fecha}" />
+
+        <button type="submit">Guardar</button>
+        <a th:href="@{/planificacion/listar}">Cancelar</a>
+    </form>
+</body>
+</html>

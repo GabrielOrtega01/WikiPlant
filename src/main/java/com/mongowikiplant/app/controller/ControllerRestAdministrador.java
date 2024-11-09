@@ -27,30 +27,30 @@ public class ControllerRestAdministrador {
 	}
 
 	@GetMapping("/{id}")
-	public Administrador getCoordinadorById(@PathVariable String id) {
-		return administradorRepository.findById(id).orElseThrow(() -> new NotFoundException("Coordinador no encontrada"));
+	public Administrador getAdministradorById(@PathVariable String id) {
+		return administradorRepository.findById(id).orElseThrow(() -> new NotFoundException("Administrdor no encontrado"));
 	}
 
 	@PostMapping("/")
-	public Administrador saveCoordinador(@RequestBody Map<String, Object> body) {
+	public Administrador saveAdministrador(@RequestBody Map<String, Object> body) {
 		ObjectMapper mapper = new ObjectMapper();
 		Administrador asociacion = mapper.convertValue(body, Administrador.class);
 		return administradorRepository.save(asociacion);
 	}
 
 	@PutMapping("/{id}")
-	public Administrador updateCoordinador(@PathVariable String id, @RequestBody Map<String, Object> body) {
+	public Administrador updateAdministrador(@PathVariable String id, @RequestBody Map<String, Object> body) {
 		ObjectMapper mapper = new ObjectMapper();
 		Administrador asociacion = mapper.convertValue(body, Administrador.class);
 		asociacion.setId(id);
-		return administradorRepository.save(asociacion);
+		return administradorRepository.save(deleteAdministrador(null));
 	}
 
 	@DeleteMapping("/{id}")
-	public Administrador deleteCoordinador(@PathVariable String id) {
-		Administrador asociacion = administradorRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Club no encontrado"));
+	public Administrador deleteAdministrador(@PathVariable String id) {
+		Administrador administrador = administradorRepository.findById(id)
+				.orElseThrow(() -> new NotFoundException("Administrador no encontrado"));
 		administradorRepository.deleteById(id);
-		return asociacion;
+		return administrador;
 	}
 }

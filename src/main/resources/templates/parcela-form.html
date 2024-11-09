@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario de Parcela</title>
+</head>
+<body>
+    <h1>Formulario de Parcela</h1>
+    <form th:action="@{/parcela/guardar}" th:object="${parcela}" method="post">
+        <label>Ubicación:</label>
+        <input type="text" th:field="*{ubicacion}" />
+
+        <label>Tamaño:</label>
+        <input type="text" th:field="*{tamano}" />
+
+        <button type="submit">Guardar</button>
+        <a th:href="@{/parcela/listar}">Cancelar</a>
+    </form>
+</body>
+</html>
