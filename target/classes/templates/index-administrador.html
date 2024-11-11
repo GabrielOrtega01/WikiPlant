@@ -1,34 +1,34 @@
-
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<link rel="stylesheet" type="text/css" href="static/css/admin.css" 	th:href="@{/css/admin.css}">
-<link type="png" sizes="32x32" rel="icon"
-	href="https://lh3.googleusercontent.com/a/ACg8ocJq9wVRTMQaBGhOzSAkpqNfFOBkn7f398iktNR4gVTLteTXhNU=s288-c-no">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/admin.css" th:href="@{/css/admin.css}">
+	<link type="png" sizes="32x32" rel="icon"
+		href="https://lh3.googleusercontent.com/a/ACg8ocJq9wVRTMQaBGhOzSAkpqNfFOBkn7f398iktNR4gVTLteTXhNU=s288-c-no">
 
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<title>Administrador</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<title>Administrador</title>
 
 </head>
 <style>
 
 </style>
-<body>
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-   <img src="https://lh3.googleusercontent.com/a/ACg8ocJq9wVRTMQaBGhOzSAkpqNfFOBkn7f398iktNR4gVTLteTXhNU=s288-c-no"
-   alt="Logo WikiPlant" width="50" height="50" style="margin-right: 15px;">
 
-    <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" th:href="@{/administrador/index}">Inicio Administrador</a>
-    
-     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+<body>
+	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+		<img src="https://lh3.googleusercontent.com/a/ACg8ocJq9wVRTMQaBGhOzSAkpqNfFOBkn7f398iktNR4gVTLteTXhNU=s288-c-no"
+			alt="Logo WikiPlant" width="50" height="50" style="margin-right: 15px;">
+
+		<!-- Navbar Brand-->
+		<a class="navbar-brand ps-3" th:href="@{/administrador/index}">Inicio Administrador</a>
+
+		<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item">
 					<a class="btn my-2 my-sm-0" th:href="@{/}">
@@ -46,521 +46,540 @@
 				</li>
 			</ul>
 		</div>
-    
-</nav>
 
-	
-<div id="layoutSidenav">
+	</nav>
 
-        <div id="layoutSidenav_nav">
 
-            
+	<div id="layoutSidenav">
 
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
-                    <div class="nav">
-                        <div class="sb-sidenav-menu-heading"></div>
-                        <a class="nav-link" th:href="@{/administrador/index}">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-bars"></i></div>
-                            Menu
-                        </a>
+		<div id="layoutSidenav_nav">
 
 
 
-                        <div class="sb-sidenav-menu-heading">Gestiones</div>
-                        <a class="nav-link collapsed"  data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-lightbulb"></i></div>
-                            Gestión de Clientes
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" th:href="@{/administrador/cliente/crear}" >Agregar Cliente</a>
+			<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+				<div class="sb-sidenav-menu">
+					<div class="nav">
+						<div class="sb-sidenav-menu-heading"></div>
+						<a class="nav-link" th:href="@{/administrador/index}">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-bars"></i></div>
+							Menu
+						</a>
+
+
+
+						<div class="sb-sidenav-menu-heading">Gestiones</div>
+						<a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
+							aria-expanded="false" aria-controls="collapseLayouts">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-lightbulb"></i></div>
+							Gestión de Clientes
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cliente/crear}">Agregar Cliente</a>
 							</nav>
 							<nav class="sb-sidenav-menu-nested nav">
-                 <a class="nav-link" th:href="@{/administrador/lista}">Listar Clientes</a>
-               </nav>
-                        </div>
-                        
-
-                        <a class="nav-link collapsed"  data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Gestión de Cultivos y Plantas
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" th:href="@{/administrador/cultivo}">Cultivo</a>
-                            </nav>
-                             <nav class="sb-sidenav-menu-nested nav">
-                               <a class="nav-link" th:href="@{/administrador/planta/crear}">Agregar Planta</a>
-                           </nav>
-                           <nav class="sb-sidenav-menu-nested nav">
-                             <a class="nav-link" th:href="@{/administrador/lista2}">Listar Plantas</a>
-                         </nav>
-                         <nav class="sb-sidenav-menu-nested nav">
-                           <a class="nav-link" th:href="@{/administrador/cultivo}">Parcela</a>
-                       </nav>
-                        </div>
-                        
+								<a class="nav-link" th:href="@{/administrador/lista}">Listar Clientes</a>
+							</nav>
+						</div>
 
 
-   <div class="sb-sidenav-menu-heading">Condiciones</div>
-                        <a class="nav-link collapsed" th:href="@{/coordinador/lista}" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-lightbulb"></i></div>
-                            Condiciones Climáticas
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" th:href="@{/administrador/cultivo}">Estaciones</a>
-						              	</nav>
-                             <nav class="sb-sidenav-menu-nested nav">
-                               <a class="nav-link" th:href="@{/administrador/cultivo}">Fotoperiodo</a>
-                           </nav>
-                           <nav class="sb-sidenav-menu-nested nav">
-                             <a class="nav-link" th:href="@{/administrador/cultivo}">Radiación Global</a>
-                         </nav>
-                         <nav class="sb-sidenav-menu-nested nav">
-                           <a class="nav-link" th:href="@{/administrador/cultivo}">Temperatura Media</a>
-                       </nav>
-                       <nav class="sb-sidenav-menu-nested nav">
-                         <a class="nav-link" th:href="@{/administrador/cultivo}">Temperatura Máxima Media</a>
-                     </nav>
-                     <nav class="sb-sidenav-menu-nested nav">
-                       <a class="nav-link" th:href="@{/administrador/cultivo}">Temperatura Mínima Media</a>
-                   </nav>
-                   <nav class="sb-sidenav-menu-nested nav">
-                     <a class="nav-link" th:href="@{/administrador/cultivo}">Precipitación</a>
-                 </nav>
-                 <nav class="sb-sidenav-menu-nested nav">
-                   <a class="nav-link" th:href="@{/administrador/cultivo}">Método de Estimación</a>
-               </nav>
-               <nav class="sb-sidenav-menu-nested nav">
-                 <a class="nav-link" th:href="@{/administrador/cultivo}">ADT - Amplitud Diaria de Temperatura</a>
-             </nav>
-             <nav class="sb-sidenav-menu-nested nav">
-               <a class="nav-link" th:href="@{/administrador/cultivo}">Evaporación</a>
-           </nav>
-           <nav class="sb-sidenav-menu-nested nav">
-             <a class="nav-link" th:href="@{/administrador/cultivo}">Evapotranspiración</a>
-         </nav>
-                        </div>
-                        
-                         
-                        <a class="nav-link collapsed" th:href="@{/coordinador/estudiante/crear}" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Gestión Hídrica
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" th:href="@{/administrador/cultivo}">Aguachicamiento</a>
-                            </nav>
-                             <nav class="sb-sidenav-menu-nested nav">
-                               <a class="nav-link" th:href="@{/administrador/cultivo}">Balance Hídrico</a>
-                           </nav>
-                           <nav class="sb-sidenav-menu-nested nav">
-                             <a class="nav-link" th:href="@{/administrador/cultivo}">Disponibilidad de Agua</a>
-                         </nav>
-                         <nav class="sb-sidenav-menu-nested nav">
-                           <a class="nav-link" th:href="@{/administrador/cultivo}">Deficit de Agua</a>
-                       </nav>
-                       <nav class="sb-sidenav-menu-nested nav">
-                         <a class="nav-link" th:href="@{/administrador/cultivo}">Exceso de Agua</a>
-                     </nav>
-                     <nav class="sb-sidenav-menu-nested nav">
-                       <a class="nav-link" th:href="@{/administrador/cultivo}">Regimen Hídrico</a>
-                   </nav>
-                        </div>
-
-
-                        <div class="sb-sidenav-menu-heading">Salir</div>
-                        <a class="nav-link" th:href="@{/coordinador/login}" >
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-share-from-square"></i></div>
-                            Cerrar Sesión
-                        </a>
-                    </div>
-                </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">Sesión:</div>
-                    Administrador WikiPlant
-                </div>
-            </nav>
-        </div>
-		
-
-
-       <div id="layoutSidenav_content">
-           <main>
-			<p></p>
-       <div class="title bg-black text-center">
-         <h1> Bienvenido Administrador <span th:text="${usuario}"></span></h1>
-     </div>
-     
-     <p></p>
+						<a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapsePages"
+							aria-expanded="false" aria-controls="collapsePages">
+							<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+							Gestión de Cultivos y Plantas
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Cultivo</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/planta/crear}">Agregar Planta</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/planta/lista}">Listar Plantas</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Parcela</a>
+							</nav>
+						</div>
 
 
 
-<!-- Gestión de Clientes -->
-<div class="container mb-4">
- <div class="p-2" style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
-   <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse" data-bs-target="#gestionClientes" aria-expanded="false" aria-controls="gestionClientes" style="color: black;">
-       <h5 class="m-0">Gestión de Clientes<i class="bi bi-chevron-down"></i></h5>
-   </button>
-</div>
-<p></p>
- <div id="gestionClientes" class="collapse">
-     <div class="row">
-         <div class="col-xl-3 col-md-6">
-             <div class="card bg-secondary text-white mb-4">
-                 <div class="card-body">Agregar Cliente</div>
-                 <div class="card-footer d-flex align-items-center justify-content-between">
-                     <a th:href="@{/administrador/cliente/crear}">
-                         <i class="bi bi-person-add" style="font-size: 40px; "></i>
-                     </a>
-                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                 </div>
-             </div>
-         </div>
-         <div class="col-xl-3 col-md-6">
-             <div class="card bg-secondary text-white mb-4">
-                 <div class="card-body">Listar Clientes</div>
-                 <div class="card-footer d-flex align-items-center justify-content-between">
-                     <a th:href="@{/administrador/lista}">
-                         <i class="bi bi-file-earmark-text-fill" style="font-size: 40px;"></i>
-                     </a>
-                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                 </div>
-             </div>
-         </div>
-     </div>
- </div>
-</div>
+						<div class="sb-sidenav-menu-heading">Condiciones</div>
+						<a class="nav-link collapsed" th:href="@{/coordinador/lista}" data-bs-toggle="collapse"
+							data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-lightbulb"></i></div>
+							Condiciones Climáticas
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Estaciones</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Fotoperiodo</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Radiación Global</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Temperatura Media</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Temperatura Máxima Media</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Temperatura Mínima Media</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Precipitación</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Método de Estimación</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">ADT - Amplitud Diaria de
+									Temperatura</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Evaporación</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Evapotranspiración</a>
+							</nav>
+						</div>
 
-<!-- Gestión de Cultivos y Plantas -->
-<div class="container mb-4">
- <div class="p-2" style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
-   <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse" data-bs-target="#gestionCultivosPlantas" aria-expanded="false" aria-controls="gestionCultivosPlantas" style="color: black;">
-       <h5 class="m-0">Gestión Cultivos y Plantas<i class="bi bi-chevron-down"></i></h5>
-   </button>
-</div>
-<p></p>
- <div id="gestionCultivosPlantas" class="collapse">
-     <div class="row">
-         <div class="col-xl-3 col-md-6">
-             <div class="card bg-success text-white mb-4">
-                 <div class="card-body">Cultivo</div>
-                 <div class="card-footer d-flex align-items-center justify-content-between">
-                     <a th:href="@{/administrador/cultivo}">
-                         <i class="bi bi-flower3" style="font-size: 40px;"></i>
-                     </a>
-                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                 </div>
-             </div>
-         </div>
-         <div class="col-xl-3 col-md-6">
-             <div class="card bg-success text-white mb-4">
-                 <div class="card-body">Agregar Planta</div>
-                 <div class="card-footer d-flex align-items-center justify-content-between">
-                     <a th:href="@{/administrador/planta/crear}">
-                         <i class="bi bi-flower1" style="font-size: 40px;"></i>
-                     </a>
-                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                 </div>
-             </div>
-         </div>
-         <p></p>
-                      <div class="col-xl-3 col-md-6">
-                       <div class="card bg-success text-white mb-4">
-                            <div class="card-body">Listar Plantas</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                             <a th:href="@{/administrador/lista2}" >
-                         	    <i class="bi bi-flower1" style="font-size: 40px;"></i>
-				                      </a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-xl-3 col-md-6">
-                     <div class="card bg-success text-white mb-4">
-                          <div class="card-body">Parcela</div>
-                          <div class="card-footer d-flex align-items-center justify-content-between">
-                           <a th:href="@{/administrador/cultivo}"  >
-                             <i class="bi bi-house" style="font-size: 40px;"></i>
-                           </a>
-                              <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                          </div>
-                      </div>
-                  </div>
+						<a class="nav-link collapsed" th:href="@{/coordinador/estudiante/crear}" data-bs-toggle="collapse"
+							data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+							<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+							Gestión Hídrica
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Aguachicamiento</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Balance Hídrico</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Disponibilidad de Agua</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Deficit de Agua</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Exceso de Agua</a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" th:href="@{/administrador/cultivo}">Regimen Hídrico</a>
+							</nav>
+						</div>
 
-     </div>
- </div>
-</div>
 
-<!-- Condiciones Climáticas -->
-<div class="container mb-4">
- <div class="p-2" style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
-   <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse" data-bs-target="#condicionesClimaticas" aria-expanded="false" aria-controls="condicionesClimaticas" style="color: black;">
-       <h5 class="m-0">Condiciones Climáticas<i class="bi bi-chevron-down"></i></h5>
-   </button>
-</div>
-<p></p>
- <div id="condicionesClimaticas" class="collapse">
-     <div class="row">
-         <div class="col-xl-3 col-md-6">
-             <div class="card bg-danger text-white mb-4">   
-                 <div class="card-body">Estaciones</div>
-                 <div class="card-footer d-flex align-items-center justify-content-between">
-                     <a th:href="@{/administrador/cultivo}">
-                         <i class="bi bi-calendar" style="font-size: 40px;"></i>
-                     </a>
-                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                 </div>
-             </div>
-         </div>
-         <div class="col-xl-3 col-md-6">
-             <div class="card bg-danger text-white mb-4">   
-                 <div class="card-body">Fotoperiodo</div>
-                 <div class="card-footer d-flex align-items-center justify-content-between">
-                     <a th:href="@{/administrador/cultivo}">
-                         <i class="bi bi-sun" style="font-size: 40px;"></i>
-                     </a>
-                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                 </div>
-             </div>
-         </div>
-         <div class="col-xl-3 col-md-6">
-           <div class="card bg-danger text-white mb-4">   
-                <div class="card-body">Radiación Gobal</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                 <a th:href="@{/administrador/cultivo}" >
-                   <i class="bi bi-brightness-high" style="font-size: 40px;"></i>
-                 </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-        </div>
-<p></p>
-<div class="col-xl-3 col-md-6">
- <div class="card bg-danger text-white mb-4">   
-      <div class="card-body">Temperatura Media</div>
-      <div class="card-footer d-flex align-items-center justify-content-between">
-       <a th:href="@{/administrador/cultivo}" >
-         <i class="bi bi-thermometer-half" style="font-size: 40px;"></i>
-       </a>
-          <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-      </div>
-  </div>
-</div>
-
-<div class="col-xl-3 col-md-6">
-<div class="card bg-danger text-white mb-4">   
-    <div class="card-body">Temperatura Máxima Media</div>
-    <div class="card-footer d-flex align-items-center justify-content-between">
-     <a th:href="@{/administrador/cultivo}"  >
-       <i class="bi bi-thermometer-sun" style="font-size: 40px;"></i>
-</a>
-        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-    </div>
-</div>
-</div>
-
-<div class="col-xl-3 col-md-6">
-<div class="card bg-danger text-white mb-4">   
-  <div class="card-body">Temperatura Mínimo Media</div>
-  <div class="card-footer d-flex align-items-center justify-content-between">
-   <a th:href="@{/administrador/cultivo}"  >
-     <i class="bi bi-thermometer-snow" style="font-size: 40px;"></i>
-   </a>
-      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-  </div>
-</div>
-</div>
-<p></p>       
-<div class="col-xl-3 col-md-6">
-<div class="card bg-danger text-white mb-4">   
-<div class="card-body">Precipitación</div>
-<div class="card-footer d-flex align-items-center justify-content-between">
- <a th:href="@{/administrador/cultivo}"  >
-   <i class="bi bi-droplet" style="font-size: 40px;"></i>
- </a>
-    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-</div>
-</div>
-</div>
-
-<div class="col-xl-3 col-md-6">
-<div class="card bg-danger text-white mb-4">   
-<div class="card-body">Método de Estimación</div>
-<div class="card-footer d-flex align-items-center justify-content-between">
-<a th:href="@{/administrador/cultivo}"  >
- <i class="bi bi-calculator" style="font-size: 40px;"></i>
-</a>
-  <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-</div>
-</div>
-</div>
-
-<div class="col-xl-3 col-md-6">
-<div class="card bg-danger text-white mb-4">   
-<div class="card-body">ADT - Amplitud Diaria de Temperatura</div>
-<div class="card-footer d-flex align-items-center justify-content-between">
-<a th:href="@{/administrador/cultivo}" >
-<i class="bi bi-thermometer" style="font-size: 40px;"></i>
-</a>
-<div class="small text-white"><i class="fas fa-angle-right"></i></div>
-</div>
-</div>
-</div>
-<p></p>
-<div class="col-xl-3 col-md-6">
-<div class="card bg-danger text-white mb-4">   
-<div class="card-body">Evaporación</div>
-<div class="card-footer d-flex align-items-center justify-content-between">
-<a th:href="@{/administrador/cultivo}"  >
-<i class="bi bi-cloud-drizzle" style="font-size: 40px;"></i>
-</a>
-<div class="small text-white"><i class="fas fa-angle-right"></i></div>
-</div>
-</div>
-</div>
-
-<div class="col-xl-3 col-md-6">
-<div class="card bg-danger text-white mb-4">   
-<div class="card-body">Evapotranspiración</div>
-<div class="card-footer d-flex align-items-center justify-content-between">
-<a th:href="@{/administrador/cultivo}" >
-<i class="bi bi-cloud-rain" style="font-size: 40px;"></i>
-</a>
-<div class="small text-white"><i class="fas fa-angle-right"></i></div>
-</div>
-</div>
-</div>
-
-<p></p>
-
-     </div>
- </div>
-</div>
-
-<!-- Gestión Hídrica -->
-<div class="container mb-4">
- <!-- Caja transparente para el botón -->
- <div class="p-2" style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
-   <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse" data-bs-target="#gestionHidrica" aria-expanded="false" aria-controls="gestionHidrica" style="color: black;">
-       <h5 class="m-0">Gestión Hídrica <i class="bi bi-chevron-down"></i></h5>
-   </button>
-</div>
-<p></p>
- <div id="gestionHidrica" class="collapse">
-     <div class="row">
-         <div class="col-xl-3 col-md-6">
-             <div class="card bg-primary text-white mb-4"> 
-                 <div class="card-body">Aguachicamiento</div>
-                 <div class="card-footer d-flex align-items-center justify-content-between">
-                     <a th:href="@{/administrador/cultivo}">
-                         <i class="bi bi-water" style="font-size: 40px;"></i>
-                     </a>
-                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                 </div>
-             </div>
-         </div>
-         <div class="col-xl-3 col-md-6">
-             <div class="card bg-primary text-white mb-4"> 
-                 <div class="card-body">Balance Hídrico</div>
-                 <div class="card-footer d-flex align-items-center justify-content-between">
-                     <a th:href="@{/administrador/cultivo}">
-                         <i class="bi bi-bar-chart-line" style="font-size: 40px;"></i>
-                     </a>
-                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                 </div>
-             </div>
-         </div>
-
-         <div class="col-xl-3 col-md-6">
-           <div class="card bg-primary text-white mb-4"> 
-                <div class="card-body">Disponibilidad de Agua</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                 <a th:href="@{/administrador/cultivo}" >
-                   <i class="bi bi-droplet" style="font-size: 40px;"></i>
-                 </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-         </div>
-         <p></p>
-         <div class="col-xl-3 col-md-6">
-           <div class="card bg-primary text-white mb-4"> 
-                <div class="card-body">Deficit de Agua</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                 <a th:href="@{/administrador/cultivo}"  >
-                   <i class="bi bi-droplet-half" style="font-size: 40px;"></i>
-                 </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-         </div>
-         
-         <div class="col-xl-3 col-md-6">
-           <div class="card bg-primary text-white mb-4"> 
-                <div class="card-body">Exceso de Agua</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                 <a th:href="@{/administrador/cultivo}"  >
-                   <i class="bi bi-cloud-rain-heavy" style="font-size: 40px;"></i>
-                 </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-         </div>
-         
-         <div class="col-xl-3 col-md-6">
-           <div class="card bg-primary text-white mb-4"> 
-                <div class="card-body">Resumen Hidrico</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                 <a th:href="@{/administrador/cultivo}"  >
-                   <i class="bi bi-cloud-drizzle" style="font-size: 40px;"></i>
-                 </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-         </div>
+						<div class="sb-sidenav-menu-heading">Salir</div>
+						<a class="nav-link" th:href="@{/coordinador/login}">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-share-from-square"></i></div>
+							Cerrar Sesión
+						</a>
+					</div>
+				</div>
+				<div class="sb-sidenav-footer">
+					<div class="small">Sesión:</div>
+					Administrador WikiPlant
+				</div>
+			</nav>
+		</div>
 
 
 
-     </div>
- </div>
-</div>
+		<div id="layoutSidenav_content">
+			<main>
+				<p></p>
+				<div class="title bg-black text-center">
+					<h1> Bienvenido Administrador <span th:text="${usuario}"></span></h1>
+				</div>
+
+				<p></p>
 
 
-                   </div>
-                   
-                   
-               </div>
-           </main>
-            <footer class="bg-dark text-white">
-       <div class="container-fluid p-6">
-           <div class="row">
-               <div class="col text-center">
-                   <p>&copy; 2024 WikiPlant. Todos los derechos reservados.</p>
-                
-               </div>
-           </div>
-       </div>
-   </footer>
 
-       </div>
-   </div>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-   <script src="js/scripts.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-   <script src="assets/demo/chart-area-demo.js"></script>
-   <script src="assets/demo/chart-bar-demo.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-   <script src="js/datatables-simple-demo.js"></script>
+				<!-- Gestión de Clientes -->
+				<div class="container mb-4">
+					<div class="p-2"
+						style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
+						<button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
+							data-bs-target="#gestionClientes" aria-expanded="false" aria-controls="gestionClientes"
+							style="color: black;">
+							<h5 class="m-0">Gestión de Clientes<i class="bi bi-chevron-down"></i></h5>
+						</button>
+					</div>
+					<p></p>
+					<div id="gestionClientes" class="collapse">
+						<div class="row">
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-secondary text-white mb-4">
+									<div class="card-body">Agregar Cliente</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cliente/crear}">
+											<i class="bi bi-person-add" style="font-size: 40px; "></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-secondary text-white mb-4">
+									<div class="card-body">Listar Clientes</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/lista}">
+											<i class="bi bi-file-earmark-text-fill" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+				<!-- Gestión de Cultivos y Plantas -->
+				<div class="container mb-4">
+					<div class="p-2"
+						style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
+						<button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
+							data-bs-target="#gestionCultivosPlantas" aria-expanded="false" aria-controls="gestionCultivosPlantas"
+							style="color: black;">
+							<h5 class="m-0">Gestión Cultivos y Plantas<i class="bi bi-chevron-down"></i></h5>
+						</button>
+					</div>
+					<p></p>
+					<div id="gestionCultivosPlantas" class="collapse">
+						<div class="row">
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-success text-white mb-4">
+									<div class="card-body">Cultivo</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-flower3" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-success text-white mb-4">
+									<div class="card-body">Agregar Planta</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/planta/crear}">
+											<i class="bi bi-flower1" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+							<p></p>
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-success text-white mb-4">
+									<div class="card-body">Listar Plantas</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/planta/lista}">
+											<i class="bi bi-flower1" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-success text-white mb-4">
+									<div class="card-body">Parcela</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-house" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<!-- Condiciones Climáticas -->
+				<div class="container mb-4">
+					<div class="p-2"
+						style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
+						<button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
+							data-bs-target="#condicionesClimaticas" aria-expanded="false" aria-controls="condicionesClimaticas"
+							style="color: black;">
+							<h5 class="m-0">Condiciones Climáticas<i class="bi bi-chevron-down"></i></h5>
+						</button>
+					</div>
+					<p></p>
+					<div id="condicionesClimaticas" class="collapse">
+						<div class="row">
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-danger text-white mb-4">
+									<div class="card-body">Estaciones</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/estacion/info}" aria-label="Estaciones">
+											<i class="bi bi-calendar" style="font-size: 40px;"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-danger text-white mb-4">
+									<div class="card-body">Fotoperíodo</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-sun" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-danger text-white mb-4">
+									<div class="card-body">Radiación Gobal</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-brightness-high" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+							<p></p>
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-danger text-white mb-4">
+									<div class="card-body">Temperatura Media</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-thermometer-half" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-danger text-white mb-4">
+									<div class="card-body">Temperatura Máxima Media</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-thermometer-sun" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-danger text-white mb-4">
+									<div class="card-body">Temperatura Mínimo Media</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-thermometer-snow" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+							<p></p>
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-danger text-white mb-4">
+									<div class="card-body">Precipitación</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-droplet" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-danger text-white mb-4">
+									<div class="card-body">Método de Estimación</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-calculator" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-danger text-white mb-4">
+									<div class="card-body">ADT - Amplitud Diaria de Temperatura</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-thermometer" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+							<p></p>
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-danger text-white mb-4">
+									<div class="card-body">Evaporación</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-cloud-drizzle" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-danger text-white mb-4">
+									<div class="card-body">Evapotranspiración</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-cloud-rain" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+
+							<p></p>
+
+						</div>
+					</div>
+				</div>
+
+				<!-- Gestión Hídrica -->
+				<div class="container mb-4">
+					<!-- Caja transparente para el botón -->
+					<div class="p-2"
+						style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
+						<button class="btn btn-link text-decoration-none" data-bs-toggle="collapse" data-bs-target="#gestionHidrica"
+							aria-expanded="false" aria-controls="gestionHidrica" style="color: black;">
+							<h5 class="m-0">Gestión Hídrica <i class="bi bi-chevron-down"></i></h5>
+						</button>
+					</div>
+					<p></p>
+					<div id="gestionHidrica" class="collapse">
+						<div class="row">
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-primary text-white mb-4">
+									<div class="card-body">Aguachicamiento</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-water" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-primary text-white mb-4">
+									<div class="card-body">Balance Hídrico</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-bar-chart-line" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-primary text-white mb-4">
+									<div class="card-body">Disponibilidad de Agua</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-droplet" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+							<p></p>
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-primary text-white mb-4">
+									<div class="card-body">Deficit de Agua</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-droplet-half" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-primary text-white mb-4">
+									<div class="card-body">Exceso de Agua</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-cloud-rain-heavy" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xl-3 col-md-6">
+								<div class="card bg-primary text-white mb-4">
+									<div class="card-body">Resumen Hidrico</div>
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a th:href="@{/administrador/cultivo}">
+											<i class="bi bi-cloud-drizzle" style="font-size: 40px;"></i>
+										</a>
+										<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+									</div>
+								</div>
+							</div>
+
+
+
+						</div>
+					</div>
+				</div>
+
+
+		</div>
+
+
+	</div>
+	</main>
+	<footer class="bg-dark text-white">
+		<div class="container-fluid p-6">
+			<div class="row">
+				<div class="col text-center">
+					<p>&copy; 2024 WikiPlant. Todos los derechos reservados.</p>
+
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+	<script src="js/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="assets/demo/chart-area-demo.js"></script>
+	<script src="assets/demo/chart-bar-demo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+		crossorigin="anonymous"></script>
+	<script src="js/datatables-simple-demo.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/5hb5mr+W3bQwPy5I7CqUghU5bF9hQ1yWnqouW3s"
 		crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -569,8 +588,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
 		integrity="sha384-4tN1W5JhMjI9T55brShtS67HiUum7tpEKwqe2w9Xjh9AkRYpc2YJ4Yjx6pXoNnSv"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+FvYB7E3x3EG7O3lNlgufQfWfbA6"
-		crossorigin="anonymous"></script>
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+FvYB7E3x3EG7O3lNlgufQfWfbA6" crossorigin="anonymous"></script>
 
 
 </body>

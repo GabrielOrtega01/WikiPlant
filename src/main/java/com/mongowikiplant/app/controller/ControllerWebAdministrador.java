@@ -115,7 +115,7 @@ public class ControllerWebAdministrador {
 	    return "planta-form";
 	}
 
-	@GetMapping("/lista2")
+	@GetMapping("/planta/lista")
 	public String plantaListTemplate(Model model) {
 	    model.addAttribute("plantas", plantaRepository.findAll());
 	    return "planta-lista";
@@ -142,7 +142,5 @@ public class ControllerWebAdministrador {
 	    plantaRepository.deleteById(id);
 	    return "redirect:/administrador/lista";
 	}
-
-	
 	
 }

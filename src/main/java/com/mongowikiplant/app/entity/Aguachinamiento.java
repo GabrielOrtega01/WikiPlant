@@ -1,5 +1,5 @@
 package com.mongowikiplant.app.entity;
 
-public class Estaciones {
+public class Aguachinamiento {
 
 }

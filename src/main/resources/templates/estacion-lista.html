@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Estaciones</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/8983/production/_109730253_gettyimages-658291850.jpg.webp') no-repeat center center fixed;
+            background-size: cover;
+            color: #1d1f21;
+        }
+
+        .header,
+        .footer {
+            background-color: rgba(38, 31, 89, 0.9);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .button-custom {
+            background-color: #216923;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            max-width: 200px;
+            width: 100%;
+        }
+
+        .button-custom:hover {
+            background-color: #45a049;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-group .btn {
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-group .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-group .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-group .btn-info:hover {
+            background-color: #17a2b8;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            color: #216923 !important;
+        }
+
+        .navbar {
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+        }
+
+        .container footer p {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" th:href="@{/administrador/index}">WikiPlant</a>
+        <div class="navbar-title">
+            <h1 class="display-4">Lista de Estaciones</h1>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="btn btn-outline-danger my-2 my-sm-0" type="submit" th:href="@{/}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="button-container">
+            <button th:onclick="|history.back()|" class="button-custom">Volver a la página anterior</button>
+        </div>
+        <div class="row">
+            <!-- Iterar sobre la lista de estaciones -->
+            <div th:each="estacion : ${estaciones}" class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-header text-center">
+                        <strong>Estación:</strong> <span th:text="${estacion.nombre}"></span>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Tipo:</strong> <span th:text="${estacion.tipo}"></span></p>
+                        <p><strong>Latitud:</strong> <span th:text="${estacion.latitud}"></span></p>
+                        <p><strong>Longitud:</strong> <span th:text="${estacion.longitud}"></span></p>
+                        <p><strong>Altitud:</strong> <span th:text="${estacion.altitud}"></span></p>
+                        <p><strong>Periodo:</strong> <span th:text="${estacion.periodo}"></span></p>
+
+                        <div class="btn-group d-flex" role="group">
+                            <a th:href="@{/estacion/edit/{id}(id=${estacion.id})}" class="btn btn-primary w-100 m-1">Editar</a>
+                            <a th:href="@{/estacion/delete/{id}(id=${estacion.id})}" class="btn btn-danger w-100 m-1">Eliminar</a>
+                            <a th:href="@{/estacion/informe/{id}(id=${estacion.id})}" class="btn btn-info w-100 m-1">Ver Informe</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer text-center">
+        <div class="container">
+            <p>&copy; 2024 WikiPlant. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

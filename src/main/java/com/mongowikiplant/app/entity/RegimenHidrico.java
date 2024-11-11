@@ -6,6 +6,6 @@ package com.mongowikiplant.app.entity;
 
 
 
-public class Reghidrico {
+public class RegimenHidrico {
 
 }
