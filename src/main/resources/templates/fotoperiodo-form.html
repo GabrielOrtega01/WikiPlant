@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Formulario Fotoperiodo</title>
+	<!-- Enlaces a los archivos CSS de Bootstrap -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background: url('https://image.slidesdocs.com/responsive-images/background/green-spring-grass-peach-blossom-plants-beautiful-powerpoint-background_f546f2a72b__960_540.jpg') no-repeat center center fixed;
+			background-size: cover;
+			color: #1d1f21;
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+		}
+
+		label {
+			margin-bottom: 0.2rem;
+		}
+
+		.form-control {
+			width: calc(50% - 5px);
+		}
+
+		.back {
+			background-color: rgba(255, 255, 255, 0.9);
+			padding-left: 10%;
+			padding-top: 2%;
+			border-radius: 5%;
+		}
+
+		.navbar {
+			padding: 8px 16px !important;
+		}
+
+		h1 {
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" th:href="@{/administrador/index}"></a>
+		<div class="navbar-title">
+			<h1>Formulario Fotoperiodo</h1>
+		</div>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="btn btn-outline-danger my-2 my-sm-0" type="submit" th:href="@{/}">Logout</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="back container">
+		<h2 class="mt-4 mb-4">Formulario de Registro de Fotoperiodo</h2>
+		<form id="registrationForm" th:action="@{/fotoperiodo/save}" th:object="${fotoperiodo}" method="post">
+			<div class="row">
+				<div class="mb-3">
+					<label for="estacion" class="form-label">Estación</label>
+					<select th:field="*{estacionId}" class="form-select" required>
+						<option th:each="estacion : ${estaciones}" th:value="${estacion.id}" th:text="${estacion.nombre}">Seleccione
+							una estación</option>
+					</select>
+				</div>
+				<div class="col-md-4 mb-3">
+					<label for="year">Año:</label>
+					<input type="number" th:field="*{year}" placeholder="Ingrese el año" required>
+				</div>
+			</div>
+
+			<!-- Mes y Cantidad dinámicamente generados -->
+			<div id="mesesContainer">
+				<div class="row">
+					<div class="col-md-4 mb-3">
+						<label for="mes1">Mes 1:</label>
+						<select class="form-control" id="mes1" name="mes1">
+							<option value="Enero">Enero</option>
+						</select>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="cantidad1">Cantidad 1:</label>
+						<input type="number" step="0.01" class="form-control" id="cantidad1" name="cantidad1">
+					</div>
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-primary mt-3">Guardar Fotoperiodo</button>
+		</form>
+
+		<button type="button" class="btn btn-info mt-3" onclick="agregarMes()">Agregar Mes</button>
+	</div>
+
+	<script>
+		const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+		let mesCount = 1; // Número inicial de meses
+
+		// Función para agregar más campos
+		function agregarMes() {
+			if (mesCount < 12) {  // Limitar a 12 meses
+				mesCount++;
+
+				// Obtener el mes disponible
+				const mesDisponible = meses[mesCount - 1];
+
+				const newMesRow = document.createElement('div');
+				newMesRow.classList.add('row');
+				newMesRow.innerHTML = `
+                    <div class="col-md-4 mb-3">
+                        <label for="mes${mesCount}">Mes ${mesCount}:</label>
+                        <select class="form-control" id="mes${mesCount}" name="mes${mesCount}">
+                            <option value="${mesDisponible}">${mesDisponible}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="cantidad${mesCount}">Cantidad ${mesCount}:</label>
+                        <input type="number" step="0.01" class="form-control" id="cantidad${mesCount}" name="cantidad${mesCount}">
+                    </div>
+                `;
+				document.getElementById('mesesContainer').appendChild(newMesRow);
+			}
+		}
+	</script>
+
+	<!-- Scripts de Bootstrap -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

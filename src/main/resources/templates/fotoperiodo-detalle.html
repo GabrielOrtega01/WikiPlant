@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalle Fotoperiodo</title>
+</head>
+<body>
+
+<h1>Detalle de Fotoperiodo</h1>
+
+<div>
+    <p><strong>ID:</strong> <span th:text="${fotoperiodo.id}"></span></p>
+    <p><strong>Año:</strong> <span th:text="${fotoperiodo.year}"></span></p>
+
+    <h2>Registros:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Mes</th>
+                <th>Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="registro : ${fotoperiodo.registros}">
+                <td th:text="${registro.mes}"></td>
+                <td th:text="${registro.cantidad}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Agregar un enlace para regresar a la lista -->
+<a th:href="@{/fotoperiodo/lista}">Regresar a la lista</a>
+
+</body>
+</html>

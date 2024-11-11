@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de amplitud</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/8983/production/_109730253_gettyimages-658291850.jpg.webp') no-repeat center center fixed;
+            background-size: cover;
+            color: #f8f9fa;
+        }
+        .header, .footer {
+            background-color: rgba(38, 31, 89, 0.8);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+       
+        .table {
+            background-color: rgba(0, 0, 0, 0.75);
+        }
+        .table th, .table td {
+            color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Lista de Registros de amplitud</h1>
+    </header>
+	<p></p>
+    <div class="container">
+        <table class="table table-dark table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th style="color:blueviolet;">Fecha</th>
+                    <th>Enero</th>
+                    <th>Febrero</th>
+                    <th>Marzo</th>
+                    <th>Abril</th>
+                    <th>Mayo</th>
+                    <th>Junio</th>
+                    <th>Julio</th>
+                    <th>Agosto</th>
+                    <th>Septiembre</th>
+                    <th>Octubre</th>
+                    <th>Noviembre</th>
+                    <th>Diciembre</th>
+                    <th style="color:rgb(0, 0, 255);">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Bucle para iterar sobre los registros de amplitud -->
+                <tr th:each="amplitud : ${amplitudes}">
+                    <td th:text="${amplitud.fecha}" >2024</td>
+                    <td th:text="${amplitud.mesCantidadMap['Enero']}">0.0</td>
+                    <td th:text="${amplitud.mesCantidadMap['Febrero']}">0.0</td>
+                    <td th:text="${amplitud.mesCantidadMap['Marzo']}">0.0</td>
+                    <td th:text="${amplitud.mesCantidadMap['Abril']}">0.0</td>
+                    <td th:text="${amplitud.mesCantidadMap['Mayo']}">0.0</td>
+                    <td th:text="${amplitud.mesCantidadMap['Junio']}">0.0</td>
+                    <td th:text="${amplitud.mesCantidadMap['Julio']}">0.0</td>
+                    <td th:text="${amplitud.mesCantidadMap['Agosto']}">0.0</td>
+                    <td th:text="${amplitud.mesCantidadMap['Septiembre']}">0.0</td>
+                    <td th:text="${amplitud.mesCantidadMap['Octubre']}">0.0</td>
+                    <td th:text="${amplitud.mesCantidadMap['Noviembre']}">0.0</td>
+                    <td th:text="${amplitud.mesCantidadMap['Diciembre']}">0.0</td>
+                    <td>
+						
+                        <a th:href="@{/amplitud/delete/{id}(id=${amplitud.id})}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer class="footer">
+        <p>© 2024 Sistema de Gestión de amplitud. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

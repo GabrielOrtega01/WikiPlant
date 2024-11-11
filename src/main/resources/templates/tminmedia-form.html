@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Formulario Temperatira Minima Media</title>
+	<!-- Enlaces a los archivos CSS de Bootstrap -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background: url('https://image.slidesdocs.com/responsive-images/background/green-spring-grass-peach-blossom-plants-beautiful-powerpoint-background_f546f2a72b__960_540.jpg') no-repeat center center fixed;
+			background-size: cover;
+			color: #1d1f21;
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+		}
+
+		label {
+			margin-bottom: 0.2rem;
+		}
+
+		.form-control {
+			width: calc(50% - 5px);
+		}
+
+		.back {
+			background-color: rgba(255, 255, 255, 0.9);
+			padding-left: 10%;
+			padding-top: 2%;
+			border-radius: 5%;
+		}
+
+		.navbar {
+			padding: 8px 16px !important;
+		}
+
+		h1 {
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" th:href="@{/administrador/index}">
+		</a>
+		<div class="navbar-title">
+			<h1>Formulario Temperatira Minima Media</h1>
+		</div>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="btn btn-outline-danger my-2 my-sm-0" type="submit" th:href="@{/}">Logout</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	
+	<div class="back container">
+	    <h2 class="mt-4 mb-4">Formulario de Registro de	Temperatira Minima Media</h2>
+	    <div>
+	        <form id="registrationForm" th:action="@{/tminmedia/save}" th:object="${tminmedia}" method="post">
+	            <div class="row">
+	                <div class="col-md-4 mb-3">
+	                    <label for="fecha">Fecha:</label>
+						<input type="number" th:field="*{fecha}" placeholder="Ingrese el año" required>
+						     </div>
+	            </div>
+	            
+				
+				
+				<div class="row">
+				                <div class="col-md-4 mb-3">
+				                    <label for="mes1">Mes 1:</label>
+				                    <select class="form-control" id="mes1" name="mes1">
+										<option value="Enero">Enero</option>
+										                        <option value="Febrero">Febrero</option>
+										                        <option value="Marzo">Marzo</option>
+										                        <option value="Abril">Abril</option>
+										                        <option value="Mayo">Mayo</option>
+										                        <option value="Junio">Junio</option>
+										                        <option value="Julio">Julio</option>
+										                        <option value="Agosto">Agosto</option>
+										                        <option value="Septiembre">Septiembre</option>
+										                        <option value="Octubre">Octubre</option>
+										                        <option value="Noviembre">Noviembre</option>
+										                        <option value="Diciembre">Diciembre</option>
+				                    </select>
+				                </div>
+				                <div class="col-md-4 mb-3">
+				                    <label for="cantidad1">Cantidad 1:</label>
+				                    <input type="number" step="0.01" class="form-control" id="cantidad1" name="cantidad1">
+				                </div>
+				            </div>
+					
+					
+					
+	          
+	
+	            <!-- Entrada para el segundo Mes y Cantidad -->
+	            <div class="row">
+	                <div class="col-md-4 mb-3">
+	                    <label for="mes2">Mes 2:</label>
+	                    <select class="form-control" id="mes2" name="mes2">
+							<option value="Enero">Enero</option>
+							                        <option value="Febrero">Febrero</option>
+							                        <option value="Marzo">Marzo</option>
+							                        <option value="Abril">Abril</option>
+							                        <option value="Mayo">Mayo</option>
+							                        <option value="Junio">Junio</option>
+							                        <option value="Julio">Julio</option>
+							                        <option value="Agosto">Agosto</option>
+							                        <option value="Septiembre">Septiembre</option>
+							                        <option value="Octubre">Octubre</option>
+							                        <option value="Noviembre">Noviembre</option>
+							                        <option value="Diciembre">Diciembre</option>
+	                    </select>
+	                </div>
+	                <div class="col-md-4 mb-3">
+	                    <label for="cantidad2">Cantidad 2:</label>
+	                    <input type="number" step="0.01" class="form-control" id="cantidad2" name="cantidad2">
+	                </div>
+	            </div>
+	
+	            <!-- Entrada para el tercer Mes y Cantidad -->
+	            <div class="row">
+	                <div class="col-md-4 mb-3">
+	                    <label for="mes3">Mes 3:</label>
+	                    <select class="form-control" id="mes3" name="mes3">
+							<option value="Enero">Enero</option>
+							                        <option value="Febrero">Febrero</option>
+							                        <option value="Marzo">Marzo</option>
+							                        <option value="Abril">Abril</option>
+							                        <option value="Mayo">Mayo</option>
+							                        <option value="Junio">Junio</option>
+							                        <option value="Julio">Julio</option>
+							                        <option value="Agosto">Agosto</option>
+							                        <option value="Septiembre">Septiembre</option>
+							                        <option value="Octubre">Octubre</option>
+							                        <option value="Noviembre">Noviembre</option>
+							                        <option value="Diciembre">Diciembre</option>
+	                    </select>
+	                </div>
+	                <div class="col-md-4 mb-3">
+	                    <label for="cantidad3">Cantidad 3:</label>
+	                    <input type="number" step="0.01" class="form-control" id="cantidad3" name="cantidad3">
+	                </div>
+	            </div>
+				
+				<!-- Entrada para el Cuarto Mes y Cantidad -->
+				            <div class="row">
+				                <div class="col-md-4 mb-3">
+				                    <label for="mes4">Mes 4:</label>
+				                    <select class="form-control" id="mes4" name="mes4">
+										<option value="Enero">Enero</option>
+										                        <option value="Febrero">Febrero</option>
+										                        <option value="Marzo">Marzo</option>
+										                        <option value="Abril">Abril</option>
+										                        <option value="Mayo">Mayo</option>
+										                        <option value="Junio">Junio</option>
+										                        <option value="Julio">Julio</option>
+										                        <option value="Agosto">Agosto</option>
+										                        <option value="Septiembre">Septiembre</option>
+										                        <option value="Octubre">Octubre</option>
+										                        <option value="Noviembre">Noviembre</option>
+										                        <option value="Diciembre">Diciembre</option>
+				                    </select>
+				                </div>
+				                <div class="col-md-4 mb-3">
+				                    <label for="cantidad4">Cantidad 4:</label>
+				                    <input type="number" step="0.01" class="form-control" id="cantidad4" name="cantidad4">
+				                </div>
+				            </div>
+							
+							
+							
+							
+							
+							
+							
+							<!-- Entrada para el Quinto  Mes y Cantidad -->
+							            <div class="row">
+							                <div class="col-md-4 mb-3">
+							                    <label for="mes5">Mes 5:</label>
+							                    <select class="form-control" id="mes5" name="mes5">
+													<option value="Enero">Enero</option>
+													                        <option value="Febrero">Febrero</option>
+													                        <option value="Marzo">Marzo</option>
+													                        <option value="Abril">Abril</option>
+													                        <option value="Mayo">Mayo</option>
+													                        <option value="Junio">Junio</option>
+													                        <option value="Julio">Julio</option>
+													                        <option value="Agosto">Agosto</option>
+													                        <option value="Septiembre">Septiembre</option>
+													                        <option value="Octubre">Octubre</option>
+													                        <option value="Noviembre">Noviembre</option>
+													                        <option value="Diciembre">Diciembre</option>
+							                    </select>
+							                </div>
+							                <div class="col-md-4 mb-3">
+							                    <label for="cantidad5">Cantidad 5:</label>
+							                    <input type="number" step="0.01" class="form-control" id="cantidad5" name="cantidad5">
+							                </div>
+							            </div>
+										
+										
+										
+										
+										
+			
+										
+										
+										<!-- Entrada para el Sexto Mes y Cantidad -->
+										            <div class="row">
+										                <div class="col-md-4 mb-3">
+										                    <label for="mes6">Mes 6:</label>
+										                    <select class="form-control" id="mes6" name="mes6">
+																<option value="Enero">Enero</option>
+																                        <option value="Febrero">Febrero</option>
+																                        <option value="Marzo">Marzo</option>
+																                        <option value="Abril">Abril</option>
+																                        <option value="Mayo">Mayo</option>
+																                        <option value="Junio">Junio</option>
+																                        <option value="Julio">Julio</option>
+																                        <option value="Agosto">Agosto</option>
+																                        <option value="Septiembre">Septiembre</option>
+																                        <option value="Octubre">Octubre</option>
+																                        <option value="Noviembre">Noviembre</option>
+																                        <option value="Diciembre">Diciembre</option>
+										                    </select>
+										                </div>
+										                <div class="col-md-4 mb-3">
+										                    <label for="cantidad6">Cantidad 6:</label>
+										                    <input type="number" step="0.01" class="form-control" id="cantidad6" name="cantidad6">
+										                </div>
+										            </div>
+													
+													
+													
+													<!-- Entrada para el Siete Mes y Cantidad -->
+													            <div class="row">
+													                <div class="col-md-4 mb-3">
+													                    <label for="mes7">Mes 7:</label>
+													                    <select class="form-control" id="mes7" name="mes7">
+																			<option value="Enero">Enero</option>
+																			                        <option value="Febrero">Febrero</option>
+																			                        <option value="Marzo">Marzo</option>
+																			                        <option value="Abril">Abril</option>
+																			                        <option value="Mayo">Mayo</option>
+																			                        <option value="Junio">Junio</option>
+																			                        <option value="Julio">Julio</option>
+																			                        <option value="Agosto">Agosto</option>
+																			                        <option value="Septiembre">Septiembre</option>
+																			                        <option value="Octubre">Octubre</option>
+																			                        <option value="Noviembre">Noviembre</option>
+																			                        <option value="Diciembre">Diciembre</option>
+													                    </select>
+													                </div>
+													                <div class="col-md-4 mb-3">
+													                    <label for="cantidad7">Cantidad 7:</label>
+													                    <input type="number" step="0.01" class="form-control" id="cantidad7" name="cantidad7">
+													                </div>
+													            </div>
+																
+																
+							
+																
+																
+																<!-- Entrada para el Octavo Mes y Cantidad -->
+																            <div class="row">
+																                <div class="col-md-4 mb-3">
+																                    <label for="mes8">Mes 8:</label>
+																                    <select class="form-control" id="mes8" name="mes8">
+																						<option value="Enero">Enero</option>
+																						                        <option value="Febrero">Febrero</option>
+																						                        <option value="Marzo">Marzo</option>
+																						                        <option value="Abril">Abril</option>
+																						                        <option value="Mayo">Mayo</option>
+																						                        <option value="Junio">Junio</option>
+																						                        <option value="Julio">Julio</option>
+																						                        <option value="Agosto">Agosto</option>
+																						                        <option value="Septiembre">Septiembre</option>
+																						                        <option value="Octubre">Octubre</option>
+																						                        <option value="Noviembre">Noviembre</option>
+																						                        <option value="Diciembre">Diciembre</option>
+																                    </select>
+																                </div>
+																                <div class="col-md-4 mb-3">
+																                    <label for="cantidad8">Cantidad 8:</label>
+																                    <input type="number" step="0.01" class="form-control" id="cantidad8" name="cantidad8">
+																                </div>
+																            </div>
+																			
+							
+																			
+																			
+																			
+																			<!-- Entrada para el Noveno Mes y Cantidad -->
+																			            <div class="row">
+																			                <div class="col-md-4 mb-3">
+																			                    <label for="mes9">Mes 9:</label>
+																			                    <select class="form-control" id="mes9" name="mes9">
+																									<option value="Enero">Enero</option>
+																									                        <option value="Febrero">Febrero</option>
+																									                        <option value="Marzo">Marzo</option>
+																									                        <option value="Abril">Abril</option>
+																									                        <option value="Mayo">Mayo</option>
+																									                        <option value="Junio">Junio</option>
+																									                        <option value="Julio">Julio</option>
+																									                        <option value="Agosto">Agosto</option>
+																									                        <option value="Septiembre">Septiembre</option>
+																									                        <option value="Octubre">Octubre</option>
+																									                        <option value="Noviembre">Noviembre</option>
+																									                        <option value="Diciembre">Diciembre</option>
+																			                    </select>
+																			                </div>
+																			                <div class="col-md-4 mb-3">
+																			                    <label for="cantidad9">Cantidad 9:</label>
+																			                    <input type="number" step="0.01" class="form-control" id="cantidad9" name="cantidad9">
+																			                </div>
+																			            </div>
+																						
+																						
+																						
+																						
+																						
+																						<!-- Entrada para el Decimo Mes y Cantidad -->
+																						            <div class="row">
+																						                <div class="col-md-4 mb-3">
+																						                    <label for="mes10">Mes 10:</label>
+																						                    <select class="form-control" id="mes10" name="mes10">
+																												<option value="Enero">Enero</option>
+																												                        <option value="Febrero">Febrero</option>
+																												                        <option value="Marzo">Marzo</option>
+																												                        <option value="Abril">Abril</option>
+																												                        <option value="Mayo">Mayo</option>
+																												                        <option value="Junio">Junio</option>
+																												                        <option value="Julio">Julio</option>
+																												                        <option value="Agosto">Agosto</option>
+																												                        <option value="Septiembre">Septiembre</option>
+																												                        <option value="Octubre">Octubre</option>
+																												                        <option value="Noviembre">Noviembre</option>
+																												                        <option value="Diciembre">Diciembre</option>
+																						                    </select>
+																						                </div>
+																						                <div class="col-md-4 mb-3">
+																						                    <label for="cantidad10">Cantidad 10:</label>
+																						                    <input type="number" step="0.01" class="form-control" id="cantidad10" name="cantidad10">
+																						                </div>
+																						            </div>
+																									
+																									
+																									
+																									
+																									
+																									<!-- Entrada para el onceavo Mes y Cantidad -->
+																									            <div class="row">
+																									                <div class="col-md-4 mb-3">
+																									                    <label for="mes11">Mes 11:</label>
+																									                    <select class="form-control" id="mes11" name="mes11">
+																															<option value="Enero">Enero</option>
+																															                        <option value="Febrero">Febrero</option>
+																															                        <option value="Marzo">Marzo</option>
+																															                        <option value="Abril">Abril</option>
+																															                        <option value="Mayo">Mayo</option>
+																															                        <option value="Junio">Junio</option>
+																															                        <option value="Julio">Julio</option>
+																															                        <option value="Agosto">Agosto</option>
+																															                        <option value="Septiembre">Septiembre</option>
+																															                        <option value="Octubre">Octubre</option>
+																															                        <option value="Noviembre">Noviembre</option>
+																															                        <option value="Diciembre">Diciembre</option>
+																									                    </select>
+																									                </div>
+																									                <div class="col-md-4 mb-3">
+																									                    <label for="cantidad11">Cantidad 11:</label>
+																									                    <input type="number" step="0.01" class="form-control" id="cantidad11" name="cantidad11">
+																									                </div>
+																									            </div>
+																												
+																												
+																												
+																												<!-- Entrada para el Doceavo Mes y Cantidad -->
+																												            <div class="row">
+																												                <div class="col-md-4 mb-3">
+																												                    <label for="mes12">Mes 12:</label>
+																												                    <select class="form-control" id="mes12" name="mes12">
+																																		<option value="Enero">Enero</option>
+																																		                        <option value="Febrero">Febrero</option>
+																																		                        <option value="Marzo">Marzo</option>
+																																		                        <option value="Abril">Abril</option>
+																																		                        <option value="Mayo">Mayo</option>
+																																		                        <option value="Junio">Junio</option>
+																																		                        <option value="Julio">Julio</option>
+																																		                        <option value="Agosto">Agosto</option>
+																																		                        <option value="Septiembre">Septiembre</option>
+																																		                        <option value="Octubre">Octubre</option>
+																																		                        <option value="Noviembre">Noviembre</option>
+																																		                        <option value="Diciembre">Diciembre</option>
+																												                    </select>
+																												                </div>
+																												                <div class="col-md-4 mb-3">
+																												                    <label for="cantidad12">Cantidad 12:</label>
+																												                    <input type="number" step="0.01" class="form-control" id="cantidad12" name="cantidad12">
+																												                </div>
+																												            </div>
+																															
+																															
+																															
+																															
+																															
+	            
+	            <button type="submit" class="btn btn-primary mt-3">Guardar Temperatira Minima Media</button>
+	        </form>
+	    </div>
+	</div>
+
+	
+	<script>
+	    let mesCount = 3; // Número inicial de meses
+	
+	    // Función para agregar más campos
+	    function agregarMes() {
+	        if (mesCount < 12) {  // Limitar a 12 meses
+	            mesCount++;
+	            const mesInput = document.createElement('select');
+	            mesInput.classList.add('form-control');
+	            mesInput.name = 'meses';  // Este es el nombre del parámetro
+	            mesInput.innerHTML = `
+	                <option value="Enero">Enero</option>
+	                <option value="Febrero">Febrero</option>
+	                <option value="Marzo">Marzo</option>
+	                <option value="Abril">Abril</option>
+	                <option value="Mayo">Mayo</option>
+	                <option value="Junio">Junio</option>
+	                <option value="Julio">Julio</option>
+	                <option value="Agosto">Agosto</option>
+	                <option value="Septiembre">Septiembre</option>
+	                <option value="Octubre">Octubre</option>
+	                <option value="Noviembre">Noviembre</option>
+	                <option value="Diciembre">Diciembre</option>
+	            `;
+	            const cantidadInput = document.createElement('input');
+	            cantidadInput.classList.add('form-control');
+	            cantidadInput.name = 'cantidades';  // Este es el nombre del parámetro
+	            cantidadInput.type = 'number';
+	            cantidadInput.step = '0.01';
+	            cantidadInput.placeholder = 'Cantidad';
+	
+	            // Crear una fila para el nuevo mes y cantidad
+	            const newRow = document.createElement('div');
+	            newRow.classList.add('row');
+	            newRow.innerHTML = `
+	                <div class="col-md-4 mb-3">
+	                    <label for="mes${mesCount}">Mes ${mesCount}:</label>
+	                </div>
+	                <div class="col-md-4 mb-3">
+	                    <label for="cantidad${mesCount}">Cantidad ${mesCount}:</label>
+	                </div>
+	            `;
+	
+	            // Añadir los inputs dinámicos a la fila
+	            newRow.appendChild(mesInput);
+	            newRow.appendChild(cantidadInput);
+	
+	            document.getElementById('mesesContainer').appendChild(newRow);
+	        }
+	    }
+	</script>
+
+	
+
+	<!-- jQuery, Popper.js, Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -108,7 +108,8 @@
         <div class="navbar-title">
             <h1 class="display-4">Lista de Estaciones</h1>
         </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -126,27 +127,29 @@
         </div>
         <div class="row">
             <!-- Iterar sobre la lista de estaciones -->
-            <div th:each="estacion : ${estaciones}" class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-header text-center">
-                        <strong>Estación:</strong> <span th:text="${estacion.nombre}"></span>
-                    </div>
-                    <div class="card-body">
-                        <p><strong>Tipo:</strong> <span th:text="${estacion.tipo}"></span></p>
-                        <p><strong>Latitud:</strong> <span th:text="${estacion.latitud}"></span></p>
-                        <p><strong>Longitud:</strong> <span th:text="${estacion.longitud}"></span></p>
-                        <p><strong>Altitud:</strong> <span th:text="${estacion.altitud}"></span></p>
-                        <p><strong>Periodo:</strong> <span th:text="${estacion.periodo}"></span></p>
+            <label for="estacion" class="form-label">Estación</label>
+            <select th:field="*{estacionId}" class="form-select" required>
+                <option th:each="estacion : ${estaciones}" th:value="${estacion.id}" th:text="${estacion.nombre}">
+                    Seleccione
+                    una estación</option>
+            </select>
+        </div>
+        <div class="card-body">
+            <p><strong>Tipo:</strong> <span th:text="${estacion.tipo}"></span></p>
+            <p><strong>Latitud:</strong> <span th:text="${estacion.latitud}"></span></p>
+            <p><strong>Longitud:</strong> <span th:text="${estacion.longitud}"></span></p>
+            <p><strong>Altitud:</strong> <span th:text="${estacion.altitud}"></span></p>
+            <p><strong>Periodo:</strong> <span th:text="${estacion.periodo}"></span></p>
 
-                        <div class="btn-group d-flex" role="group">
-                            <a th:href="@{/estacion/edit/{id}(id=${estacion.id})}" class="btn btn-primary w-100 m-1">Editar</a>
-                            <a th:href="@{/estacion/delete/{id}(id=${estacion.id})}" class="btn btn-danger w-100 m-1">Eliminar</a>
-                            <a th:href="@{/estacion/informe/{id}(id=${estacion.id})}" class="btn btn-info w-100 m-1">Ver Informe</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="btn-group d-flex" role="group">
+                <a th:href="@{/estacion/edit/{id}(id=${estacion.id})}" class="btn btn-primary w-100 m-1">Editar</a>
+                <a th:href="@{/estacion/delete/{id}(id=${estacion.id})}" class="btn btn-danger w-100 m-1">Eliminar</a>
+                <a th:href="@{/estacion/informe/{id}(id=${estacion.id})}" class="btn btn-info w-100 m-1">Ver Informe</a>
             </div>
         </div>
+    </div>
+    </div>
+    </div>
     </div>
 
     <footer class="footer text-center">

@@ -56,7 +56,7 @@ public class ControllerWebEstacion {
     
     @GetMapping("/info")
     public String estacionesInfoTemplate() {
-        return "estaciones-info"; // nombre del nuevo template Thymeleaf
+        return "estacion-info"; // nombre del nuevo template Thymeleaf
     }
 
     

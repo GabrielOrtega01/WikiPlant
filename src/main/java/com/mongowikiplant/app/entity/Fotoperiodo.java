@@ -11,14 +11,12 @@ public class Fotoperiodo {
 
     @Id
     private String id;
-    private int fecha;  // Cambié de String a int para almacenar el año
-    private List<MesCantidad> registros;
-
-    // Map para almacenar mes -> cantidad
-    private Map<String, Double> mesCantidadMap = new HashMap<>();
+    private String estacionId;  // ID de la estación a la que pertenece este fotoperiodo
+    private int year;  // Año al que corresponde el fotoperiodo
+    private List<MesCantidad> registros;  // Lista de registros mensuales
+    private Map<String, Double> mesCantidadMap = new HashMap<>();  // Mapa de mes -> cantidad
 
     // Getters y Setters
-
     public String getId() {
         return id;
     }
@@ -26,13 +24,21 @@ public class Fotoperiodo {
     public void setId(String id) {
         this.id = id;
     }
-
-    public int getFecha() {
-        return fecha;
+    
+    public String getEstacionId() {
+        return estacionId;
     }
 
-    public void setFecha(int fecha) {
-        this.fecha = fecha;
+    public void setEstacionId(String estacionId) {
+        this.estacionId = estacionId;
+    }
+    
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public List<MesCantidad> getRegistros() {
@@ -43,7 +49,6 @@ public class Fotoperiodo {
         this.registros = registros;
     }
 
-    // Getter y Setter para mesCantidadMap
     public Map<String, Double> getMesCantidadMap() {
         return mesCantidadMap;
     }
@@ -52,12 +57,26 @@ public class Fotoperiodo {
         this.mesCantidadMap = mesCantidadMap;
     }
 
-    // Clase estática embebida para representar Mes y Cantidad
+    // Método para calcular el promedio anual
+    public double calcularPromedioAnual() {
+        double suma = 0;
+        int count = 0;
+        for (String mes : List.of("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")) {
+            Double valor = mesCantidadMap.get(mes);
+            if (valor != null) {
+                suma += valor;
+                count++;
+            }
+        }
+        return count > 0 ? suma / count : 0;
+    }
+
+    // Clase estática embebida para representar un registro de mes y cantidad
     public static class MesCantidad {
         private String mes;
         private Double cantidad;
 
-        // Constructor
+        // Constructores
         public MesCantidad() {}
 
         public MesCantidad(String mes, Double cantidad) {
