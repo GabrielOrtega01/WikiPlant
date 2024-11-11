@@ -106,7 +106,6 @@
             </div>
 
 
-
             <div class="sb-sidenav-menu-heading">Condiciones</div>
             <a class="nav-link collapsed" th:href="@{/coordinador/lista}" data-bs-toggle="collapse"
               data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -116,38 +115,38 @@
             </a>
             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
               <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/administrador/cultivo}">Estaciones</a>
+                <a class="nav-link" th:href="@{/estacion/info}">Estaciones</a>
               </nav>
               <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/administrador/cultivo}">Fotoperiodo</a>
+                <a class="nav-link" th:href="@{/fotoperiodo/info}">Fotoperiodo</a>
               </nav>
               <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/administrador/cultivo}">Radiación Global</a>
+                <a class="nav-link" th:href="@{/rediacion/info}">Radiación Global</a>
               </nav>
               <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/administrador/cultivo}">Temperatura Media</a>
+                <a class="nav-link" th:href="@{/tmedia/info}">Temperatura Media</a>
               </nav>
               <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/administrador/cultivo}">Temperatura Máxima Media</a>
+                <a class="nav-link" th:href="@{/tmaxmedia/info}">Temperatura Máxima Media</a>
               </nav>
               <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/administrador/cultivo}">Temperatura Mínima Media</a>
+                <a class="nav-link" th:href="@{/tminmedia/info}">Temperatura Mínima Media</a>
               </nav>
               <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/administrador/cultivo}">Precipitación</a>
+                <a class="nav-link" th:href="@{/precipitacion/info}">Precipitación</a>
               </nav>
               <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/administrador/cultivo}">Método de Estimación</a>
+                <a class="nav-link" th:href="@{/estimacion/info}">Método de Estimación</a>
               </nav>
               <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/administrador/cultivo}">ADT - Amplitud Diaria de
+                <a class="nav-link" th:href="@{/amplitud/info}">ADT - Amplitud Diaria de
                   Temperatura</a>
               </nav>
               <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/administrador/cultivo}">Evaporación</a>
+                <a class="nav-link" th:href="@{/Evaporación/info}">Evaporación</a>
               </nav>
               <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/administrador/cultivo}">Evapotranspiración</a>
+                <a class="nav-link" th:href="@{/evapotranspiracion/info}">Evapotranspiración</a>
               </nav>
             </div>
 
@@ -177,6 +176,31 @@
               <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/administrador/cultivo}">Regimen Hídrico</a>
               </nav>
+            </div>
+
+
+            <div class="sb-sidenav-menu-heading">Administracion</div>
+            <a class="nav-link collapsed" th:href="@{/coordinador/lista}" data-bs-toggle="collapse"
+              data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+              <div class="sb-nav-link-icon"><i class="fa-solid fa-lightbulb"></i></div>
+              Monitoreo y control
+              <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+              <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link" th:href="@{/administrador/cultivo}">Notificaciones</a>
+              </nav>
+              <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link" th:href="@{/administrador/cultivo}">Usuarios activos e inactivos</a>
+              </nav>
+              <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link" th:href="@{/administrador/cultivo}">Historial</a>
+              </nav>
+
+              <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link" th:href="@{/administrador/cultivo}">Reportes</a>
+              </nav>
+
             </div>
 
 
@@ -337,7 +361,7 @@
 
               <div class="col-xl-3 col-md-6">
                 <div class="card bg-danger text-white mb-4">
-                  <div class="card-body">Fotoperíodo</div>
+                  <div class="card-body">Fotoperiodo</div>
                   <div class="card-footer d-flex align-items-center justify-content-between">
                     <a th:href="@{/fotoperiodo/info}">
                       <i class="bi bi-sun" style="font-size: 40px;"></i>
@@ -549,6 +573,79 @@
             </div>
           </div>
         </div>
+
+
+        <!-- Monitoreo y control -->
+        <div class="container mb-4">
+          <!-- Caja transparente para el botón -->
+          <div class="p-2"
+            style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
+            <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
+              data-bs-target="#monitoreoycontrol" aria-expanded="false" aria-controls="monitoreoycontrol"
+              style="color: black;">
+              <h5 class="m-0">Monitoreo y Control <i class="bi bi-chevron-down"></i></h5>
+            </button>
+          </div>
+          <p></p>
+
+          <div id="monitoreoycontrol" class="collapse">
+            <div class="row">
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                  <div class="card-body">Notificaciones</div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a th:href="@{/administrador/cultivo}">
+                      <i class="bi bi-bell-fill" style="font-size: 40px;"></i>
+                    </a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                  <div class="card-body">Usuarios ACTIVOS e INACTIVOS</div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a th:href="@{/administrador/cultivo}">
+                      <i class="bi bi-gear" style="font-size: 40px;"></i>
+                    </a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+              <p></p>
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                  <div class="card-body">Historial</div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a th:href="@{/administrador/cultivo}">
+                      <i class="bi bi-hourglass-split" style="font-size: 40px;"></i>
+                    </a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                  <div class="card-body">Reportes</div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a th:href="@{/administrador/cultivo}">
+                      <i class="bi bi-flag" style="font-size: 40px;"></i>
+                    </a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+
 
 
     </div>

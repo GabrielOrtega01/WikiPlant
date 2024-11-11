@@ -26,7 +26,8 @@
 
         .title {
             text-align: center;
-            color: #e4fde4; /* Verde oscuro */
+            color: #e4fde4;
+            /* Verde oscuro */
         }
 
         .btn-container {
@@ -38,15 +39,21 @@
             padding: 15px 40px;
             font-size: 1.2rem;
             margin: 10px;
-            background-color: rgba(0, 123, 255, 0.7); /* Color de fondo del botón */
-            color: white; /* Color del texto del botón */
-            border: none; /* Sin borde */
-            border-radius: 5px; /* Bordes redondeados */
+            background-color: rgba(0, 123, 255, 0.7);
+            /* Color de fondo del botón */
+            color: white;
+            /* Color del texto del botón */
+            border: none;
+            /* Sin borde */
+            border-radius: 5px;
+            /* Bordes redondeados */
         }
 
         .btn-large:hover {
-            background-color: rgba(0, 123, 255, 1); /* Color al pasar el mouse */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Brillo */
+            background-color: rgba(0, 123, 255, 1);
+            /* Color al pasar el mouse */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            /* Brillo */
         }
 
         .navbar-title {
@@ -61,7 +68,8 @@
         }
 
         .header {
-            background-color: rgba(3, 42, 3, 0.8); /* Color de fondo del header (verde) */
+            background-color: rgba(3, 42, 3, 0.8);
+            /* Color de fondo del header (verde) */
             color: white;
             padding: 15px 0;
             text-align: center;
@@ -79,7 +87,8 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: all 0.3s;
-            background-color: rgba(52, 58, 64, 0.8); /* Color de fondo de las tarjetas */
+            background-color: rgba(52, 58, 64, 0.8);
+            /* Color de fondo de las tarjetas */
         }
 
         .card:hover {
@@ -97,6 +106,7 @@
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="navbar-title">
@@ -140,57 +150,97 @@
             </div>
         </form>
 
-		<!-- Mostrar los detalles de la planta seleccionada en una tarjeta -->
-		<div th:if="${planta != null}" class="mt-4">
-		    <h2>Planta Seleccionada</h2>
-		    <div class="card text-center" style="width: 18rem; margin: 0 auto;">
-		        <img th:src="${planta.imagen}" alt="Imagen de la planta" class="card-img-top" style="max-height: 200px;">
-		        <div class="card-body">
-		            <h5 class="card-title" th:text="${planta.nomComun}"></h5>
-		            <p class="card-text" th:text="${planta.nomCientifico}"></p>
-		            <a th:href="@{/cliente/plantaDetalle(plantaId=${planta.id})}" class="btn btn-primary">Ver Detalles</a>
-		        </div>
-		    </div>
-		</div>
-		<div class="col-md-4 mb-4">
-		    <div class="card">
-		        <div class="card-body text-center">
-		            <a th:href="@{/}" title="Regresar" class="btn btn-danger btn-large">
-						<i class="bi bi-flower2" style="font-size: 40px;"></i>
-		                <p>Simulaciones de Cultivo</p>
-		            </a>
-		        </div>
-		    </div>
-		</div>		
-		<div class="col-md-4 mb-4">
-		    <div class="card">
-		        <div class="card-body text-center">
-		            <a th:href="@{/}" title="Regresar" class="btn btn-danger btn-large">
-		                <i class="bi bi-clock-history" style="font-size: 40px;"></i>
-		                <p>Historial</p>
-		            </a>
-		        </div>
-		    </div>
-		</div>
-		<!-- Botón Regresar -->
-		          <div class="col-md-4 mb-4">
-		              <div class="card">
-		                  <div class="card-body text-center">
-		                      <a th:href="@{/}" title="Regresar" class="btn btn-danger btn-large">
-		                          <i class="bi bi-arrow-return-left" style="font-size: 40px;"></i>
-		                          <p>Regresar</p>
-		                      </a>
-		                  </div>
-		              </div>
-		          </div>
+        <!-- Mostrar los detalles de la planta seleccionada en una tarjeta -->
+        <div th:if="${planta != null}" class="mt-4">
+            <h2>Planta Seleccionada</h2>
+            <div class="card text-center" style="width: 18rem; margin: 0 auto;">
+                <img th:src="${planta.imagen}" alt="Imagen de la planta" class="card-img-top"
+                    style="max-height: 200px;">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${planta.nomComun}"></h5>
+                    <p class="card-text" th:text="${planta.nomCientifico}"></p>
+                    <a th:href="@{/cliente/plantaDetalle(plantaId=${planta.id})}" class="btn btn-primary">Ver
+                        Detalles</a>
+                </div>
+            </div>
+        </div>
 
+
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a th:href="@{/}" title="Regresar" class="btn btn-danger btn-large">
+                            <i class="bi bi-flower2" style="font-size: 40px;"></i>
+                            <p>Simulaciones de Cultivo</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a th:href="@{/}" title="Regresar" class="btn btn-danger btn-large">
+                            <i class="bi bi-bookmark-star" style="font-size: 40px;"></i>
+                            <p>Favoritos</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a th:href="@{/}" title="Regresar" class="btn btn-danger btn-large">
+                            <i class="bi bi-clock-history" style="font-size: 40px;"></i>
+                            <p>Historial</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a th:href="@{/}" title="Regresar" class="btn btn-danger btn-large">
+                            <i class="bi bi-exclamation-circle" style="font-size: 40px;"></i>
+                            <p>Notificaciones</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a th:href="@{/}" title="Regresar" class="btn btn-danger btn-large">
+                            <i class="bi bi-activity" style="font-size: 40px;"></i>
+                            <p>Reportes Graficos</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Botón Regresar -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a th:href="@{/}" title="Regresar" class="btn btn-danger btn-large">
+                            <i class="bi bi-arrow-return-left" style="font-size: 40px;"></i>
+                            <p>Regresar</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <footer class="footer">
         <p>&copy; 2024 Desarrollado por El equipo de Pruebas Saber Pro</p>
     </footer>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
