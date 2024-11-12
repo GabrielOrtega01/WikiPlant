@@ -46,7 +46,8 @@
 
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" th:href="@{/administrador/index}"></a>
+		<a class="navbar-brand" th:href="@{/administrador/index}">
+		</a>
 		<div class="navbar-title">
 			<h1>Formulario Fotoperiodo</h1>
 		</div>
@@ -65,77 +66,290 @@
 
 	<div class="back container">
 		<h2 class="mt-4 mb-4">Formulario de Registro de Fotoperiodo</h2>
-		<form id="registrationForm" th:action="@{/fotoperiodo/save}" th:object="${fotoperiodo}" method="post">
-			<div class="row">
-				<div class="mb-3">
-					<label for="estacion" class="form-label">Estación</label>
-					<select th:field="*{estacionId}" class="form-select" required>
-						<option th:each="estacion : ${estaciones}" th:value="${estacion.id}" th:text="${estacion.nombre}">Seleccione
-							una estación</option>
-					</select>
-				</div>
-				<div class="col-md-4 mb-3">
-					<label for="year">Año:</label>
-					<input type="number" th:field="*{year}" placeholder="Ingrese el año" required>
-				</div>
-			</div>
+		<div>
+			<form id="registrationForm" th:action="@{/fotoperiodo/save}" th:object="${fotoperiodo}" method="post">
+				<div class="row">
+					<div class="mb-3">
+						<label for="estacion" class="form-label">Estación</label>
+						<select th:field="*{estacionId}" class="form-select" required>
+							<option th:each="estacion : ${estaciones}" th:value="${estacion.id}" th:text="${estacion.nombre}"
+								th:selected="${fotoperiodo.estacionId == estacion.id}">Seleccione una estación</option>
+						</select>
+					</div>
 
-			<!-- Mes y Cantidad dinámicamente generados -->
-			<div id="mesesContainer">
+					<div class="col-md-4 mb-3">
+						<label for="year">Año:</label>
+						<input type="number" th:field="*{year}" placeholder="Ingrese el año" required>
+					</div>
+				</div>
+
+				<!-- Mes 1: Enero -->
 				<div class="row">
 					<div class="col-md-4 mb-3">
 						<label for="mes1">Mes 1:</label>
 						<select class="form-control" id="mes1" name="mes1">
-							<option value="Enero">Enero</option>
+							<option value="Enero" th:selected="${fotoperiodo.mesCantidadMap['Enero'] != null}">Enero</option>
 						</select>
 					</div>
 					<div class="col-md-4 mb-3">
-						<label for="cantidad1">Cantidad 1:</label>
-						<input type="number" step="0.01" class="form-control" id="cantidad1" name="cantidad1">
+						<label for="cantidad1">Cantidad Enero:</label>
+						<input type="number" th:field="*{mesCantidadMap['Enero']}" placeholder="Ingrese la cantidad para enero"
+							required step="0.01" lang="en">
 					</div>
 				</div>
-			</div>
 
-			<button type="submit" class="btn btn-primary mt-3">Guardar Fotoperiodo</button>
-		</form>
+				<!-- Mes 2: Febrero -->
+				<div class="row">
+					<div class="col-md-4 mb-3">
+						<label for="mes2">Mes 2:</label>
+						<select class="form-control" id="mes2" name="mes2">
+							<option value="Febrero" th:selected="${fotoperiodo.mesCantidadMap['Febrero'] != null}">Febrero</option>
+						</select>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="cantidad2">Cantidad Febrero:</label>
+						<input type="number" th:field="*{mesCantidadMap['Febrero']}" placeholder="Ingrese la cantidad para febrero"
+							required step="0.01" lang="en">
+					</div>
+				</div>
 
-		<button type="button" class="btn btn-info mt-3" onclick="agregarMes()">Agregar Mes</button>
+				<!-- Mes 3: Marzo -->
+				<div class="row">
+					<div class="col-md-4 mb-3">
+						<label for="mes3">Mes 3:</label>
+						<select class="form-control" id="mes3" name="mes3">
+							<option value="Marzo" th:selected="${fotoperiodo.mesCantidadMap['Marzo'] != null}">Marzo</option>
+						</select>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="cantidad3">Cantidad Marzo:</label>
+						<input type="number" th:field="*{mesCantidadMap['Marzo']}" placeholder="Ingrese la cantidad para marzo"
+							required step="0.01" lang="en">
+					</div>
+				</div>
+
+				<!-- Mes 4: Abril -->
+				<div class="row">
+					<div class="col-md-4 mb-3">
+						<label for="mes4">Mes 4:</label>
+						<select class="form-control" id="mes4" name="mes4">
+							<option value="Abril" th:selected="${fotoperiodo.mesCantidadMap['Abril'] != null}">Abril</option>
+						</select>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="cantidad4">Cantidad Abril:</label>
+						<input type="number" th:field="*{mesCantidadMap['Abril']}" placeholder="Ingrese la cantidad para abril"
+							required step="0.01" lang="en">
+					</div>
+				</div>
+
+				<!-- Mes 5: Mayo -->
+				<div class="row">
+					<div class="col-md-4 mb-3">
+						<label for="mes5">Mes 5:</label>
+						<select class="form-control" id="mes5" name="mes5">
+							<option value="Mayo" th:selected="${fotoperiodo.mesCantidadMap['Mayo'] != null}">Mayo</option>
+						</select>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="cantidad5">Cantidad Mayo:</label>
+						<input type="number" th:field="*{mesCantidadMap['Mayo']}" placeholder="Ingrese la cantidad para mayo"
+							required step="0.01" lang="en">
+					</div>
+				</div>
+
+				<!-- Mes 6: Junio -->
+				<div class="row">
+					<div class="col-md-4 mb-3">
+						<label for="mes6">Mes 6:</label>
+						<select class="form-control" id="mes6" name="mes6">
+							<option value="Junio" th:selected="${fotoperiodo.mesCantidadMap['Junio'] != null}">Junio</option>
+						</select>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="cantidad6">Cantidad Junio:</label>
+						<input type="number" th:field="*{mesCantidadMap['Junio']}" placeholder="Ingrese la cantidad para junio"
+							required step="0.01" lang="en">
+					</div>
+				</div>
+
+				<!-- Mes 7: Julio -->
+				<div class="row">
+					<div class="col-md-4 mb-3">
+						<label for="mes7">Mes 7:</label>
+						<select class="form-control" id="mes7" name="mes7">
+							<option value="Julio" th:selected="${fotoperiodo.mesCantidadMap['Julio'] != null}">Julio</option>
+						</select>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="cantidad7">Cantidad Julio:</label>
+						<input type="number" th:field="*{mesCantidadMap['Julio']}" placeholder="Ingrese la cantidad para julio"
+							required step="0.01" lang="en">
+					</div>
+				</div>
+
+				<!-- Mes 8: Agosto -->
+				<div class="row">
+					<div class="col-md-4 mb-3">
+						<label for="mes8">Mes 8:</label>
+						<select class="form-control" id="mes8" name="mes8">
+							<option value="Agosto" th:selected="${fotoperiodo.mesCantidadMap['Agosto'] != null}">Agosto</option>
+						</select>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="cantidad8">Cantidad Agosto:</label>
+						<input type="number" th:field="*{mesCantidadMap['Agosto']}" placeholder="Ingrese la cantidad para agosto"
+							required step="0.01" lang="en">
+					</div>
+				</div>
+
+				<!-- Mes 9: Septiembre -->
+				<div class="row">
+					<div class="col-md-4 mb-3">
+						<label for="mes9">Mes 9:</label>
+						<select class="form-control" id="mes9" name="mes9">
+							<option value="Septiembre" th:selected="${fotoperiodo.mesCantidadMap['Septiembre'] != null}">Septiembre
+							</option>
+						</select>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="cantidad9">Cantidad Septiembre:</label>
+						<input type="number" th:field="*{mesCantidadMap['Septiembre']}"
+							placeholder="Ingrese la cantidad para septiembre" required step="0.01" lang="en">
+					</div>
+				</div>
+
+				<!-- Mes 10: Octubre -->
+				<div class="row">
+					<div class="col-md-4 mb-3">
+						<label for="mes10">Mes 10:</label>
+						<select class="form-control" id="mes10" name="mes10">
+							<option value="Octubre" th:selected="${fotoperiodo.mesCantidadMap['Octubre'] != null}">Octubre</option>
+						</select>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="cantidad10">Cantidad Octubre:</label>
+						<input type="number" th:field="*{mesCantidadMap['Octubre']}" placeholder="Ingrese la cantidad para octubre"
+							required step="0.01" lang="en">
+					</div>
+				</div>
+
+				<!-- Mes 11: Noviembre -->
+				<div class="row">
+					<div class="col-md-4 mb-3">
+						<label for="mes11">Mes 11:</label>
+						<select class="form-control" id="mes11" name="mes11">
+							<option value="Noviembre" th:selected="${fotoperiodo.mesCantidadMap['Noviembre'] != null}">Noviembre
+							</option>
+						</select>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="cantidad11">Cantidad Noviembre:</label>
+						<input type="number" th:field="*{mesCantidadMap['Noviembre']}"
+							placeholder="Ingrese la cantidad para noviembre" required step="0.01" lang="en">
+					</div>
+				</div>
+
+				<!-- Mes 12: Diciembre -->
+				<div class="row">
+					<div class="col-md-4 mb-3">
+						<label for="mes12">Mes 12:</label>
+						<select class="form-control" id="mes12" name="mes12">
+							<option value="Diciembre" th:selected="${fotoperiodo.mesCantidadMap['Diciembre'] != null}">Diciembre
+							</option>
+						</select>
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="cantidad12">Cantidad Diciembre:</label>
+						<input type="number" th:field="*{mesCantidadMap['Diciembre']}"
+							placeholder="Ingrese la cantidad para diciembre" required step="0.01" lang="en">
+					</div>
+				</div>
+
+				<button type="submit" class="btn btn-primary"onclick="guardarFotoperiodo()">Guardar fotoperiodo</button>
+			</form>
+
+		</div>
 	</div>
 
 	<script>
-		const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-		let mesCount = 1; // Número inicial de meses
+		let mesCount = 3; // Número inicial de meses
 
 		// Función para agregar más campos
 		function agregarMes() {
 			if (mesCount < 12) {  // Limitar a 12 meses
 				mesCount++;
+				const mesInput = document.createElement('select');
+				mesInput.classList.add('form-control');
+				mesInput.name = 'meses';  // Este es el nombre del parámetro
+				mesInput.innerHTML = `
+	                <option value="Enero">Enero</option>
+	                <option value="Febrero">Febrero</option>
+	                <option value="Marzo">Marzo</option>
+	                <option value="Abril">Abril</option>
+	                <option value="Mayo">Mayo</option>
+	                <option value="Junio">Junio</option>
+	                <option value="Julio">Julio</option>
+	                <option value="Agosto">Agosto</option>
+	                <option value="Septiembre">Septiembre</option>
+	                <option value="Octubre">Octubre</option>
+	                <option value="Noviembre">Noviembre</option>
+	                <option value="Diciembre">Diciembre</option>
+	            `;
+				const cantidadInput = document.createElement('input');
+				cantidadInput.classList.add('form-control');
+				cantidadInput.name = 'cantidades';  // Este es el nombre del parámetro
+				cantidadInput.type = 'number';
+				cantidadInput.step = '0.01';
+				cantidadInput.placeholder = 'Cantidad';
 
-				// Obtener el mes disponible
-				const mesDisponible = meses[mesCount - 1];
+				// Crear una fila para el nuevo mes y cantidad
+				const newRow = document.createElement('div');
+				newRow.classList.add('row');
+				newRow.innerHTML = `
+	                <div class="col-md-4 mb-3">
+	                    <label for="mes${mesCount}">Mes ${mesCount}:</label>
+	                </div>
+	                <div class="col-md-4 mb-3">
+	                    <label for="cantidad${mesCount}">Cantidad ${mesCount}:</label>
+	                </div>
+	            `;
 
-				const newMesRow = document.createElement('div');
-				newMesRow.classList.add('row');
-				newMesRow.innerHTML = `
-                    <div class="col-md-4 mb-3">
-                        <label for="mes${mesCount}">Mes ${mesCount}:</label>
-                        <select class="form-control" id="mes${mesCount}" name="mes${mesCount}">
-                            <option value="${mesDisponible}">${mesDisponible}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="cantidad${mesCount}">Cantidad ${mesCount}:</label>
-                        <input type="number" step="0.01" class="form-control" id="cantidad${mesCount}" name="cantidad${mesCount}">
-                    </div>
-                `;
-				document.getElementById('mesesContainer').appendChild(newMesRow);
+				// Añadir los inputs dinámicos a la fila
+				newRow.appendChild(mesInput);
+				newRow.appendChild(cantidadInput);
+
+				document.getElementById('mesesContainer').appendChild(newRow);
 			}
 		}
 	</script>
 
-	<!-- Scripts de Bootstrap -->
+<script>
+	function guardarFotoperiodo() {
+			const form = document.getElementById("registrationForm");
+			const formData = new FormData(form);
+			fetch(form.action, {
+					method: "POST",
+					body: formData
+			})
+			.then(response => {
+					if (response.ok) {
+							document.getElementById("successMessage").style.display = "block";
+					} else {
+							throw new Error("Error en el guardado del fotoperiodo.");
+					}
+			})
+			.catch(error => {
+					console.error(error);
+					alert("Hubo un problema al guardar el fotoperiodo. Intente nuevamente.");
+			});
+	}
+</script>
+
+
+	<!-- jQuery, Popper.js, Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 

@@ -25,7 +25,7 @@ public class ControllerRestAmplitudDiariaTemperatura {
     @GetMapping("/{id}")
     public AmplitudDiariaTemperatura getAmplitudDiariaTemperaturaById(@PathVariable String id) {
         return amplitudDiariaTemperaturaRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("AmplitudDiariaTemperatura no encontrado"));
+                .orElseThrow(() -> new NotFoundException("AmplitudDiariaTemperatura no encontrada"));
     }
 
     @PostMapping
@@ -58,7 +58,7 @@ public class ControllerRestAmplitudDiariaTemperatura {
 	@DeleteMapping("/{id}")
 	public AmplitudDiariaTemperatura deleteAmplitudDiariaTemperatura(@PathVariable String id) {
 		AmplitudDiariaTemperatura amplitudDiariaTemperatura = amplitudDiariaTemperaturaRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("AmplitudDiariaTemperatura no encontrado"));
+				.orElseThrow(() -> new NotFoundException("AmplitudDiariaTemperatura no encontrada"));
 		amplitudDiariaTemperaturaRepository.deleteById(id);
 		return amplitudDiariaTemperatura;
 	}

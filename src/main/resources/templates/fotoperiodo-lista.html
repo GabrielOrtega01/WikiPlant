@@ -2,182 +2,71 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Fotoperiodo</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        /* Estilos personalizados */
-        body {
-            background: url('https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/8983/production/_109730253_gettyimages-658291850.jpg.webp') no-repeat center center fixed;
-            background-size: cover;
-            color: #f8f9fa;
-        }
-
-        .header,
-        .footer {
-            background-color: rgba(38, 31, 89, 0.8);
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .navbar {
-            margin-bottom: 20px;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
-        #estacionSelect {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 0.75rem 1rem;
-            transition: all 0.3s ease;
-            color: #333;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .excel-table {
-            background-color: rgba(255, 255, 255, 0.9);
-            color: #333;
-            border-collapse: collapse;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .excel-table th,
-        .excel-table td {
-            border: 1px solid #bbb;
-            padding: 12px 15px;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .excel-table th {
-            background-color: #e8e8e8;
-            font-weight: bold;
-        }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Lista de Fotoperiodo</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/administrador/index">WikiPlant</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="btn btn-outline-danger my-2 my-sm-0" href="/">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+	<header class="bg-dark text-white text-center py-3">
+		<h1>Lista de Fotoperiodo</h1>
+	</header>
 
-    <div class="container mt-4">
-        <header class="header">
-            <h1>FACULTAD DE AGRONOMÍA - U.C.V. - SERVICIO DE CLIMATOLOGÍA AGRÍCOLA</h1>
-            <p>Elemento: FOTOPERÍODO (horas)</p>
-        </header>
+	<div class="container my-4">
+		<table class="table table-dark table-bordered">
+			<thead>
+				<tr>
+					<th>AÑO</th>
+					<th>ENE</th>
+					<th>FEB</th>
+					<th>MAR</th>
+					<th>ABR</th>
+					<th>MAY</th>
+					<th>JUN</th>
+					<th>JUL</th>
+					<th>AGO</th>
+					<th>SEP</th>
+					<th>OCT</th>
+					<th>NOV</th>
+					<th>DIC</th>
 
-        <div class="form-group mb-4">
-            <label for="estacionSelect" class="form-label">Estación</label>
-            <!-- Select con las estaciones cargadas desde el servidor -->
-            <select id="estacionSelect" class="form-select" required onchange="filterFotoperiodo(this.value)">
-                <option value="" disabled selected>Seleccione una estación</option>
-                <!-- Thymeleaf llena el select con las estaciones -->
-                <option th:each="estacion : ${estaciones}" th:value="${estacion.id}" th:text="${estacion.nombre}"></option>
-            </select>
-        </div>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Bucle para iterar sobre los registros de fotoperiodo -->
+				<tr th:each="fotoperiodo : ${fotoperiodos}">
+					<td th:text="${fotoperiodo.year}">Año</td>
+					<td th:text="${fotoperiodo.mesCantidadMap['Enero']}">0.0</td>
+					<td th:text="${fotoperiodo.mesCantidadMap['Febrero']}">FEB</td>
+					<td th:text="${fotoperiodo.mesCantidadMap['Marzo']}">MAR</td>
+					<td th:text="${fotoperiodo.mesCantidadMap['Abril']}">ABR</td>
+					<td th:text="${fotoperiodo.mesCantidadMap['Mayo']}">MAY</td>
+					<td th:text="${fotoperiodo.mesCantidadMap['Junio']}">JUN</td>
+					<td th:text="${fotoperiodo.mesCantidadMap['Julio']}">JUL</td>
+					<td th:text="${fotoperiodo.mesCantidadMap['Agosto']}">AGO</td>
+					<td th:text="${fotoperiodo.mesCantidadMap['Septiembre']}">SEP</td>
+					<td th:text="${fotoperiodo.mesCantidadMap['Octubre']}">OCT</td>
+					<td th:text="${fotoperiodo.mesCantidadMap['Noviembre']}">NOV</td>
+					<td th:text="${fotoperiodo.mesCantidadMap['Diciembre']}">DIC</td>
 
-        <table class="excel-table" id="fotoperiodoTable">
-            <thead>
-                <tr>
-                    <th>AÑO</th>
-                    <th>ENE</th>
-                    <th>FEB</th>
-                    <th>MAR</th>
-                    <th>ABR</th>
-                    <th>MAY</th>
-                    <th>JUN</th>
-                    <th>JUL</th>
-                    <th>AGO</th>
-                    <th>SEP</th>
-                    <th>OCT</th>
-                    <th>NOV</th>
-                    <th>DIC</th>
-                    <th>ANUAL</th>
-                    <th class="actions">Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="fotoperiodoBody">
-                <!-- Aquí se agregarán las filas de la tabla según la estación seleccionada -->
-            </tbody>
-        </table>
-    </div>
+					<td>
+						<a th:href="@{/fotoperiodo/edit/{id}(id=${fotoperiodo.id})}" class="btn btn-warning">Editar</a>
+						<a th:href="@{/fotoperiodo/delete/{id}(id=${fotoperiodo.id})}" class="btn btn-danger">Eliminar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 WikiPlant. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+	<footer class="bg-dark text-white text-center py-3">
+		<p>© 2024 Sistema de Gestión de Fotoperiodo. Todos los derechos reservados.</p>
+	</footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-    <script>
-        // Función para filtrar los fotoperíodos según la estación seleccionada
-        function filterFotoperiodo(estacionId) {
-            fetch(`/fotoperiodo/estacion/${estacionId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const tableBody = document.getElementById("fotoperiodoBody");
-                    tableBody.innerHTML = ""; // Limpiar tabla antes de agregar nuevos resultados
-
-                    // Verificar si no hay datos y mostrar mensaje
-                    if (data.length === 0) {
-                        tableBody.innerHTML = "<tr><td colspan='14'>No hay datos disponibles para esta estación.</td></tr>";
-                        return;
-                    }
-
-                    // Agregar las filas de la tabla
-                    data.forEach(fotoperiodo => {
-                        let row = document.createElement("tr");
-                        row.innerHTML = `
-                            <td>${fotoperiodo.year}</td>
-                            <td>${fotoperiodo.Enero}</td>
-                            <td>${fotoperiodo.Febrero}</td>
-                            <td>${fotoperiodo.Marzo}</td>
-                            <td>${fotoperiodo.Abril}</td>
-                            <td>${fotoperiodo.Mayo}</td>
-                            <td>${fotoperiodo.Junio}</td>
-                            <td>${fotoperiodo.Julio}</td>
-                            <td>${fotoperiodo.Agosto}</td>
-                            <td>${fotoperiodo.Septiembre}</td>
-                            <td>${fotoperiodo.Octubre}</td>
-                            <td>${fotoperiodo.Noviembre}</td>
-                            <td>${fotoperiodo.Diciembre}</td>
-                            <td>${fotoperiodo.anual}</td>
-                            <td class="actions">
-                                <a href="#" class="btn btn-sm btn-primary">Editar</a>
-                                <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
-                            </td>
-                        `;
-                        tableBody.appendChild(row);
-                    });
-                })
-                .catch(error => console.log("Error al obtener los fotoperíodos: ", error));
-        }
-    </script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
