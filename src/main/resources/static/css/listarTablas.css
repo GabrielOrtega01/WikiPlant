@@ -1,0 +1,225 @@
+/* listarTablas.css */
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #4caf50;
+  padding: 1rem 0;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #28293e;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+label {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+select {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #4caf50;
+  background-color: #333;
+  color: #fff;
+}
+
+.table {
+  width: 100%;
+  margin-top: 1.5rem;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th, .table td {
+  padding: 0.75rem 1rem;
+}
+
+.table thead th {
+  background-color: #4caf50;
+  color: #fff;
+  font-weight: 600;
+  border-bottom: 2px solid #3b8c43;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #333647;
+}
+
+.table tbody tr:hover {
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.table-bordered {
+  border: 1px solid #4caf50;
+}
+
+.table-bordered th, .table-bordered td {
+  border: 1px solid #3b8c43;
+}
+
+.button-container {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.button-custom {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.button-custom:hover {
+  background: linear-gradient(135deg, #ff6f61, #fdc685);
+  transform: scale(1.1);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+footer {
+  background-color: #1c1c29;
+  padding: 1rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+  border-top: 2px solid #4caf50;
+}
+
+footer p {
+  margin: 0;
+}
+
+.tabla-adicional h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.tabla-adicional .table {
+  margin-top: 1rem;
+}
+
+/* Animación sutil al cambiar filtros */
+table tbody tr {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+
+
+/* Botón flotante */
+.boton-flotante {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.boton-flotante:hover {
+  background-color: #3e8e41;
+  transform: scale(1.1);
+}
+
+.boton-flotante i {
+  font-size: 24px;
+}
+
+.boton-flotante img {
+  width: 70px;
+  height: 70px;
+}
+
+
+
+
+
+
+
+
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.5rem; /* Reduce el tamaño del título */
+  }
+
+  .container {
+    padding: 0.5rem; /* Reduce el padding del contenedor */
+  }
+
+  .table {
+    font-size: 0.9rem; /* Reduce el tamaño de fuente de la tabla */
+  }
+
+  .button-custom {
+    font-size: 1rem; /* Ajusta el tamaño del botón */
+    padding: 10px 20px;
+  }
+
+  .tabla-adicional h3 {
+    font-size: 1.2rem; /* Reduce el tamaño de los subtítulos */
+  }
+
+  .boton-flotante {
+    width: 60px; /* Ajusta el tamaño del botón flotante */
+    height: 60px;
+  }
+}
+
+/* Manejo de tablas largas en pantallas pequeñas */
+.table-responsive {
+  overflow-x: auto; /* Habilita el desplazamiento horizontal */
+  -webkit-overflow-scrolling: touch; /* Mejora la experiencia en dispositivos táctiles */
+}

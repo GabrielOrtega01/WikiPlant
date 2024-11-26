@@ -1,31 +1,24 @@
 package com.mongowikiplant.app.controller;
 
-import java.util.List;
-import java.util.Map;
 
+import com.mongowikiplant.app.entity.Estacion;
+import com.mongowikiplant.app.repository.EstacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mongowikiplant.app.entity.Estacion;
-import com.mongowikiplant.app.exception.NotFoundException;
-import com.mongowikiplant.app.repository.EstacionRepository;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/estaciones")
+@RequestMapping("/api/estacion")
+
 public class ControllerRestEstacion {
 
-    @Autowired
+	@Autowired
     private EstacionRepository estacionRepository;
 
     @GetMapping
-    public List<Estacion> listarEstaciones() {
+    public List<Estacion> listarPlantas() {
         return estacionRepository.findAll();
-    }
-
-    @GetMapping("/{id}")
-    public Estacion getEstacionById(@PathVariable String id) {
-        return estacionRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Estación no encontrada"));
     }
 
     @PostMapping
@@ -33,34 +26,17 @@ public class ControllerRestEstacion {
         return estacionRepository.save(estacion);
     }
 
-    @PostMapping("/map")
-    public Estacion saveEstacionFromMap(@RequestBody Map<String, Object> body) {
-        ObjectMapper mapper = new ObjectMapper();
-        Estacion estacion = mapper.convertValue(body, Estacion.class);
-        return estacionRepository.save(estacion);
-    }
-
     @PutMapping("/{id}")
-    public Estacion actualizarEstacion(@PathVariable String id, @RequestBody Estacion estacionActualizada) {
-        estacionActualizada.setId(id);
-        return estacionRepository.save(estacionActualizada);
+    public Estacion actualizarEstacion(@PathVariable String id, @RequestBody Estacion estacionActualizado) {
+    	estacionActualizado.setId(id);
+        return estacionRepository.save(estacionActualizado);
     }
 
-    @PutMapping("/map/{id}")
-    public Estacion updateEstacionFromMap(@PathVariable String id, @RequestBody Map<String, Object> body) {
-        ObjectMapper mapper = new ObjectMapper();
-        Estacion estacion = mapper.convertValue(body, Estacion.class);
-        estacion.setId(id);
-        return estacionRepository.save(estacion);
+    @DeleteMapping("/{id}")
+    public void eliminarPlanta(@PathVariable String id) {
+    	estacionRepository.deleteById(id);
     }
-
     
-	@DeleteMapping("/{id}")
-	public Estacion deleteEstacion(@PathVariable String id) {
-		Estacion estacion = estacionRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Estación no encontrada"));
-		estacionRepository.deleteById(id);
-		return estacion;
-	}
-
 }
+
+

@@ -1,25 +1,193 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Lista de Planificaciones</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Planificación</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: url('https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/8983/production/_109730253_gettyimages-658291850.jpg.webp') no-repeat center center fixed;
+      background-size: cover;
+      color: #f8f9fa;
+    }
+
+    .header,
+    .footer {
+      background-color: rgba(38, 31, 89, 0.8);
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .table {
+      background-color: rgba(0, 0, 0, 0.75);
+    }
+
+    .table th,
+    .table td {
+      color: #f8f9fa;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .button-custom {
+      background-color: #216923;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s;
+      width: 100%;
+      max-width: 200px;
+    }
+
+    .button-custom:hover {
+      background-color: #45a049;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .button-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <h1>Lista de Planificaciones</h1>
-    <a th:href="@{/planificacion/crear}">Crear Nueva Planificación</a>
-    <table>
+  <header class="header">
+    <h1>Lista de Registros de Planificación</h1>
+  </header>
+  <div class="button-container mt-4">
+    <button th:onclick="|history.back()|" class="button-custom">Volver a la página anterior</button>
+  </div>
+  <div class="container mt-4">
+    <!-- Dropdown para filtrar estaciones -->
+    <div class="mb-3">
+      <label for="estacion" class="form-label">Filtrar por estación:</label>
+      <select id="estacion" class="form-control">
+        <option value="">Todas las estaciones</option>
+        <option th:each="planificacion : ${planificaciones}" th:value="${planificacion.estacion.nombre}"
+          th:text="${planificacion.estacion.nombre}"></option>
+      </select>
+    </div>
+
+    <!-- Tabla de planificaciones -->
+    <table class="table table-dark table-hover table-bordered">
+      <thead>
         <tr>
-            <th>Nombre</th>
-            <th>Fecha</th>
-            <th>Acciones</th>
+          <th>Estación</th>
+          <th style="color:blueviolet;">Fecha</th>
+          <th>Ene</th>
+          <th>Feb</th>
+          <th>Mar</th>
+          <th>Abr</th>
+          <th>May</th>
+          <th>Jun</th>
+          <th>Jul</th>
+          <th>Ago</th>
+          <th>Sep</th>
+          <th>Oct</th>
+          <th>Nov</th>
+          <th>Dic</th>
+          <th>Anual</th>
+          <th style="color:rgb(0, 0, 255);">Acciones</th>
         </tr>
+      </thead>
+      <tbody>
+        <!-- Bucle para iterar sobre los registros de planificacion -->
         <tr th:each="planificacion : ${planificaciones}">
-            <td th:text="${planificacion.nombre}">Nombre</td>
-            <td th:text="${planificacion.fecha}">Fecha</td>
-            <td>
-                <a th:href="@{/planificacion/editar/{id}(id=${planificacion.id})}">Editar</a>
-                <a th:href="@{/planificacion/eliminar/{id}(id=${planificacion.id})}">Eliminar</a>
-            </td>
+          <td th:text="${planificacion.estacion.nombre}">Estación</td>
+          <td th:text="${planificacion.fecha}">2024</td>
+          <td th:text="${planificacion.enero}">0.0</td>
+          <td th:text="${planificacion.febrero}">0.0</td>
+          <td th:text="${planificacion.marzo}">0.0</td>
+          <td th:text="${planificacion.abril}">0.0</td>
+          <td th:text="${planificacion.mayo}">0.0</td>
+          <td th:text="${planificacion.junio}">0.0</td>
+          <td th:text="${planificacion.julio}">0.0</td>
+          <td th:text="${planificacion.agosto}">0.0</td>
+          <td th:text="${planificacion.septiembre}">0.0</td>
+          <td th:text="${planificacion.octubre}">0.0</td>
+          <td th:text="${planificacion.noviembre}">0.0</td>
+          <td th:text="${planificacion.diciembre}">0.0</td>
+          <td th:text="${planificacion.calcularPromedioAnual()}">0.0</td>
+          <td>
+            <div class="d-flex justify-content-center flex-wrap gap-2">
+              <a class="btn btn-info btn-sm" th:href="@{'/planificacion/edit/' + ${planificacion.id}}"
+                aria-label="Editar planificacion">Editar</a>
+              <a class="btn btn-danger btn-sm" th:href="@{'/planificacion/delete/' + ${planificacion.id}}"
+                aria-label="Eliminar planificacion"
+                onclick="return confirm('¿Estás seguro de eliminar este planificacion?');">Eliminar</a>
+            </div>
+          </td>
         </tr>
+      </tbody>
     </table>
+
+    <!-- Tabla Adicional -->
+    <div class="tabla-adicional">
+      <h3 class="text-center text-white">Resumen de Cálculos</h3>
+      <table class="table table-dark table-bordered">
+        <thead>
+          <tr>
+            <th>Estación</th>
+            <th>N</th>
+            <th>Media</th>
+            <th>D.S.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="planificacion : ${planificaciones}">
+            <td th:text="${planificacion.estacion.nombre}">Estación</td>
+            <td th:text="${planificacion.calcularN()}">28</td>
+            <td th:text="${planificacion.calcularMedia()}">31.7</td>
+            <td th:text="${planificacion.calcularDesviacionEstandar()}">0.7</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white text-center py-3">
+    <p>© 2024 Sistema de Gestión de Planificación. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    document.getElementById("estacion").addEventListener("change", function () {
+      const selectedEstacion = this.value.toLowerCase(); // Obtiene el valor seleccionado en minúsculas
+      const rows = document.querySelectorAll("tbody tr"); // Obtiene todas las filas de la tabla
+
+      rows.forEach(row => {
+        const estacion = row.querySelector("td:first-child").textContent.toLowerCase(); // Obtiene el texto de la primera celda (estación) en minúsculas
+        if (selectedEstacion === "" || estacion === selectedEstacion) {
+          row.style.display = ""; // Muestra la fila
+        } else {
+          row.style.display = "none"; // Oculta la fila
+        }
+      });
+    });
+  </script>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+
 public interface FotoperiodoRepository extends MongoRepository<Fotoperiodo, String> {
-    List<Fotoperiodo> findByEstacionId(String estacionId);
+
+	List<Fotoperiodo> findByFechaBetween(int yearStart, int yearEnd);
+ 
 }

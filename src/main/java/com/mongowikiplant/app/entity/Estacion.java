@@ -3,6 +3,9 @@ package com.mongowikiplant.app.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 @Document(collection = "estacion")
 
 
@@ -12,8 +15,11 @@ public class Estacion {
 	private String id;
 	private String nombre;
 	private String tipo;
+	@Min(-90) @Max(90)
 	private Double latitud;
+	@Min(-180) @Max(180)
 	private Double longitud;
+	@Min(0)
 	private Double altitud;
 	private String periodo;
 	

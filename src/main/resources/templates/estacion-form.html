@@ -2,181 +2,158 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Estación</title>
-    <!-- Enlaces a los archivos CSS de Bootstrap -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: url('https://image.slidesdocs.com/responsive-images/background/green-spring-grass-peach-blossom-plants-beautiful-powerpoint-background_f546f2a72b__960_540.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #1d1f21;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .back {
-            background-color: rgba(255, 255, 255, 0.85);
-            padding: 2%;
-            border-radius: 8px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-            margin-top: 20px;
-        }
-
-        h1, h2 {
-            text-align: center;
-            color: #216923;
-        }
-
-        .btn-primary {
-            background-color: #0026ff;
-            border: none;
-            transition: background-color 0.3s ease, transform 0.2s;
-        }
-
-        .btn-primary:hover {
-            background-color: #6045a0;
-            transform: scale(1.05);
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .button-custom {
-            background-color: #216923;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s;
-            width: 100%;
-            max-width: 200px;
-        }
-
-        .button-custom:hover {
-            background-color: #45a049;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
-            transform: scale(1.05);
-        }
-
-        #successMessage {
-            display: none;
-            color: green;
-            font-weight: bold;
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Estación</title>
+  <!-- Enlaces a los archivos CSS de Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link type="png" sizes="32x32" rel="icon"
+    href="https://lh3.googleusercontent.com/a/ACg8ocJq9wVRTMQaBGhOzSAkpqNfFOBkn7f398iktNR4gVTLteTXhNU=s288-c-no">
+  <link rel="stylesheet" type="text/css" href="static/css/formularios.css" th:href="@{/css/formularios.css}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
+<style>
+  body {
+    background: url('https://images.pexels.com/photos/1151418/pexels-photo-1151418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center fixed;
+    background-size: cover;
+    color: #1d1f21;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* Asegura que el cuerpo ocupe al menos la altura de la ventana */
+  }
+</style>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" th:href="@{/administrador/index}">WikiPlant</a>
-        <div class="navbar-title">
-            <h1>Formulario Estación</h1>
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="btn btn-outline-danger my-2 my-sm-0" type="submit" th:href="@{/}">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+  <nav class="sb-topnav navbar navbar-expand-lg shadow">
+    <div class="container-fluid">
+      <!-- Logo centrado -->
+      <a class="navbar-brand d-flex align-items-center mx-auto" th:href="@{/administrador/index}">
+        <img th:src="@{/img/wikiplant.png}" alt="Logo WikiPlant" width="60px" height="60px" class="me-2">
+      </a>
 
-    <div class="container my-4">
-        <div class="back mx-auto" style="max-width: 800px;">
-            <h2>Formulario de Registro de Estación</h2>
-            <div id="successMessage">¡La estación se ha creado con éxito!</div>
-            <form id="registrationForm" th:action="@{/estacion/save}" th:object="${estacion}" method="post">
-                <div class="form-row">
-                    <div class="form-group col-md-4" style="display: none;">
-                        <label for="id">ID:</label>
-                        <input th:field="*{id}" type="hidden" class="form-control" id="id" name="id">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="nombre">Nombre:</label>
-                        <input th:field="*{nombre}" type="text" class="form-control" id="nombre" name="nombre" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="tipo">Tipo:</label>
-                        <input th:field="*{tipo}" type="text" class="form-control" id="tipo" name="tipo" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="latitud">Latitud:</label>
-                        <input th:field="*{latitud}" type="number" step="0.000001" class="form-control" id="latitud" name="latitud" required>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="longitud">Longitud:</label>
-                        <input th:field="*{longitud}" type="number" step="0.000001" class="form-control" id="longitud" name="longitud" required>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="altitud">Altitud:</label>
-                        <input th:field="*{altitud}" type="number" step="0.01" class="form-control" id="altitud" name="altitud" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="periodo">Periodo:</label>
-                    <input th:field="*{periodo}" type="text" class="form-control" id="periodo" name="periodo" required>
-                </div>
-                <div class="text-center">
-                    <button type="button" class="btn btn-primary mt-3" onclick="guardarEstacion()">Guardar Estación</button>
-                </div>
-            </form>
-
-            <div class="button-container mt-4">
-                <button th:onclick="|history.back()|" class="button-custom">Volver a la página anterior</button>
-            </div>
-        </div>
+      <!-- Menú de navegación -->
+      <div class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="btn btn-outline-light rounded-pill d-flex align-items-center px-3" th:href="@{/}">
+            <i class="bi bi-box-arrow-right me-2"></i>
+            <span>Salir</span>
+          </a>
+        </li>
+      </div>
     </div>
+  </nav>
 
-    <footer class="bg-dark text-light text-center py-3">
-        <div class="container">
-            <p>&copy; 2024 WikiPlant. Todos los derechos reservados.</p>
+  <div class="container my-4">
+    <div class="back mx-auto" style="max-width: 800px;">
+      <h2>Formulario de Registro de Estación</h2>
+      <form id="registrationForm" th:action="@{/estacion/save}" th:object="${estacion}" method="post">
+        <div class="form-row">
+          <div class="form-group col-md-4" style="display: none;">
+            <label for="id">ID:</label>
+            <input th:field="*{id}" type="hidden" class="form-control" id="id" name="id">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="nombre">Nombre:</label>
+            <input th:field="*{nombre}" type="text" class="form-control" id="nombre" name="nombre" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="tipo">Tipo:</label>
+            <input th:field="*{tipo}" type="text" class="form-control" id="tipo" name="tipo" required>
+          </div>
         </div>
-    </footer>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="latitud">Latitud:</label>
+            <input th:field="*{latitud}" type="number" step="0.000001" class="form-control" id="latitud" name="latitud"
+              required>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="longitud">Longitud:</label>
+            <input th:field="*{longitud}" type="number" step="0.000001" class="form-control" id="longitud"
+              name="longitud" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="altitud">Altitud:</label>
+            <input th:field="*{altitud}" type="number" step="0.01" class="form-control" id="altitud" name="altitud"
+              required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="periodo">Periodo:</label>
+          <input th:field="*{periodo}" type="text" class="form-control" id="periodo" name="periodo" required>
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn btn-primary mt-3" onclick="guardarEstacion()">Guardar
+            Estación</button>
+        </div>
+      </form>
 
-    <!-- jQuery, Popper.js, Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
-    <!-- JavaScript personalizado -->
-    <script>
-        function guardarEstacion() {
-            const form = document.getElementById("registrationForm");
-            const formData = new FormData(form);
-            fetch(form.action, {
-                method: "POST",
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    document.getElementById("successMessage").style.display = "block";
-                } else {
-                    throw new Error("Error en el guardado de la estación.");
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                alert("Hubo un problema al guardar la estación. Intente nuevamente.");
-            });
-        }
-    </script>
+      <div class="button-container mt-4">
+        <button th:onclick="|history.back()|" class="btn button-custom">Volver a la página anterior</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-light text-center py-2">
+    <p>&copy; 2024 WikiPlant. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- jQuery, Popper.js, Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- JavaScript personalizado -->
+  <script>
+    function guardarEstacion() {
+      const form = document.getElementById("registrationForm");
+      const formData = new FormData(form);
+
+      if (!validarFormulario()) return;
+
+      fetch(form.action, {
+        method: "POST",
+        body: formData,
+        redirect: "follow" // Permitir seguir redirecciones
+      })
+        .then(response => {
+          if (response.ok) {
+            document.getElementById("successMessage").style.display = "block";
+            form.reset();
+          } else {
+            alert("Hubo un problema al guardar la estación.");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          alert("Hubo un problema en el servidor. Intente más tarde.");
+        });
+    }
+
+    function validarFormulario() {
+      const nombre = document.getElementById("nombre").value.trim();
+      const latitud = parseFloat(document.getElementById("latitud").value);
+      const longitud = parseFloat(document.getElementById("longitud").value);
+
+      if (!nombre) {
+        alert("Por favor, ingrese un nombre.");
+        return false;
+      }
+      if (isNaN(latitud) || latitud < -90 || latitud > 90) {
+        alert("Por favor, ingrese una latitud válida (-90 a 90).");
+        return false;
+      }
+      if (isNaN(longitud) || longitud < -180 || longitud > 180) {
+        alert("Por favor, ingrese una longitud válida (-180 a 180).");
+        return false;
+      }
+      return true;
+    }
+
+  </script>
 </body>
 
 </html>

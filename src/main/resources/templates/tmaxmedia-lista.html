@@ -1,86 +1,142 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Temperatura Maxima Media</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background: url('https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/8983/production/_109730253_gettyimages-658291850.jpg.webp') no-repeat center center fixed;
-            background-size: cover;
-            color: #f8f9fa;
-        }
-        .header, .footer {
-            background-color: rgba(38, 31, 89, 0.8);
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-       
-        .table {
-            background-color: rgba(0, 0, 0, 0.75);
-        }
-        .table th, .table td {
-            color: #f8f9fa;
-        }
-    </style>
-</head>
-<body>
-    <header class="header">
-        <h1>Lista de Registros de Temperatura Maxima Media</h1>
-    </header>
-	<p></p>
-    <div class="container">
-        <table class="table table-dark table-hover table-bordered">
-            <thead>
-                <tr>
-                    <th style="color:blueviolet;">Fecha</th>
-                    <th>Enero</th>
-                    <th>Febrero</th>
-                    <th>Marzo</th>
-                    <th>Abril</th>
-                    <th>Mayo</th>
-                    <th>Junio</th>
-                    <th>Julio</th>
-                    <th>Agosto</th>
-                    <th>Septiembre</th>
-                    <th>Octubre</th>
-                    <th>Noviembre</th>
-                    <th>Diciembre</th>
-                    <th style="color:rgb(0, 0, 255);">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Bucle para iterar sobre los registros de tmaxmedia -->
-                <tr th:each="tmaxmedia : ${tmaxmedias}">
-                    <td th:text="${tmaxmedia.fecha}" >2024</td>
-                    <td th:text="${tmaxmedia.mesCantidadMap['Enero']}">0.0</td>
-                    <td th:text="${tmaxmedia.mesCantidadMap['Febrero']}">0.0</td>
-                    <td th:text="${tmaxmedia.mesCantidadMap['Marzo']}">0.0</td>
-                    <td th:text="${tmaxmedia.mesCantidadMap['Abril']}">0.0</td>
-                    <td th:text="${tmaxmedia.mesCantidadMap['Mayo']}">0.0</td>
-                    <td th:text="${tmaxmedia.mesCantidadMap['Junio']}">0.0</td>
-                    <td th:text="${tmaxmedia.mesCantidadMap['Julio']}">0.0</td>
-                    <td th:text="${tmaxmedia.mesCantidadMap['Agosto']}">0.0</td>
-                    <td th:text="${tmaxmedia.mesCantidadMap['Septiembre']}">0.0</td>
-                    <td th:text="${tmaxmedia.mesCantidadMap['Octubre']}">0.0</td>
-                    <td th:text="${tmaxmedia.mesCantidadMap['Noviembre']}">0.0</td>
-                    <td th:text="${tmaxmedia.mesCantidadMap['Diciembre']}">0.0</td>
-                    <td>
-						
-                        <a th:href="@{/tmaxmedia/delete/{id}(id=${tmaxmedia.id})}" class="btn btn-danger">Eliminar</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <footer class="footer">
-        <p>© 2024 Sistema de Gestión de Temperatura Maxima Media. Todos los derechos reservados.</p>
-    </footer>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Temperatura máxima media</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link type="png" sizes="32x32" rel="icon"
+    href="https://lh3.googleusercontent.com/a/ACg8ocJq9wVRTMQaBGhOzSAkpqNfFOBkn7f398iktNR4gVTLteTXhNU=s288-c-no">
+  <link rel="stylesheet" type="text/css" href="static/css/listarTablas.css" th:href="@{/css/listarTablas.css}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <header class="header">
+    <h1>Lista de Registros de Temperatura máxima media</h1>
+  </header>
+  <div class="button-container mt-4">
+    <button th:onclick="|history.back()|" class="button-custom">Volver a la página anterior</button>
+  </div>
+  <div class="container mt-4">
+    <!-- Dropdown para filtrar estaciones -->
+    <div class="mb-3">
+      <label for="estacion" class="form-label">Filtrar por estación:</label>
+      <select id="estacion" class="form-control">
+        <option value="">Todas las estaciones</option>
+        <option th:each="tmaxmedia : ${tmaxmedias}" th:value="${tmaxmedia.estacion.nombre}"
+          th:text="${tmaxmedia.estacion.nombre}"></option>
+      </select>
+    </div>
+
+    <div class="table-responsive">
+      <!-- Tabla de tmaxmedias -->
+      <table class="table table-dark table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>Estación</th>
+            <th>Fecha</th>
+            <th>Ene</th>
+            <th>Feb</th>
+            <th>Mar</th>
+            <th>Abr</th>
+            <th>May</th>
+            <th>Jun</th>
+            <th>Jul</th>
+            <th>Ago</th>
+            <th>Sep</th>
+            <th>Oct</th>
+            <th>Nov</th>
+            <th>Dic</th>
+            <th>Anual</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Bucle para iterar sobre los registros de tmaxmedia -->
+          <tr th:each="tmaxmedia : ${tmaxmedias}">
+            <td th:text="${tmaxmedia.estacion.nombre}">Estación</td>
+            <td th:text="${tmaxmedia.fecha}">2024</td>
+            <td th:text="${tmaxmedia.enero}">0.0</td>
+            <td th:text="${tmaxmedia.febrero}">0.0</td>
+            <td th:text="${tmaxmedia.marzo}">0.0</td>
+            <td th:text="${tmaxmedia.abril}">0.0</td>
+            <td th:text="${tmaxmedia.mayo}">0.0</td>
+            <td th:text="${tmaxmedia.junio}">0.0</td>
+            <td th:text="${tmaxmedia.julio}">0.0</td>
+            <td th:text="${tmaxmedia.agosto}">0.0</td>
+            <td th:text="${tmaxmedia.septiembre}">0.0</td>
+            <td th:text="${tmaxmedia.octubre}">0.0</td>
+            <td th:text="${tmaxmedia.noviembre}">0.0</td>
+            <td th:text="${tmaxmedia.diciembre}">0.0</td>
+            <td th:text="${tmaxmedia.calcularPromedioAnual()}">0.0</td>
+            <td>
+              <div class="d-flex justify-content-center flex-wrap gap-2">
+                <a class="btn btn-info btn-sm" th:href="@{'/tmaxmedia/edit/' + ${tmaxmedia.id}}"
+                  aria-label="Editar tmaxmedia">Editar</a>
+                <a class="btn btn-danger btn-sm" th:href="@{'/tmaxmedia/delete/' + ${tmaxmedia.id}}"
+                  aria-label="Eliminar tmaxmedia"
+                  onclick="return confirm('¿Estás seguro de eliminar este tmaxmedia?');">Eliminar</a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-responsive">
+      <!-- Tabla Adicional -->
+      <div class="tabla-adicional">
+        <h3 class="text-center text-white">Resumen de Cálculos</h3>
+        <table class="table table-dark table-bordered">
+          <thead>
+            <tr>
+              <th>Estación</th>
+              <th>N</th>
+              <th>Media</th>
+              <th>D.S.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="tmaxmedia : ${tmaxmedias}">
+              <td th:text="${tmaxmedia.estacion.nombre}">Estación</td>
+              <td th:text="${tmaxmedia.calcularN()}">28</td>
+              <td th:text="${tmaxmedia.calcularMedia()}">31.7</td>
+              <td th:text="${tmaxmedia.calcularDesviacionEstandar()}">0.7</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white text-center py-3">
+    <p>© 2024 Sistema de Gestión de Temperatura máxima media. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    document.getElementById("estacion").addEventListener("change", function () {
+      const selectedEstacion = this.value.toLowerCase(); // Obtiene el valor seleccionado en minúsculas
+      const rows = document.querySelectorAll("tbody tr"); // Obtiene todas las filas de la tabla
+
+      rows.forEach(row => {
+        const estacion = row.querySelector("td:first-child").textContent.toLowerCase(); // Obtiene el texto de la primera celda (estación) en minúsculas
+        if (selectedEstacion === "" || estacion === selectedEstacion) {
+          row.style.display = ""; // Muestra la fila
+        } else {
+          row.style.display = "none"; // Oculta la fila
+        }
+      });
+    });
+  </script>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

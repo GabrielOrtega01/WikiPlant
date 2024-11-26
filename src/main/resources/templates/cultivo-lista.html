@@ -1,35 +1,193 @@
-<!-- cultivo-lista.html -->
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Lista de Cultivos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Cultivo</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: url('https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/8983/production/_109730253_gettyimages-658291850.jpg.webp') no-repeat center center fixed;
+      background-size: cover;
+      color: #f8f9fa;
+    }
+
+    .header,
+    .footer {
+      background-color: rgba(38, 31, 89, 0.8);
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .table {
+      background-color: rgba(0, 0, 0, 0.75);
+    }
+
+    .table th,
+    .table td {
+      color: #f8f9fa;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .button-custom {
+      background-color: #216923;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s;
+      width: 100%;
+      max-width: 200px;
+    }
+
+    .button-custom:hover {
+      background-color: #45a049;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .button-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <h2>Lista de Cultivos</h2>
-    <table>
+  <header class="header">
+    <h1>Lista de Registros de Cultivo</h1>
+  </header>
+  <div class="button-container mt-4">
+    <button th:onclick="|history.back()|" class="button-custom">Volver a la página anterior</button>
+  </div>
+  <div class="container mt-4">
+    <!-- Dropdown para filtrar estaciones -->
+    <div class="mb-3">
+      <label for="estacion" class="form-label">Filtrar por estación:</label>
+      <select id="estacion" class="form-control">
+        <option value="">Todas las estaciones</option>
+        <option th:each="cultivo : ${cultivos}" th:value="${cultivo.estacion.nombre}"
+          th:text="${cultivo.estacion.nombre}"></option>
+      </select>
+    </div>
+
+    <!-- Tabla de cultivos -->
+    <table class="table table-dark table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Estación</th>
+          <th style="color:blueviolet;">Fecha</th>
+          <th>Ene</th>
+          <th>Feb</th>
+          <th>Mar</th>
+          <th>Abr</th>
+          <th>May</th>
+          <th>Jun</th>
+          <th>Jul</th>
+          <th>Ago</th>
+          <th>Sep</th>
+          <th>Oct</th>
+          <th>Nov</th>
+          <th>Dic</th>
+          <th>Anual</th>
+          <th style="color:rgb(0, 0, 255);">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Bucle para iterar sobre los registros de cultivo -->
+        <tr th:each="cultivo : ${cultivos}">
+          <td th:text="${cultivo.estacion.nombre}">Estación</td>
+          <td th:text="${cultivo.fecha}">2024</td>
+          <td th:text="${cultivo.enero}">0.0</td>
+          <td th:text="${cultivo.febrero}">0.0</td>
+          <td th:text="${cultivo.marzo}">0.0</td>
+          <td th:text="${cultivo.abril}">0.0</td>
+          <td th:text="${cultivo.mayo}">0.0</td>
+          <td th:text="${cultivo.junio}">0.0</td>
+          <td th:text="${cultivo.julio}">0.0</td>
+          <td th:text="${cultivo.agosto}">0.0</td>
+          <td th:text="${cultivo.septiembre}">0.0</td>
+          <td th:text="${cultivo.octubre}">0.0</td>
+          <td th:text="${cultivo.noviembre}">0.0</td>
+          <td th:text="${cultivo.diciembre}">0.0</td>
+          <td th:text="${cultivo.calcularPromedioAnual()}">0.0</td>
+          <td>
+            <div class="d-flex justify-content-start flex-wrap gap-2">
+              <a class="btn btn-info btn-sm" th:href="@{'/cultivo/edit/' + ${cultivo.id}}"
+                aria-label="Editar cultivo">Editar</a>
+              <a class="btn btn-danger btn-sm" th:href="@{'/cultivo/delete/' + ${cultivo.id}}"
+                aria-label="Eliminar cultivo"
+                onclick="return confirm('¿Estás seguro de eliminar este cultivo?');">Eliminar</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Tabla Adicional -->
+    <div class="tabla-adicional">
+      <h3 class="text-center text-white">Resumen de Cálculos</h3>
+      <table class="table table-dark table-bordered">
         <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Tipo de Planta</th>
-                <th>Duración</th>
-                <th>Temporada</th>
-                <th>Acciones</th>
-            </tr>
+          <tr>
+            <th>Estación</th>
+            <th>N</th>
+            <th>Media</th>
+            <th>D.S.</th>
+          </tr>
         </thead>
         <tbody>
-            <tr th:each="cultivo : ${cultivos}">
-                <td th:text="${cultivo.nombre}">Nombre</td>
-                <td th:text="${cultivo.tipoPlanta}">Tipo de Planta</td>
-                <td th:text="${cultivo.duracion}">Duración</td>
-                <td th:text="${cultivo.temporada}">Temporada</td>
-                <td>
-                    <a th:href="@{'/cultivo/editar/' + ${cultivo.id}}">Editar</a>
-                    <a th:href="@{'/cultivo/eliminar/' + ${cultivo.id}}">Eliminar</a>
-                </td>
-            </tr>
+          <tr th:each="cultivo : ${cultivos}">
+            <td th:text="${cultivo.estacion.nombre}">Estación</td>
+            <td th:text="${cultivo.calcularN()}">28</td>
+            <td th:text="${cultivo.calcularMedia()}">31.7</td>
+            <td th:text="${cultivo.calcularDesviacionEstandar()}">0.7</td>
+          </tr>
         </tbody>
-    </table>
-    <a href="/cultivo/crear">Agregar nuevo cultivo</a>
+      </table>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white text-center py-3">
+    <p>© 2024 Sistema de Gestión de Cultivo. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    document.getElementById("estacion").addEventListener("change", function () {
+      const selectedEstacion = this.value.toLowerCase(); // Obtiene el valor seleccionado en minúsculas
+      const rows = document.querySelectorAll("tbody tr"); // Obtiene todas las filas de la tabla
+
+      rows.forEach(row => {
+        const estacion = row.querySelector("td:first-child").textContent.toLowerCase(); // Obtiene el texto de la primera celda (estación) en minúsculas
+        if (selectedEstacion === "" || estacion === selectedEstacion) {
+          row.style.display = ""; // Muestra la fila
+        } else {
+          row.style.display = "none"; // Oculta la fila
+        }
+      });
+    });
+  </script>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

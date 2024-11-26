@@ -1,53 +1,371 @@
 <!-- vista/modulos/Inicio.php -->
 <!DOCTYPE html>
-<html lang="es"> 
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WikiPlant</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
-  
-  <link rel="stylesheet" href="/WEBMVC/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link type="png" sizes="32x32" rel="icon"
+    href="https://lh3.googleusercontent.com/a/ACg8ocJq9wVRTMQaBGhOzSAkpqNfFOBkn7f398iktNR4gVTLteTXhNU=s288-c-no">
   <link type="image/png" sizes="32x32" rel="icon" href="https://cdn-icons-png.flaticon.com/128/628/628324.png">
-  <link rel="stylesheet" type="text/css" href="static/css/index.css" 	th:href="@{/css/index.css}">
-  	
- 
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: aliceblue;
+      /* Fondo suave y limpio */
+      font-family: 'Poppins', sans-serif;
+      /* Tipografía moderna */
+      color: #333;
+      min-height: 100vh;
+      /* Hace que el body tenga al menos el tamaño de la pantalla */
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      flex-grow: 1;
+      /* Hace que el contenedor principal ocupe todo el espacio disponible */
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      color: #fff;
+      padding: 6rem 0;
+      background-image: url("https://www.murgiplast.com/wp-content/uploads/2022/10/murgiplast-vivero-1536x1024.jpg.webp");
+      height: 150px;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .btn-ingresar {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .carousel-caption {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+    }
+
+    /* Estilos generales para los carruseles */
+    .carousel {
+      max-height: 50vh;
+      text-align: center;
+    }
+
+    /* Ajuste de la altura del carrusel */
+    .carousel-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      max-height: 400px;
+      /* Ajusta la altura máxima según sea necesario */
+    }
+
+    .carousel-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Estilos para los botones de ver más en el carrusel */
+    .btn-outline-success {
+      margin-top: 10px;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .welcome-container {
+      position: relative;
+      color: #000;
+      padding: 5rem 0;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .welcome-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("https://img.freepik.com/foto-gratis/vista-superior-bandeja-turba-planta-showel-rastrillo-escritorio-madera_23-2148044580.jpg?t=st=1730728145~exp=1730731745~hmac=9b1f36d46a6861ca5d9ac23a10c02a65b175079b302c83715715c1835d218fc6&w=996") center/cover fixed no-repeat;
+      opacity: 0.7;
+      z-index: -1;
+    }
+
+    .nosotros-container {
+      position: relative;
+      content: "";
+      background-image: url("https://img.freepik.com/fotos-premium/composicion-primavera-jardineria-partir-plantas-interior-flores-flor-ollas-herramientas-jardineria_144356-4045.jpg?w=1060");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: top;
+      background-attachment: fixed;
+      color: #000;
+      padding: 3rem 0;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .servicios-container {
+      position: relative;
+      content: "";
+      background-image: url("https://agrolearning.org/wp-content/uploads/2024/08/imagen-destacada.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: top;
+      background-attachment: fixed;
+      color: #fff;
+      padding: 3rem 0;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .img-fluid {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .lead {
+      font-size: 1.8rem;
+      line-height: 1.5;
+    }
+
+
+    .bg-darkgreen {
+      background-color: #388e3c;
+    }
+
+    .bg-blue {
+      background-color: #90caf9;
+    }
+
+    .bg-pink {
+      background-color: #fff3f6;
+    }
+
+    /* Estilos para la barra de navegación */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      transition: background-color 0.5s;
+    }
+
+    .nav-container {
+      position: sticky;
+      background-color: #85b6fb;
+      top: 0;
+      z-index: 3;
+    }
+
+    nav ul {
+      position: sticky;
+      margin: auto;
+      width: 50%;
+      text-align: center;
+    }
+
+    nav ul li {
+      display: inline-block;
+      width: 24%;
+      line-height: 40%;
+      list-style: none;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav .navbar-nav .nav-item .nav-link:hover {
+      color: #1b9423;
+    }
+
+    /* Estilos para la sección principal */
+    section {
+      position: relative;
+      text-align: center;
+    }
+
+    .section-title {
+      color: #fff;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .bg-image {
+      position: absolute;
+      height: 100%;
+      width: auto;
+      max-width: 20%;
+      top: 0;
+    }
+
+    .bg-image.left {
+      left: 0;
+    }
+
+    .bg-image.right {
+      right: 0;
+    }
+
+    /* Estilos para las imágenes pequeñas */
+    .img-thumbnail {
+      max-width: 75%;
+      height: auto;
+    }
+
+    /* Estilos para las secciones de productos */
+    .product-section {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 10px;
+    }
+
+    /* Estilos para las imágenes de productos */
+    .product-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    /* Estilos para los textos de productos */
+    .product-description {
+      margin-top: 1rem;
+    }
+
+    .btn-outline-success {
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      margin: 10px;
+      padding: 10px 20px;
+    }
+
+    /* Estilos para el pie de página */
+    footer {
+      background-color: #245325;
+      color: #edf2f7;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #c6f6d5;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #68d391;
+    }
+
+    #chatbot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+
+    #chatbot-button {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #85b6fb;
+    }
+
+    #chatbot-window {
+      display: none;
+      position: absolute;
+      bottom: 80px;
+      right: 0;
+      width: 500px;
+      background: white;
+      border-radius: 10px;
+    }
+
+    .faq-option {
+      cursor: pointer;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      background-color: #f8f9fa;
+      transition: background-color 0.2s;
+    }
+
+    .faq-option:hover {
+      background-color: #e2e6ea;
+    }
+  </style>
 </head>
 
-
-
-    <body>
-        <header class="bg-darkgreen text-light text-center py-3">
-          <div class="container">
-            <a class="navbar-brand" >
-              <img src="https://lh4.googleusercontent.com/proxy/heN60yvGR-WbvVyaBKdAp_uQ3092mUF34lhm2ITvC2HPxA0rqko5RwFifTeT_iBwvi3scg"  class="img-fluid" style="max-width: 100%;">
-            </a>
-          </div>
-        </header> 
-    <div class="nav-container">
-        <nav class="navbar navbar-expand-md navbar-light bg-pink">
-          <div class="container"> <!-- Agregado un contenedor para centrar el contenido -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-				<ul class="navbar-nav">
-				               <li class="nav-item"><a class="nav-link" th:href="@{/}"><i class="fas fa-home"></i> Inicio</a></li>
-				               <li class="nav-item"><a class="nav-link" th:href="@{/nosotros}"><i class="fas fa-users"></i> Nosotros</a></li>
-				               <li class="nav-item"><a class="nav-link" th:href="@{/servicios}"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
-				               <li class="nav-item"><a class="nav-link" th:href="@{/administrador/login}"><i class="fas fa-user-shield"></i> Admin</a></li>
-				               <li class="nav-item"><a class="nav-link" th:href="@{/cliente/login}"><i class="fas fa-user"></i> Cliente</a></li>
-				               <li class="nav-item"><a class="nav-link" th:href="@{/contactenos}"><i class="fas fa-envelope"></i> Contáctenos</a></li>
-				           </ul>
-            </div>
-          </div>
-        </nav>
+<body>
+  <header class="bg-darkgreen text-light text-center py-3">
+    <div class="container">
+      <a class="navbar-brand">
+        <img
+          src="https://lh4.googleusercontent.com/proxy/heN60yvGR-WbvVyaBKdAp_uQ3092mUF34lhm2ITvC2HPxA0rqko5RwFifTeT_iBwvi3scg"
+          class="img-fluid" style="max-width: 100%;">
+      </a>
+    </div>
+  </header>
+  <div class="nav-container">
+    <nav class="navbar navbar-expand-md navbar-light bg-pink">
+      <div class="container"> <!-- Agregado un contenedor para centrar el contenido -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" th:href="@{/}"><i class="fas fa-home"></i> Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/nosotros}"><i class="fas fa-users"></i> Nosotros</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/servicios}"><i class="fas fa-concierge-bell"></i>
+                Servicios</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/administrador/login}"><i
+                  class="fas fa-user-shield"></i> Admin</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/cliente/login}"><i class="fas fa-user"></i> Cliente</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/contactenos}"><i class="fas fa-envelope"></i>
+                Contáctenos</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/wikiplant}"><i class="fas fa-envelope"></i>
+                WikiPlant</a></li>
+          </ul>
+        </div>
       </div>
+    </nav>
+  </div>
 
   <div class="welcome-container">
     <div class="row">
       <div class="col-md-2">
-        <img src="https://img.freepik.com/fotos-premium/planta-buganvillas-flores-rosas_626124-2182.jpg?w=360" alt="Imagen Izquierda" class="img-fluid img-thumbnail">
+        <img src="https://img.freepik.com/fotos-premium/planta-buganvillas-flores-rosas_626124-2182.jpg?w=360"
+          alt="Imagen Izquierda" class="img-fluid img-thumbnail">
       </div>
       <div class="col-md-8">
         <h1 class="text-lg">Bienvenido a WikiPlant</h1>
@@ -56,7 +374,9 @@
           ¡S.O.N.R.I.E. con nosotros!</p>
       </div>
       <div class="col-md-2">
-        <img src="https://img.freepik.com/fotos-premium/flor-hortensia-verde-verano-jardin-cabana-fondo-borroso_389793-886.jpg?w=360" alt="Imagen Derecha" class="img-fluid img-thumbnail">
+        <img
+          src="https://img.freepik.com/fotos-premium/flor-hortensia-verde-verano-jardin-cabana-fondo-borroso_389793-886.jpg?w=360"
+          alt="Imagen Derecha" class="img-fluid img-thumbnail">
       </div>
     </div>
   </div>
@@ -66,21 +386,26 @@
       <div class="row">
         <div class="col-md-4">
           <a href="index.php?axn=Servicios#plantas">
-            <img src="https://cdn.pixabay.com/photo/2024/01/31/21/21/ai-generated-8544824_1280.jpg" alt="Plantas Destacadas" class="img-fluid img-thumbnail">
+            <img src="https://cdn.pixabay.com/photo/2024/01/31/21/21/ai-generated-8544824_1280.jpg"
+              alt="Plantas Destacadas" class="img-fluid img-thumbnail">
           </a>
           <h3>Plantas de Alta Calidad</h3>
           <p>Descubre nuestra amplia variedad de plantas de alta calidad.</p>
         </div>
         <div class="col-md-4">
           <a href="index.php?axn=Servicios#semillas">
-            <img src="https://agrobio.org/sites/default/files/styles/interna_662x450_/public/2022-02/Diferencias%20entre%20la%20semilla%20nativa%2C%20convencional%20y%20transg%C3%A9nica.jpg?h=56d0ca2e&itok=_gfH1Zd_" alt="Semillas Destacadas" class="img-fluid img-thumbnail">
+            <img
+              src="https://agrobio.org/sites/default/files/styles/interna_662x450_/public/2022-02/Diferencias%20entre%20la%20semilla%20nativa%2C%20convencional%20y%20transg%C3%A9nica.jpg?h=56d0ca2e&itok=_gfH1Zd_"
+              alt="Semillas Destacadas" class="img-fluid img-thumbnail">
           </a>
           <h3>Semillas Especializadas</h3>
           <p>Explora nuestras semillas especializadas para cultivar tus propios alimentos.</p>
         </div>
         <div class="col-md-4">
           <a href="index.php?axn=Servicios#servicios-personalizados">
-            <img src="https://img.freepik.com/vector-premium/iconos-jardin-vivero-isometrico-plantas-arboles-macetas-ilustraciones-vectoriales-aisladas_1284-77776.jpg?w=826" alt="Servicios Destacados" class="img-fluid img-thumbnail">
+            <img
+              src="https://img.freepik.com/vector-premium/iconos-jardin-vivero-isometrico-plantas-arboles-macetas-ilustraciones-vectoriales-aisladas_1284-77776.jpg?w=826"
+              alt="Servicios Destacados" class="img-fluid img-thumbnail">
           </a>
           <h3>Servicios Personalizados</h3>
           <p>Conoce nuestros servicios diseñados para satisfacer tus necesidades de jardinería.</p>
@@ -90,12 +415,114 @@
     </div>
   </section>
 
-  
-  
+  <!-- Agregar esto dentro del <body> justo antes de </body> -->
+  <div id="chatbot-container">
+    <button id="chatbot-button" class="btn">
+      <img src="https://cdn-icons-png.flaticon.com/128/1024/1024716.png" alt="Chatbot" style="width: 24px;">
+    </button>
+    <div id="chatbot-window" class="card shadow-lg">
+      <div class="card-header bg-success text-white">
+        <h5 class="mb-0">WikiPlant Chatbot</h5>
+        <button id="chatbot-close" class="close text-white" style="font-size: 1.2rem;">&times;</button>
+      </div>
+      <div class="card-body">
+        <div id="chatbot-messages" style="height: 200px; overflow-y: auto;">
+          <div class="text-muted small">Elige una pregunta o escribe la tuya:</div>
+          <ul id="faq-options" class="list-group mt-3"></ul>
+        </div>
+        <div class="input-group mt-3">
+          <input id="chatbot-input" type="text" class="form-control" placeholder="Escribe tu pregunta...">
+          <div class="input-group-append">
+            <button id="chatbot-send" class="btn btn-success">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
   <footer class="bg-dark text-light text-center py-3">
     <div class="container">
       <p>&copy; 2024 WikiPlant. Todos los derechos reservados.</p>
     </div>
+
+    <script>
+      // Opciones de preguntas frecuentes
+      const faqResponses = {
+        "¿Qué es WikiPlant?": "WikiPlant es una plataforma para compartir información sobre plantas.",
+        "¿Cuáles son sus servicios?": "Ofrecemos venta de plantas, semillas y servicios personalizados.",
+        "¿Cómo puedo contactarlos?": "Puedes contactarnos desde la sección 'Contáctenos' en el menú principal.",
+      };
+
+      const defaultResponse = "Lo siento, no entiendo esa pregunta. Por favor, intenta otra o selecciona una de las opciones.";
+
+      // Variable para rastrear si el chatbot está visible
+      let chatbotVisible = false;
+
+      document.getElementById("chatbot-button").onclick = () => {
+        const chatbotWindow = document.getElementById("chatbot-window");
+
+        if (chatbotVisible) {
+          chatbotWindow.style.display = "none"; // Ocultar chatbot
+        } else {
+          chatbotWindow.style.display = "block"; // Mostrar chatbot
+          loadFaqOptions(); // Cargar preguntas frecuentes
+        }
+
+        chatbotVisible = !chatbotVisible; // Alternar estado de visibilidad
+      };
+
+      document.getElementById("chatbot-close").onclick = () => {
+        document.getElementById("chatbot-window").style.display = "none";
+        chatbotVisible = false; // Actualizar el estado
+      };
+
+      document.getElementById("chatbot-send").onclick = () => {
+        const input = document.getElementById("chatbot-input").value.trim();
+        if (input) handleUserInput(input);
+        document.getElementById("chatbot-input").value = ""; // Limpiar el campo
+      };
+
+      document.getElementById("chatbot-input").addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+          document.getElementById("chatbot-send").click();
+        }
+      });
+
+      function loadFaqOptions() {
+        const faqOptions = document.getElementById("faq-options");
+        faqOptions.innerHTML = ""; // Limpiar opciones anteriores
+
+        for (const question in faqResponses) {
+          const li = document.createElement("li");
+          li.textContent = question;
+          li.classList.add("faq-option");
+          li.onclick = () => handleFaqSelection(question);
+          faqOptions.appendChild(li);
+        }
+      }
+
+      function handleFaqSelection(question) {
+        addChatMessage("Tú", question);
+        addChatMessage("Chatbot", faqResponses[question]);
+      }
+
+      function handleUserInput(input) {
+        const response = faqResponses[input] || defaultResponse;
+        addChatMessage("Tú", input);
+        addChatMessage("Chatbot", response);
+      }
+
+      function addChatMessage(sender, message) {
+        const messages = document.getElementById("chatbot-messages");
+        const div = document.createElement("div");
+        div.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight; // Desplazar al final
+      }
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -103,4 +530,5 @@
   </footer>
 
 </body>
+
 </html>

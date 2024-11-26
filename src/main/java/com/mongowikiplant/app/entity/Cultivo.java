@@ -1,10 +1,14 @@
 package com.mongowikiplant.app.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+
+import java.util.Objects;
+import java.util.stream.Stream;
 
 @Document(collection = "cultivo")
 public class Cultivo {
@@ -12,72 +16,195 @@ public class Cultivo {
     @Id
     private String id;
 
-    @NotBlank(message = "Nombre es obligatorio")
-    private String nombre;
+    @Min(1900)
+    @Max(2100)
+    private int fecha; 
 
-    @NotBlank(message = "Tipo de planta es obligatorio")
-    private String tipoPlanta;
+    private Double enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre;
 
-    @Positive(message = "Tiempo de crecimiento debe ser un número positivo")
-    private int tiempoCrecimientoDias;
+    @DBRef
+    private Estacion estacion; // Referencia a la estación
 
-    @NotBlank(message = "Temporada es obligatoria")
-    private String temporada;
-    
-	public Cultivo() {
-		super();
-	}
+    public Cultivo() {
+        // Constructor por defecto
+    }
 
-	public Cultivo(String id, @NotBlank(message = "Nombre es obligatorio") String nombre,
-			@NotBlank(message = "Tipo de planta es obligatorio") String tipoPlanta,
-			@Positive(message = "Tiempo de crecimiento debe ser un número positivo") int tiempoCrecimientoDias,
-			@NotBlank(message = "Temporada es obligatoria") String temporada) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.tipoPlanta = tipoPlanta;
-		this.tiempoCrecimientoDias = tiempoCrecimientoDias;
-		this.temporada = temporada;
-	}
+    public Cultivo(String id, int fecha, Estacion estacion, Double enero, Double febrero,
+            Double marzo, Double abril, Double mayo, Double junio, Double julio, Double agosto, Double septiembre,
+            Double octubre, Double noviembre, Double diciembre) {
+        super();
+        this.id = id;
+        this.fecha = fecha;
+        this.estacion = estacion;
+        this.enero = enero;
+        this.febrero = febrero;
+        this.marzo = marzo;
+        this.abril = abril;
+        this.mayo = mayo;
+        this.junio = junio;
+        this.julio = julio;
+        this.agosto = agosto;
+        this.septiembre = septiembre;
+        this.octubre = octubre;
+        this.noviembre = noviembre;
+        this.diciembre = diciembre;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public int getFecha() {
+        return fecha;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setFecha(int fecha) {
+        this.fecha = fecha;
+    }
 
-	public String getTipoPlanta() {
-		return tipoPlanta;
-	}
+    public Double getEnero() {
+        return enero;
+    }
 
-	public void setTipoPlanta(String tipoPlanta) {
-		this.tipoPlanta = tipoPlanta;
-	}
+    public void setEnero(Double enero) {
+        this.enero = enero;
+    }
 
-	public int getTiempoCrecimientoDias() {
-		return tiempoCrecimientoDias;
-	}
+    public Double getFebrero() {
+        return febrero;
+    }
 
-	public void setTiempoCrecimientoDias(int tiempoCrecimientoDias) {
-		this.tiempoCrecimientoDias = tiempoCrecimientoDias;
-	}
+    public void setFebrero(Double febrero) {
+        this.febrero = febrero;
+    }
 
-	public String getTemporada() {
-		return temporada;
-	}
+    public Double getMarzo() {
+        return marzo;
+    }
 
-	public void setTemporada(String temporada) {
-		this.temporada = temporada;
-	}
+    public void setMarzo(Double marzo) {
+        this.marzo = marzo;
+    }
+
+    public Double getAbril() {
+        return abril;
+    }
+
+    public void setAbril(Double abril) {
+        this.abril = abril;
+    }
+
+    public Double getMayo() {
+        return mayo;
+    }
+
+    public void setMayo(Double mayo) {
+        this.mayo = mayo;
+    }
+
+    public Double getJunio() {
+        return junio;
+    }
+
+    public void setJunio(Double junio) {
+        this.junio = junio;
+    }
+
+    public Double getJulio() {
+        return julio;
+    }
+
+    public void setJulio(Double julio) {
+        this.julio = julio;
+    }
+
+    public Double getAgosto() {
+        return agosto;
+    }
+
+    public void setAgosto(Double agosto) {
+        this.agosto = agosto;
+    }
+
+    public Double getSeptiembre() {
+        return septiembre;
+    }
+
+    public void setSeptiembre(Double septiembre) {
+        this.septiembre = septiembre;
+    }
+
+    public Double getOctubre() {
+        return octubre;
+    }
+
+    public void setOctubre(Double octubre) {
+        this.octubre = octubre;
+    }
+
+    public Double getNoviembre() {
+        return noviembre;
+    }
+
+    public void setNoviembre(Double noviembre) {
+        this.noviembre = noviembre;
+    }
+
+    public Double getDiciembre() {
+        return diciembre;
+    }
+
+    public void setDiciembre(Double diciembre) {
+        this.diciembre = diciembre;
+    }
+
+    public Estacion getEstacion() {
+        return estacion;
+    }
+
+    public void setEstacion(Estacion estacion) {
+        this.estacion = estacion;
+    }
+
+    // Tu clase permanece igual excepto por el método calcularPromedioAnual
+    public Double calcularPromedioAnual() {
+        return Stream
+                .of(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre)
+                .filter(Objects::nonNull) // Filtra los valores nulos
+                .mapToDouble(Double::doubleValue) // Convierte los valores a double
+                .average() // Calcula el promedio
+                .orElse(0.0); // Devuelve 0.0 si no hay valores
+    }
+
+    public long calcularN() {
+        return Stream
+                .of(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre)
+                .filter(Objects::nonNull)
+                .count();
+    }
+
+    public Double calcularMedia() {
+        return Stream
+                .of(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre)
+                .filter(Objects::nonNull)
+                .mapToDouble(Double::doubleValue)
+                .average()
+                .orElse(0.0); // Devuelve 0.0 si no hay valores
+    }
+
+    public Double calcularDesviacionEstandar() {
+        double media = calcularMedia();
+        return Math.sqrt(Stream
+                .of(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre)
+                .filter(Objects::nonNull)
+                .mapToDouble(Double::doubleValue)
+                .map(valor -> Math.pow(valor - media, 2))
+                .average()
+                .orElse(0.0)); // Devuelve 0.0 si no hay valores
+    }
 
 }

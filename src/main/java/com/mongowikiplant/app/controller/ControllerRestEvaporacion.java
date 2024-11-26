@@ -1,17 +1,14 @@
 package com.mongowikiplant.app.controller;
 
-import java.util.List;
-import java.util.Map;
-
+import com.mongowikiplant.app.entity.Evaporacion;
+import com.mongowikiplant.app.repository.EvaporacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mongowikiplant.app.entity.Evaporacion;
-import com.mongowikiplant.app.exception.NotFoundException;
-import com.mongowikiplant.app.repository.EvaporacionRepository;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/evaporaciones")
+@RequestMapping("/api/evaporacion")
 public class ControllerRestEvaporacion {
 
     @Autowired
@@ -22,21 +19,8 @@ public class ControllerRestEvaporacion {
         return evaporacionRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Evaporacion getEvaporacionById(@PathVariable String id) {
-        return evaporacionRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Evaporación no encontrada"));
-    }
-
     @PostMapping
     public Evaporacion crearEvaporacion(@RequestBody Evaporacion evaporacion) {
-        return evaporacionRepository.save(evaporacion);
-    }
-
-    @PostMapping("/map")
-    public Evaporacion saveEvaporacionFromMap(@RequestBody Map<String, Object> body) {
-        ObjectMapper mapper = new ObjectMapper();
-        Evaporacion evaporacion = mapper.convertValue(body, Evaporacion.class);
         return evaporacionRepository.save(evaporacion);
     }
 
@@ -46,21 +30,8 @@ public class ControllerRestEvaporacion {
         return evaporacionRepository.save(evaporacionActualizada);
     }
 
-    @PutMapping("/map/{id}")
-    public Evaporacion updateEvaporacionFromMap(@PathVariable String id, @RequestBody Map<String, Object> body) {
-        ObjectMapper mapper = new ObjectMapper();
-        Evaporacion evaporacion = mapper.convertValue(body, Evaporacion.class);
-        evaporacion.setId(id);
-        return evaporacionRepository.save(evaporacion);
+    @DeleteMapping("/{id}")
+    public void eliminarEvaporacion(@PathVariable String id) {
+        evaporacionRepository.deleteById(id);
     }
-
-    
-	@DeleteMapping("/{id}")
-	public Evaporacion deleteEvaporacion(@PathVariable String id) {
-		Evaporacion evaporacion = evaporacionRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Evaporación no encontrada"));
-		evaporacionRepository.deleteById(id);
-		return evaporacion;
-	}
-
 }

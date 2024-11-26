@@ -1,13 +1,14 @@
 package com.mongowikiplant.app.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import java.time.LocalDate;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 @Document(collection = "planificacion")
 public class Planificacion {
@@ -15,100 +16,195 @@ public class Planificacion {
     @Id
     private String id;
 
-    @DBRef(lazy = true)
-    @NotNull(message = "Cliente es obligatorio")
-    private Cliente cliente;
+    @Min(1900)
+    @Max(2100)
+    private int fecha; // Año al que corresponde el planificacion
 
-    @DBRef(lazy = true)
-    @NotNull(message = "Parcela es obligatorio")
-    private Parcela parcela;
+    private Double enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre;
 
-    @DBRef(lazy = true)
-    @NotNull(message = "Cultivo es obligatorio")
-    private Cultivo cultivo;
+    @DBRef
+    private Estacion estacion; // Referencia a la estación
 
-    @NotNull(message = "Fecha de inicio es obligatoria")
-    private LocalDate fechaInicio;
+    public Planificacion() {
+        // Constructor por defecto
+    }
 
-    @NotNull(message = "Fecha de fin es obligatoria")
-    private LocalDate fechaFin;
+    public Planificacion(String id, int fecha, Estacion estacion, Double enero, Double febrero,
+            Double marzo, Double abril, Double mayo, Double junio, Double julio, Double agosto, Double septiembre,
+            Double octubre, Double noviembre, Double diciembre) {
+        super();
+        this.id = id;
+        this.fecha = fecha;
+        this.estacion = estacion;
+        this.enero = enero;
+        this.febrero = febrero;
+        this.marzo = marzo;
+        this.abril = abril;
+        this.mayo = mayo;
+        this.junio = junio;
+        this.julio = julio;
+        this.agosto = agosto;
+        this.septiembre = septiembre;
+        this.octubre = octubre;
+        this.noviembre = noviembre;
+        this.diciembre = diciembre;
+    }
 
-    @NotBlank(message = "Estado es obligatorio")
-    private String estado;
+    public String getId() {
+        return id;
+    }
 
-    // Constructor vacío y completo, Getters y Setters...
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public Planificacion() {}
+    public int getFecha() {
+        return fecha;
+    }
 
-	public Planificacion(String id, @NotNull(message = "Cliente es obligatorio") Cliente cliente,
-			@NotNull(message = "Parcela es obligatorio") Parcela parcela,
-			@NotNull(message = "Cultivo es obligatorio") Cultivo cultivo,
-			@NotNull(message = "Fecha de inicio es obligatoria") LocalDate fechaInicio,
-			@NotNull(message = "Fecha de fin es obligatoria") LocalDate fechaFin,
-			@NotBlank(message = "Estado es obligatorio") String estado) {
-		super();
-		this.id = id;
-		this.cliente = cliente;
-		this.parcela = parcela;
-		this.cultivo = cultivo;
-		this.fechaInicio = fechaInicio;
-		this.fechaFin = fechaFin;
-		this.estado = estado;
-	}
+    public void setFecha(int fecha) {
+        this.fecha = fecha;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public Double getEnero() {
+        return enero;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setEnero(Double enero) {
+        this.enero = enero;
+    }
 
-	public Cliente getCliente() {
-		return cliente;
-	}
+    public Double getFebrero() {
+        return febrero;
+    }
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
+    public void setFebrero(Double febrero) {
+        this.febrero = febrero;
+    }
 
-	public Parcela getParcela() {
-		return parcela;
-	}
+    public Double getMarzo() {
+        return marzo;
+    }
 
-	public void setParcela(Parcela parcela) {
-		this.parcela = parcela;
-	}
+    public void setMarzo(Double marzo) {
+        this.marzo = marzo;
+    }
 
-	public Cultivo getCultivo() {
-		return cultivo;
-	}
+    public Double getAbril() {
+        return abril;
+    }
 
-	public void setCultivo(Cultivo cultivo) {
-		this.cultivo = cultivo;
-	}
+    public void setAbril(Double abril) {
+        this.abril = abril;
+    }
 
-	public LocalDate getFechaInicio() {
-		return fechaInicio;
-	}
+    public Double getMayo() {
+        return mayo;
+    }
 
-	public void setFechaInicio(LocalDate fechaInicio) {
-		this.fechaInicio = fechaInicio;
-	}
+    public void setMayo(Double mayo) {
+        this.mayo = mayo;
+    }
 
-	public LocalDate getFechaFin() {
-		return fechaFin;
-	}
+    public Double getJunio() {
+        return junio;
+    }
 
-	public void setFechaFin(LocalDate fechaFin) {
-		this.fechaFin = fechaFin;
-	}
+    public void setJunio(Double junio) {
+        this.junio = junio;
+    }
 
-	public String getEstado() {
-		return estado;
-	}
+    public Double getJulio() {
+        return julio;
+    }
 
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
+    public void setJulio(Double julio) {
+        this.julio = julio;
+    }
+
+    public Double getAgosto() {
+        return agosto;
+    }
+
+    public void setAgosto(Double agosto) {
+        this.agosto = agosto;
+    }
+
+    public Double getSeptiembre() {
+        return septiembre;
+    }
+
+    public void setSeptiembre(Double septiembre) {
+        this.septiembre = septiembre;
+    }
+
+    public Double getOctubre() {
+        return octubre;
+    }
+
+    public void setOctubre(Double octubre) {
+        this.octubre = octubre;
+    }
+
+    public Double getNoviembre() {
+        return noviembre;
+    }
+
+    public void setNoviembre(Double noviembre) {
+        this.noviembre = noviembre;
+    }
+
+    public Double getDiciembre() {
+        return diciembre;
+    }
+
+    public void setDiciembre(Double diciembre) {
+        this.diciembre = diciembre;
+    }
+
+    public Estacion getEstacion() {
+        return estacion;
+    }
+
+    public void setEstacion(Estacion estacion) {
+        this.estacion = estacion;
+    }
+
+    // Tu clase permanece igual excepto por el método calcularPromedioAnual
+    public Double calcularPromedioAnual() {
+        return Stream
+                .of(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre)
+                .filter(Objects::nonNull) // Filtra los valores nulos
+                .mapToDouble(Double::doubleValue) // Convierte los valores a double
+                .average() // Calcula el promedio
+                .orElse(0.0); // Devuelve 0.0 si no hay valores
+    }
+
+    public long calcularN() {
+        return Stream
+                .of(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre)
+                .filter(Objects::nonNull)
+                .count();
+    }
+
+    public Double calcularMedia() {
+        return Stream
+                .of(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre)
+                .filter(Objects::nonNull)
+                .mapToDouble(Double::doubleValue)
+                .average()
+                .orElse(0.0); // Devuelve 0.0 si no hay valores
+    }
+
+    public Double calcularDesviacionEstandar() {
+        double media = calcularMedia();
+        return Math.sqrt(Stream
+                .of(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre)
+                .filter(Objects::nonNull)
+                .mapToDouble(Double::doubleValue)
+                .map(valor -> Math.pow(valor - media, 2))
+                .average()
+                .orElse(0.0)); // Devuelve 0.0 si no hay valores
+    }
+
 }

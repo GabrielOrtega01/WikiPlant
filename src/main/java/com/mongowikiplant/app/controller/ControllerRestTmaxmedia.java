@@ -1,17 +1,15 @@
 package com.mongowikiplant.app.controller;
 
-import java.util.List;
-import java.util.Map;
-
+import com.mongowikiplant.app.entity.Tmaxmedia;
+import com.mongowikiplant.app.repository.TmaxmediaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mongowikiplant.app.entity.Tmaxmedia;
-import com.mongowikiplant.app.exception.NotFoundException;
-import com.mongowikiplant.app.repository.TmaxmediaRepository;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/tmaxmedias")
+@RequestMapping("/api/tmaxmedia")
+
 public class ControllerRestTmaxmedia {
 
     @Autowired
@@ -22,45 +20,19 @@ public class ControllerRestTmaxmedia {
         return tmaxmediaRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Tmaxmedia getTmaxmediaById(@PathVariable String id) {
-        return tmaxmediaRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Tmaxmedia no encontrada"));
-    }
-
     @PostMapping
     public Tmaxmedia crearTmaxmedia(@RequestBody Tmaxmedia tmaxmedia) {
         return tmaxmediaRepository.save(tmaxmedia);
     }
 
-    @PostMapping("/map")
-    public Tmaxmedia saveTmaxmediaFromMap(@RequestBody Map<String, Object> body) {
-        ObjectMapper mapper = new ObjectMapper();
-        Tmaxmedia tmaxmedia = mapper.convertValue(body, Tmaxmedia.class);
-        return tmaxmediaRepository.save(tmaxmedia);
-    }
-
     @PutMapping("/{id}")
-    public Tmaxmedia actualizarTmaxmedia(@PathVariable String id, @RequestBody Tmaxmedia tmaxmediaActualizada) {
-        tmaxmediaActualizada.setId(id);
-        return tmaxmediaRepository.save(tmaxmediaActualizada);
+    public Tmaxmedia actualizarTmaxmedia(@PathVariable String id, @RequestBody Tmaxmedia tmaxmediaActualizado) {
+    	tmaxmediaActualizado.setId(id);
+        return tmaxmediaRepository.save(tmaxmediaActualizado);
     }
 
-    @PutMapping("/map/{id}")
-    public Tmaxmedia updateTmaxmediaFromMap(@PathVariable String id, @RequestBody Map<String, Object> body) {
-        ObjectMapper mapper = new ObjectMapper();
-        Tmaxmedia tmaxmedia = mapper.convertValue(body, Tmaxmedia.class);
-        tmaxmedia.setId(id);
-        return tmaxmediaRepository.save(tmaxmedia);
+    @DeleteMapping("/{id}")
+    public void eliminarTmaxmedia(@PathVariable String id) {
+    	tmaxmediaRepository.deleteById(id);
     }
-
-    
-	@DeleteMapping("/{id}")
-	public Tmaxmedia deleteTmaxmedia(@PathVariable String id) {
-		Tmaxmedia tmaxmedia = tmaxmediaRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Tmaxmedia no encontrada"));
-		tmaxmediaRepository.deleteById(id);
-		return tmaxmedia;
-	}
-
 }

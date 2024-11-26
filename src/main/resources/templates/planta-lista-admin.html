@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registros Plantas</title>
+  <!-- Enlaces a los archivos CSS de Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link type="png" sizes="32x32" rel="icon"
+    href="https://lh3.googleusercontent.com/a/ACg8ocJq9wVRTMQaBGhOzSAkpqNfFOBkn7f398iktNR4gVTLteTXhNU=s288-c-no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" type="text/css" href="static/css/plantas.css" th:href="@{/css/plantas.css}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <header>
+    <nav class="sb-topnav navbar navbar-expand-lg shadow">
+      <div class="container-fluid">
+        <!-- Logo centrado -->
+        <a class="navbar-brand d-flex align-items-center mx-auto" th:href="@{/administrador/index}">
+          <img th:src="@{/img/wikiplant.png}" alt="Logo WikiPlant" width="60px" height="60px" class="me-2">
+        </a>
+
+        <!-- Menú de navegación -->
+        <div class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="btn btn-outline-light rounded-pill d-flex align-items-center px-3 " style="background: none;"
+              th:href="@{/}">
+              <i class="bi  me-2"></i>
+              <span>Salir</span>
+            </a>
+          </li>
+        </div>
+      </div>
+    </nav>
+    <div class="button-container mt-4">
+      <a th:href="@{/administrador/index}" class="button-custom">Volver a la página anterior</a>
+    </div>
+    <br>
+
+
+    <div class="container mt-4">
+      <h1 class="text-center">Registros de Plantas</h1>
+      <div class="row">
+        <!-- Ciclo de registros de plantas -->
+        <div th:each="planta : ${plantas}" class="col-md-4">
+          <div class="card">
+            <div class="card-header">
+              Planta: <span th:text="${planta.nomCientifico}"></span>
+            </div>
+            <div class="card-body">
+
+              <div class="text-center mb-3">
+                <img th:src="${planta.imagen}" alt="Imagen de la planta" class="img-fluid"
+                  th:if="${planta.imagen != null}" style="max-height: 200px;">
+              </div>
+
+              <p><strong>Nombre Común:</strong> <span th:text="${planta.nomComun}"></span></p>
+              <p><strong>Familia:</strong> <span th:text="${planta.familia}"></span></p>
+
+              <div class="btn-group" role="group" aria-label="Acciones">
+                <a th:href="@{/administrador/planta/edit/{id}(id=${planta.id})}" class="btn btn-primary">Editar</a>
+                <a th:href="@{/administrador/planta/delete/{id}(id=${planta.id})}" class="btn btn-danger">Eliminar</a>
+                <a th:href="@{/administrador/plantaDetalle(plantaId=${planta.id})}" class="btn btn-su">Ver
+                  Detalles</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="container text-center mb-4">
+      <a href="/export/plantas/excel" class="btn btn-success">
+        <i class="bi bi-file-earmark-spreadsheet-fill"></i> Descargar Excel
+      </a>
+      <a href="/export/plantas/pdf" class="btn btn-danger">
+        <i class="bi bi-file-earmark-pdf-fill"></i> Descargar PDF
+      </a>
+    </div>
+
+    <footer>
+      <div class="container">
+        <p>© 2024 Sistema de Gestión de Plantas. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <button class="boton-flotante" id="botonSubir">
+      <img src="https://i.pinimg.com/originals/7f/6f/1f/7f6f1f5bbdb893acec35f67285b0e102.png" alt="Planta"
+        class="icono-planta">
+    </button>
+
+
+
+    <script>
+      // Seleccionamos el botón
+      const botonSubir = document.getElementById("botonSubir");
+
+      // Evento para mostrar el botón cuando se hace scroll
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 500) {  // Cambia 500 por el número que desees
+          botonSubir.style.display = "flex";  // Muestra el botón
+        } else {
+          botonSubir.style.display = "none";  // Manténlo oculto si no se hace scroll
+        }
+      });
+
+      // Acción para volver al inicio cuando se hace click en el botón
+      botonSubir.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });  // Hace un scroll suave al inicio
+      });
+    </script>
+
+    <!-- Enlaces a los archivos JavaScript de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Añadir jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Añadir Popper.js, necesario para algunos componentes de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <!-- Añadir Bootstrap JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

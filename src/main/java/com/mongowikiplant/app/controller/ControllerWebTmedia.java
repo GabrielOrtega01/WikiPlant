@@ -1,29 +1,21 @@
 package com.mongowikiplant.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import com.mongowikiplant.app.entity.Tmedia;
-import com.mongowikiplant.app.entity.Tmedia.MesCantidad;
 import com.mongowikiplant.app.exception.NotFoundException;
 import com.mongowikiplant.app.repository.EstacionRepository;
 import com.mongowikiplant.app.repository.TmediaRepository;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/tmedia")
+@RequestMapping(value = "/tmedia")
 public class ControllerWebTmedia {
 
     @Autowired
@@ -33,94 +25,57 @@ public class ControllerWebTmedia {
     private EstacionRepository estacionRepository;
 
     @GetMapping("/crear")
-    public String tmediaCrearTemplate(Model model) {
+    public String tmediasNewTemplate(Model model) {
         model.addAttribute("tmedia", new Tmedia());
-        model.addAttribute("estaciones", estacionRepository.findAll());
+        model.addAttribute("listaEstaciones", estacionRepository.findAll());
         return "tmedia-form";
     }
 
     @GetMapping("/lista")
-    public String tmediaListTemplate(Model model) {
-        List<Tmedia> tmedias = tmediaRepository.findAll();
-        tmedias.forEach(Tmedia::actualizarMesCantidadMap);
-        model.addAttribute("tmedias", tmedias);
-        tmedias.sort(Comparator.comparingInt(Tmedia::getYear));
+    public String tmediasListTemplate(Model model) {
+        // Ordenar por el campo 'fecha' de manera ascendente
+        model.addAttribute("tmedias", tmediaRepository.findAll(Sort.by(Sort.Order.asc("fecha"))));
         return "tmedia-lista";
     }
 
     @GetMapping("/edit/{id}")
     public String tmediaEditTemplate(@PathVariable("id") String id, Model model) {
         Tmedia tmedia = tmediaRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Temperatura media no encontrada"));
+                .orElseThrow(() -> new NotFoundException("Tmedia no encontrado"));
         model.addAttribute("tmedia", tmedia);
-        model.addAttribute("estaciones", estacionRepository.findAll());
+        model.addAttribute("listaEstaciones", estacionRepository.findAll());
         return "tmedia-form";
     }
 
+    @PostMapping("/save")
+    public String tmediasSaveProcess(@Valid @ModelAttribute("tmedia") Tmedia tmedia, BindingResult result,
+            Model model) {
+        if (result.hasErrors()) {
+            // Si hay errores en los datos del formulario, se vuelve a mostrar el formulario
+            model.addAttribute("listaEstaciones", estacionRepository.findAll());
+            return "tmedia-form";
+        }
+        if (tmedia.getId() == null || tmedia.getId().isEmpty()) {
+        	tmedia.setId(null); // MongoDB generará un ID automáticamente
+        }
+
+        // Si no hay errores, se guarda el tmedia
+        tmediaRepository.save(tmedia);
+
+        // Redirigir al usuario a la lista de tmedias después de guardar los datos
+        return "redirect:/tmedia/lista";
+    }
+    
     @GetMapping("/delete/{id}")
     public String tmediaDeleteProcess(@PathVariable("id") String id) {
-        tmediaRepository.deleteById(id);
+    	tmediaRepository.deleteById(id);
         return "redirect:/tmedia/lista";
     }
 
+    
     @GetMapping("/info")
     public String tmediaInfoTemplate() {
         return "tmedia-info";
     }
 
-    @PostMapping("/save")
-    public String tmediaSaveProcess(@ModelAttribute Tmedia tmedia,
-                                         @RequestParam(value = "year", required = false) int year,
-                                         @RequestParam Map<String, String> allParams) {
-
-        if (year != 0) {
-            tmedia.setYear(year);
-        }
-
-        List<MesCantidad> registros = new ArrayList<>();
-        for (int i = 1; i <= 12; i++) {
-            String mes = allParams.get("mes" + i);
-            Double cantidad = allParams.containsKey("cantidad" + i) ? Double.valueOf(allParams.get("cantidad" + i)) : null;
-            if (mes != null && cantidad != null) {
-                registros.add(new MesCantidad(mes, cantidad));
-            }
-        }
-
-        tmedia.setRegistros(registros);
-        tmedia.actualizarMesCantidadMap();
-        tmediaRepository.save(tmedia);
-
-        return "redirect:/tmedia/lista";
-    }
-
-    @GetMapping("/detalle/{id}")
-    public String tmediaDetalleTemplate(@PathVariable("id") String id, Model model) {
-        Tmedia tmedia = tmediaRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Temperatura media no encontrada"));
-
-        // Calcular las estadísticas y agregarlas al modelo
-        double promedioAnual = tmedia.calcularPromedioAnual();
-        double desviacionEstandar = tmedia.calcularDesviacionEstandar();
-        double coeficienteVariacion = tmedia.calcularCoeficienteVariacion();
-        double maximo = tmedia.calcularMaximo();
-        double minimo = tmedia.calcularMinimo();
-
-        model.addAttribute("tmedia", tmedia);
-        model.addAttribute("promedioAnual", promedioAnual);
-        model.addAttribute("desviacionEstandar", desviacionEstandar);
-        model.addAttribute("coeficienteVariacion", coeficienteVariacion);
-        model.addAttribute("maximo", maximo);
-        model.addAttribute("minimo", minimo);
-
-        return "tmedia-detalle";
-    }
-
-    @GetMapping("/estacion/{id}")
-    @ResponseBody
-    public List<Tmedia> getTmediasByEstacion(@PathVariable("id") String estacionId) {
-        List<Tmedia> tmedias = tmediaRepository.findByEstacionId(estacionId);
-        tmedias.forEach(Tmedia::actualizarMesCantidadMap);
-        return tmedias;
-    }
 }
-

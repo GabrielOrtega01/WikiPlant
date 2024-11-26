@@ -118,9 +118,9 @@ public class ControllerWebAdministrador {
 	@GetMapping("/planta/lista")
 	public String plantaListTemplate(Model model) {
 	    model.addAttribute("plantas", plantaRepository.findAll());
-	    return "planta-lista";
+	    return "planta-lista-admin";
 	}
-
+	
 	@GetMapping("/planta/edit/{id}")
 	public String plantaEditTemplate(@PathVariable("id") String id, Model model) {
 	    model.addAttribute("planta",
@@ -142,5 +142,24 @@ public class ControllerWebAdministrador {
 	    plantaRepository.deleteById(id);
 	    return "redirect:/administrador/lista";
 	}
+	
+    @GetMapping("/plantaDetalle")
+    public String mostrarDetallePlanta(@RequestParam("plantaId") String plantaId, Model model, HttpSession session) {
+        Planta planta = plantaRepository.findById(plantaId).orElse(null);
+        if (planta != null) {
+            planta.incrementarBusquedas(); // Incrementar el contador de búsquedas
+            plantaRepository.save(planta); // Guardar cambios en la base de datos
+
+            // Agregar los detalles de la planta al modelo
+            model.addAttribute("planta", planta);
+
+        } else {
+            model.addAttribute("error", "Planta no encontrada.");
+        }
+
+        return "planta-detalle-admin"; // Mostrar la vista con los detalles de la planta y la nota
+    }
+
+	
 	
 }

@@ -10,4 +10,12 @@ public class ControllerWebCompartido {
 	public String compartidoIndexTemplate(Model model) {
 		return "index-compartido";
 	}
+	@Controller
+	public class ControllerWebNosotros {
+		@GetMapping("/wikiplant")
+		public String compartidoIndexTemplate(Model model) {
+			return "wikiplant";
+		}
+	}
+
 }

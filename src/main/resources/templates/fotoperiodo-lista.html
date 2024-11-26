@@ -2,71 +2,237 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Lista de Fotoperiodo</title>
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Fotoperiodo</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link type="png" sizes="32x32" rel="icon"
+    href="https://lh3.googleusercontent.com/a/ACg8ocJq9wVRTMQaBGhOzSAkpqNfFOBkn7f398iktNR4gVTLteTXhNU=s288-c-no">
+  <link rel="stylesheet" type="text/css" href="static/css/listarTablas.css" th:href="@{/css/listarTablas.css}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-	<header class="bg-dark text-white text-center py-3">
-		<h1>Lista de Fotoperiodo</h1>
-	</header>
+  <header class="header">
+    <h1>Lista de Registros de Fotoperiodo</h1>
+  </header>
 
-	<div class="container my-4">
-		<table class="table table-dark table-bordered">
-			<thead>
-				<tr>
-					<th>AÑO</th>
-					<th>ENE</th>
-					<th>FEB</th>
-					<th>MAR</th>
-					<th>ABR</th>
-					<th>MAY</th>
-					<th>JUN</th>
-					<th>JUL</th>
-					<th>AGO</th>
-					<th>SEP</th>
-					<th>OCT</th>
-					<th>NOV</th>
-					<th>DIC</th>
+  <div class="button-container mt-4">
+    <button th:onclick="|history.back()|" class="button-custom">Volver a la página anterior</button>
+  </div>
 
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody>
-				<!-- Bucle para iterar sobre los registros de fotoperiodo -->
-				<tr th:each="fotoperiodo : ${fotoperiodos}">
-					<td th:text="${fotoperiodo.year}">Año</td>
-					<td th:text="${fotoperiodo.mesCantidadMap['Enero']}">0.0</td>
-					<td th:text="${fotoperiodo.mesCantidadMap['Febrero']}">FEB</td>
-					<td th:text="${fotoperiodo.mesCantidadMap['Marzo']}">MAR</td>
-					<td th:text="${fotoperiodo.mesCantidadMap['Abril']}">ABR</td>
-					<td th:text="${fotoperiodo.mesCantidadMap['Mayo']}">MAY</td>
-					<td th:text="${fotoperiodo.mesCantidadMap['Junio']}">JUN</td>
-					<td th:text="${fotoperiodo.mesCantidadMap['Julio']}">JUL</td>
-					<td th:text="${fotoperiodo.mesCantidadMap['Agosto']}">AGO</td>
-					<td th:text="${fotoperiodo.mesCantidadMap['Septiembre']}">SEP</td>
-					<td th:text="${fotoperiodo.mesCantidadMap['Octubre']}">OCT</td>
-					<td th:text="${fotoperiodo.mesCantidadMap['Noviembre']}">NOV</td>
-					<td th:text="${fotoperiodo.mesCantidadMap['Diciembre']}">DIC</td>
 
-					<td>
-						<a th:href="@{/fotoperiodo/edit/{id}(id=${fotoperiodo.id})}" class="btn btn-warning">Editar</a>
-						<a th:href="@{/fotoperiodo/delete/{id}(id=${fotoperiodo.id})}" class="btn btn-danger">Eliminar</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+  <div class="container mt-4">
+    <!-- Dropdown para filtrar estaciones -->
+    <div class="mb-3">
+      <label for="estacion" class="form-label">Filtrar por estación:</label>
+      <select id="estacion" class="form-control">
+        <option value="">Todas las estaciones</option>
+        <option th:each="fotoperiodo : ${fotoperiodos}" th:value="${fotoperiodo.estacion.nombre}"
+          th:text="${fotoperiodo.estacion.nombre}"></option>
+      </select>
+    </div>
 
-	<footer class="bg-dark text-white text-center py-3">
-		<p>© 2024 Sistema de Gestión de Fotoperiodo. Todos los derechos reservados.</p>
-	</footer>
+    <!-- Tabla de fotoperiodos -->
+    <table class="table table-dark table-hover table-bordered">
+      <thead>
+        <tr>
+          <th style="color:rgb(19, 73, 35);">Fecha</th>
+          <th>Estación</th>
+          <th>Ene</th>
+          <th>Feb</th>
+          <th>Mar</th>
+          <th>Abr</th>
+          <th>May</th>
+          <th>Jun</th>
+          <th>Jul</th>
+          <th>Ago</th>
+          <th>Sep</th>
+          <th>Oct</th>
+          <th>Nov</th>
+          <th>Dic</th>
+          <th>Anual</th>
+          <th style="color:rgb(42, 95, 40);">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Bucle para iterar sobre los registros de fotoperiodo -->
+        <tr th:each="fotoperiodo : ${fotoperiodos}">
+          <td th:text="${fotoperiodo.fecha}">2024</td>
+          <td th:text="${fotoperiodo.estacion.nombre}">Estación</td>
+          <td th:text="${fotoperiodo.enero}">0.0</td>
+          <td th:text="${fotoperiodo.febrero}">0.0</td>
+          <td th:text="${fotoperiodo.marzo}">0.0</td>
+          <td th:text="${fotoperiodo.abril}">0.0</td>
+          <td th:text="${fotoperiodo.mayo}">0.0</td>
+          <td th:text="${fotoperiodo.junio}">0.0</td>
+          <td th:text="${fotoperiodo.julio}">0.0</td>
+          <td th:text="${fotoperiodo.agosto}">0.0</td>
+          <td th:text="${fotoperiodo.septiembre}">0.0</td>
+          <td th:text="${fotoperiodo.octubre}">0.0</td>
+          <td th:text="${fotoperiodo.noviembre}">0.0</td>
+          <td th:text="${fotoperiodo.diciembre}">0.0</td>
+          <td th:text="${fotoperiodo.calcularPromedioAnual()}">0.0</td>
+          <td>
+            <div class="d-flex justify-content-start flex-wrap gap-2">
+              <a class="btn btn-info btn-sm" th:href="@{'/fotoperiodo/edit/' + ${fotoperiodo.id}}"
+                aria-label="Editar fotoperiodo">Editar</a>
+              <a class="btn btn-danger btn-sm" th:href="@{'/fotoperiodo/delete/' + ${fotoperiodo.id}}"
+                aria-label="Eliminar fotoperiodo"
+                onclick="return confirm('¿Estás seguro de eliminar este fotoperiodo?');">Eliminar</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Tabla de Resumen Horizontal -->
+    <div class="tabla-adicional table-responsive">
+      <h3 class="text-center text-white">Resumen de Cálculos por Estación</h3>
+      <table class="table table-dark table-bordered">
+        <thead class="thead-light">
+          <tr class="text-center">
+            <th></th> <!-- Encabezado vacío para las filas -->
+            <th>ENE</th>
+            <th>FEB</th>
+            <th>MAR</th>
+            <th>ABR</th>
+            <th>MAY</th>
+            <th>JUN</th>
+            <th>JUL</th>
+            <th>AGO</th>
+            <th>SEP</th>
+            <th>OCT</th>
+            <th>NOV</th>
+            <th>DIC</th>
+            <th>ANUAL</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          <!-- Fila N -->
+          <td>N</td>
+          <td th:text="${conteosTotales['enero']}">0</td>
+          <td th:text="${conteosTotales['febrero']}">0</td>
+          <td th:text="${conteosTotales['marzo']}">0</td>
+          <td th:text="${conteosTotales['abril']}">0</td>
+          <td th:text="${conteosTotales['mayo']}">0</td>
+          <td th:text="${conteosTotales['junio']}">0</td>
+          <td th:text="${conteosTotales['julio']}">0</td>
+          <td th:text="${conteosTotales['agosto']}">0</td>
+          <td th:text="${conteosTotales['septiembre']}">0</td>
+          <td th:text="${conteosTotales['octubre']}">0</td>
+          <td th:text="${conteosTotales['noviembre']}">0</td>
+          <td th:text="${conteosTotales['diciembre']}">0</td>
+          <td th:text="${conteosTotales['promedioAnual']}">0</td>
+          </tr>
+
+          <!-- Fila MEDIA -->
+          <td>MEDIA</td>
+          <td th:text="${promedios['enero']}">0</td>
+          <td th:text="${promedios['febrero']}">0</td>
+          <td th:text="${promedios['marzo']}">0</td>
+          <td th:text="${promedios['abril']}">0</td>
+          <td th:text="${promedios['mayo']}">0</td>
+          <td th:text="${promedios['junio']}">0</td>
+          <td th:text="${promedios['julio']}">0</td>
+          <td th:text="${promedios['agosto']}">0</td>
+          <td th:text="${promedios['septiembre']}">0</td>
+          <td th:text="${promedios['octubre']}">0</td>
+          <td th:text="${promedios['noviembre']}">0</td>
+          <td th:text="${promedios['diciembre']}">0</td>
+          <td th:text="${promedios['anual']}">0</td>
+          </tr>
+
+
+          <!-- Fila Desviación estandar -->
+          <td>D.S.</td>
+          <td th:text="${desviaciones['enero']}">0</td>
+          <td th:text="${desviaciones['febrero']}">0</td>
+          <td th:text="${desviaciones['marzo']}">0</td>
+          <td th:text="${desviaciones['abril']}">0</td>
+          <td th:text="${desviaciones['mayo']}">0</td>
+          <td th:text="${desviaciones['junio']}">0</td>
+          <td th:text="${desviaciones['julio']}">0</td>
+          <td th:text="${desviaciones['agosto']}">0</td>
+          <td th:text="${desviaciones['septiembre']}">0</td>
+          <td th:text="${desviaciones['octubre']}">0</td>
+          <td th:text="${desviaciones['noviembre']}">0</td>
+          <td th:text="${desviaciones['diciembre']}">0</td>
+          <td th:text="${desviaciones['anual']}">0</td>
+          </tr>
+
+          <!-- Fila Coeficiente de Variación -->
+          <td>C.V.%</td>
+          <td th:text="${coeficienteDeVariacion['enero']}">0</td>
+          <td th:text="${coeficienteDeVariacion['febrero']}">0</td>
+          <td th:text="${coeficienteDeVariacion['marzo']}">0</td>
+          <td th:text="${coeficienteDeVariacion['abril']}">0</td>
+          <td th:text="${coeficienteDeVariacion['mayo']}">0</td>
+          <td th:text="${coeficienteDeVariacion['junio']}">0</td>
+          <td th:text="${coeficienteDeVariacion['julio']}">0</td>
+          <td th:text="${coeficienteDeVariacion['agosto']}">0</td>
+          <td th:text="${coeficienteDeVariacion['septiembre']}">0</td>
+          <td th:text="${coeficienteDeVariacion['octubre']}">0</td>
+          <td th:text="${coeficienteDeVariacion['noviembre']}">0</td>
+          <td th:text="${coeficienteDeVariacion['diciembre']}">0</td>
+          <td th:text="${coeficienteDeVariacion['diciembre']}">0</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="container text-center mb-4">
+    <a href="/export/fotoperiodo/excel" class="btn btn-success">
+      <i class="bi bi-file-earmark-spreadsheet-fill"></i> Descargar Excel
+    </a>
+  </div>
+
+
+  <footer class="bg-dark text-white text-center py-3">
+    <p>© 2024 Sistema de Gestión de Fotoperiodo. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    document.getElementById("estacion").addEventListener("change", function () {
+      const selectedEstacion = this.value.toLowerCase(); // Obtiene el valor seleccionado en minúsculas
+      const rows = document.querySelectorAll("tbody tr"); // Obtiene todas las filas de la tabla
+
+      rows.forEach(row => {
+        // Obtenemos el valor de la estación desde la segunda columna (td), que debe ser el nombre de la estación
+        const estacion = row.cells[1].textContent.toLowerCase(); // `cells[1]` hace referencia a la columna "Estación"
+
+        // Si no se selecciona ninguna estación o si el nombre de la estación coincide con el seleccionado
+        if (selectedEstacion === "" || estacion.includes(selectedEstacion)) {
+          row.style.display = ""; // Muestra la fila si coincide con el filtro
+        } else {
+          row.style.display = "none"; // Oculta la fila si no coincide con el filtro
+        }
+      });
+    });
+
+
+    // Seleccionamos el botón
+      const botonSubir = document.getElementById("botonSubir");
+
+    // Evento para mostrar el botón cuando se hace scroll
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 500) {  // Cambia 500 por el número que desees
+        botonSubir.style.display = "flex";  // Muestra el botón
+      } else {
+        botonSubir.style.display = "none";  // Manténlo oculto si no se hace scroll
+      }
+    });
+
+    // Acción para volver al inicio cuando se hace click en el botón
+    botonSubir.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });  // Hace un scroll suave al inicio
+    });
+  </script>
 </body>
 
 </html>

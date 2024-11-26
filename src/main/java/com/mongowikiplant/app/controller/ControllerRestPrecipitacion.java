@@ -1,17 +1,14 @@
 package com.mongowikiplant.app.controller;
 
-import java.util.List;
-import java.util.Map;
-
+import com.mongowikiplant.app.entity.Precipitacion;
+import com.mongowikiplant.app.repository.PrecipitacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mongowikiplant.app.entity.Precipitacion;
-import com.mongowikiplant.app.exception.NotFoundException;
-import com.mongowikiplant.app.repository.PrecipitacionRepository;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/precipitaciones")
+@RequestMapping("/api/precipitacion")
 public class ControllerRestPrecipitacion {
 
     @Autowired
@@ -22,21 +19,8 @@ public class ControllerRestPrecipitacion {
         return precipitacionRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Precipitacion getPrecipitacionById(@PathVariable String id) {
-        return precipitacionRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Precipitación no encontrada"));
-    }
-
     @PostMapping
     public Precipitacion crearPrecipitacion(@RequestBody Precipitacion precipitacion) {
-        return precipitacionRepository.save(precipitacion);
-    }
-
-    @PostMapping("/map")
-    public Precipitacion savePrecipitacionFromMap(@RequestBody Map<String, Object> body) {
-        ObjectMapper mapper = new ObjectMapper();
-        Precipitacion precipitacion = mapper.convertValue(body, Precipitacion.class);
         return precipitacionRepository.save(precipitacion);
     }
 
@@ -46,21 +30,8 @@ public class ControllerRestPrecipitacion {
         return precipitacionRepository.save(precipitacionActualizada);
     }
 
-    @PutMapping("/map/{id}")
-    public Precipitacion updatePrecipitacionFromMap(@PathVariable String id, @RequestBody Map<String, Object> body) {
-        ObjectMapper mapper = new ObjectMapper();
-        Precipitacion precipitacion = mapper.convertValue(body, Precipitacion.class);
-        precipitacion.setId(id);
-        return precipitacionRepository.save(precipitacion);
+    @DeleteMapping("/{id}")
+    public void eliminarPrecipitacion(@PathVariable String id) {
+        precipitacionRepository.deleteById(id);
     }
-
-    
-	@DeleteMapping("/{id}")
-	public Precipitacion deletePrecipitacion(@PathVariable String id) {
-		Precipitacion precipitacion = precipitacionRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Precipitación no encontrada"));
-		precipitacionRepository.deleteById(id);
-		return precipitacion;
-	}
-
 }

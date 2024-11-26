@@ -7,5 +7,5 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface RadiacionRepository extends MongoRepository<Radiacion, String> {
-    List<Radiacion> findByEstacionId(String estacionId);
+  /*  List<Radiacion> findByEstacionId(String estacionId);*/
 }

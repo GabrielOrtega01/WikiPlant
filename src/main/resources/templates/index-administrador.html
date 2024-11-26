@@ -8,11 +8,13 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" type="text/css" href="static/css/admin.css" th:href="@{/css/admin.css}">
   <link type="png" sizes="32x32" rel="icon"
     href="https://lh3.googleusercontent.com/a/ACg8ocJq9wVRTMQaBGhOzSAkpqNfFOBkn7f398iktNR4gVTLteTXhNU=s288-c-no">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="static/css/adminO.css" th:href="@{/css/adminO.css}">
+
   <title>Administrador</title>
 
 </head>
@@ -21,33 +23,30 @@
 </style>
 
 <body>
-  <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <img src="https://lh3.googleusercontent.com/a/ACg8ocJq9wVRTMQaBGhOzSAkpqNfFOBkn7f398iktNR4gVTLteTXhNU=s288-c-no"
-      alt="Logo WikiPlant" width="50" height="50" style="margin-right: 15px;">
+  <nav class="sb-topnav navbar navbar-expand-lg shadow">
+    <div class="container-fluid">
+      <!-- Logo centrado -->
+      <div class="d-flex justify-content-center w-100">
+        <a class="navbar-brand d-flex align-items-center" th:href="@{/administrador/index}">
+          <img th:src="@{/img/wikiplant.png}" alt="Logo WikiPlant" width="60px" height="60px" class="me-2">
+        </a>
+      </div>
 
-    <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" th:href="@{/administrador/index}">Inicio Administrador</a>
-
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
+      <!-- Menú de navegación sin collapse -->
+      <div class="navbar-nav ms-auto">
+        <!-- Botón de Logout visible en todos los tamaños -->
         <li class="nav-item">
-          <a class="btn my-2 my-sm-0" th:href="@{/}">
-            <button class="Btn">
-              <div class="sign">
-                <svg viewBox="0 0 512 512">
-                  <path
-                    d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z">
-                  </path>
-                </svg>
-              </div>
-              <div class="text">Logout</div>
-            </button>
+          <a class="btn btn-outline-light rounded-pill d-flex align-items-center px-3" th:href="@{/}">
+            <i class="bi bi-box-arrow-right me-2"></i>
+            <span>Salir</span>
           </a>
         </li>
-      </ul>
+      </div>
     </div>
-
   </nav>
+
+
+
 
 
   <div id="layoutSidenav">
@@ -59,576 +58,519 @@
       <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
           <div class="nav">
-            <div class="sb-sidenav-menu-heading"></div>
-            <a class="nav-link" th:href="@{/administrador/index}">
-              <div class="sb-nav-link-icon"><i class="fa-solid fa-bars"></i></div>
-              Menu
-            </a>
 
-
-
+            <!-- Gestión de Clientes -->
             <div class="sb-sidenav-menu-heading">Gestiones</div>
-            <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
-              aria-expanded="false" aria-controls="collapseLayouts">
-              <div class="sb-nav-link-icon"><i class="fa-solid fa-lightbulb"></i></div>
+            <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseClients"
+              aria-expanded="false" aria-controls="collapseClients">
+              <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
               Gestión de Clientes
               <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
             </a>
-            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+            <div class="collapse" id="collapseClients" data-bs-parent="#sidenavAccordion">
               <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/administrador/cliente/crear}">Agregar Cliente</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/administrador/lista}">Listar Clientes</a>
               </nav>
             </div>
 
-
-            <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-              aria-expanded="false" aria-controls="collapsePages">
+            <!-- Gestión de Cultivos y Plantas -->
+            <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapsePlants"
+              aria-expanded="false" aria-controls="collapsePlants">
               <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
               Gestión de Cultivos y Plantas
               <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
             </a>
-            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+            <div class="collapse" id="collapsePlants" data-bs-parent="#sidenavAccordion">
               <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/administrador/cultivo/info}">Cultivo</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/administrador/planta/crear}">Agregar Planta</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/administrador/planta/lista}">Listar Plantas</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/parcela/info}">Parcela</a>
               </nav>
             </div>
 
-
+            <!-- Condiciones Climáticas -->
             <div class="sb-sidenav-menu-heading">Condiciones</div>
-            <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
-              aria-expanded="false" aria-controls="collapseLayouts">
+            <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseConditions"
+              aria-expanded="false" aria-controls="collapseConditions">
               <div class="sb-nav-link-icon"><i class="fa-solid fa-lightbulb"></i></div>
               Condiciones Climáticas
               <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
             </a>
-            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+            <div class="collapse" id="collapseConditions" data-bs-parent="#sidenavAccordion">
               <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/estacion/info}">Estaciones</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/fotoperiodo/info}">Fotoperiodo</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/radiacion/info}">Radiación Global</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/tmedia/info}">Temperatura Media</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/tmaxmedia/info}">Temperatura Máxima Media</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/tminmedia/info}">Temperatura Mínima Media</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/precipitacion/info}">Precipitación</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/estimacion/info}">Método de Estimación</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/amplitudDiariaTemperatura/info}">ADT - Amplitud Diaria de
-                  Temperatura</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/evaporacion/info}">Evaporación</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/evapotranspiracion/info}">Evapotranspiración</a>
               </nav>
             </div>
 
-
-            <a class="nav-link collapsed" th:href="@{/gestionHidrica/info}" data-bs-toggle="collapse"
-              data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-              <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+            <!-- Gestión Hídrica -->
+            <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseWater"
+              aria-expanded="false" aria-controls="collapseWater">
+              <div class="sb-nav-link-icon"><i class="fas fa-book-open "></i></div>
               Gestión Hídrica
               <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
             </a>
-            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+            <div class="collapse" id="collapseWater" data-bs-parent="#sidenavAccordion">
               <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/aguachinamiento/info}">Aguachicamiento</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/balanceHidrico/info}">Balance Hídrico</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/disponibilidadAgua/info}">Disponibilidad de Agua</a>
               </nav>
-              <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/deficitAgua/info}">Deficit de Agua</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/excesoAgua/info}">Exceso de Agua</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/regimenHidrico/info}">Regimen Hídrico</a>
-              </nav>
             </div>
-
 
             <div class="sb-sidenav-menu-heading">Administracion</div>
-            <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
-              aria-expanded="false" aria-controls="collapseLayouts">
+            <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseMonitoring"
+              aria-expanded="false" aria-controls="collapseMonitoring">
               <div class="sb-nav-link-icon"><i class="fa-solid fa-lightbulb"></i></div>
-              Monitoreo y control
+              Monitoreo y Control
               <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
             </a>
-            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+            <div class="collapse" id="collapseMonitoring" data-bs-parent="#sidenavAccordion">
               <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/administrador/notificacion/info}">Notificaciones</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" th:href="@{/administrador/usuario/info}">Usuarios activos e inactivos</a>
-              </nav>
-              <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link" th:href="@{/administrador/usuario/info}">Usuarios Activos e Inactivos</a>
                 <a class="nav-link" th:href="@{/administrador/historial/info}">Historial</a>
-              </nav>
-
-              <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" th:href="@{/administrador/reporte/info}">Reportes</a>
               </nav>
-
             </div>
 
-
+            <!-- Salir -->
             <div class="sb-sidenav-menu-heading">Salir</div>
             <a class="nav-link" th:href="@{/administrador/login}">
-              <div class="sb-nav-link-icon"><i class="fa-solid fa-share-from-square"></i></div>
               Cerrar Sesión
             </a>
+
           </div>
         </div>
+        <!-- Footer del Sidebar -->
         <div class="sb-sidenav-footer">
-          <div class="small">Sesión: </div>
-          Administrador  <span th:text="${usuario}"></span> WikiPlant
+          <div class="small">Sesión:</div>
+          Administrador <span th:text="${usuario}"></span> WikiPlant
         </div>
       </nav>
+
+
+
+      <br>
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="title bg-black text-center welcome-title">
+            <h1> Bienvenido Administrador <span th:text="${usuario}"></span></h1>
+          </div>
+          <br>
+
+
+
+
+          <!-- Gestión de Clientes -->
+          <div class="container mb-4">
+            <div class="p-2"
+              style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
+              <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
+                data-bs-target="#gestionClientes" aria-expanded="false" aria-controls="gestionClientes"
+                style="color: black;">
+                <h5 class="m-0">Gestión de Clientes<i class="bi bi-chevron-down"></i></h5>
+              </button>
+            </div>
+            <p></p>
+            <div id="gestionClientes" class="collapse">
+              <div class="row">
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-secondary text-white mb-4">
+                    <div class="card-body">Agregar Cliente</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/administrador/cliente/crear}">
+                        <i class="bi bi-person-add" style="font-size: 40px; "></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-secondary text-white mb-4">
+                    <div class="card-body">Listar Clientes</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/administrador/lista}">
+                        <i class="bi bi-file-earmark-text-fill" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gestión de Cultivos y Plantas -->
+          <div class="container mb-4">
+            <div class="p-2"
+              style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
+              <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
+                data-bs-target="#gestionCultivosPlantas" aria-expanded="false" aria-controls="gestionCultivosPlantas"
+                style="color: black;">
+                <h5 class="m-0">Gestión Cultivos y Plantas<i class="bi bi-chevron-down"></i></h5>
+              </button>
+            </div>
+            <p></p>
+            <div id="gestionCultivosPlantas" class="collapse">
+              <div class="row">
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-success text-white mb-4">
+                    <div class="card-body">Cultivo</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/administrador/cultivo}">
+                        <i class="bi bi-flower3" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-success text-white mb-4">
+                    <div class="card-body">Agregar Planta</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/administrador/planta/crear}">
+                        <i class="bi bi-flower1" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <p></p>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-success text-white mb-4">
+                    <div class="card-body">Listar Plantas</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/administrador/planta/lista}">
+                        <i class="bi bi-flower1" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-success text-white mb-4">
+                    <div class="card-body">Parcela</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/parcela/info}">
+                        <i class="bi bi-house" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Condiciones Climáticas -->
+          <div class="container mb-4">
+            <div class="p-2"
+              style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
+              <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
+                data-bs-target="#condicionesClimaticas" aria-expanded="false" aria-controls="condicionesClimaticas"
+                style="color: black;">
+                <h5 class="m-0">Condiciones Climáticas<i class="bi bi-chevron-down"></i></h5>
+              </button>
+            </div>
+            <p></p>
+            <div id="condicionesClimaticas" class="collapse">
+              <div class="row">
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Estaciones</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/estacion/info}" aria-label="Estaciones">
+                        <i class="bi bi-calendar" style="font-size: 40px;"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Fotoperiodo</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/fotoperiodo/info}">
+                        <i class="bi bi-sun" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Radiación Gobal</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/radiacion/info}">
+                        <i class="bi bi-brightness-high" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <p></p>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Temperatura Media</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/tmedia/info}">
+                        <i class="bi bi-thermometer-half" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Temperatura Máxima Media</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/tmaxmedia/info}">
+                        <i class="bi bi-thermometer-sun" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Temperatura Mínimo Media</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/tminmedia/info}">
+                        <i class="bi bi-thermometer-snow" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <p></p>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Precipitación</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/precipitacion/info}">
+                        <i class="bi bi-droplet" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Método de Estimación</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/estimacion/info}">
+                        <i class="bi bi-calculator" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">ADT - Amplitud Diaria de Temperatura</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/amplitud/info}">
+                        <i class="bi bi-thermometer" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <p></p>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Evaporación</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/evaporacion/info}">
+                        <i class="bi bi-cloud-drizzle" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Evapotranspiración</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/evapotranspiracion/info}">
+                        <i class="bi bi-cloud-rain" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <!-- Gestión Hídrica -->
+          <div class="container mb-4">
+            <!-- Caja transparente para el botón -->
+            <div class="p-2"
+              style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
+              <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
+                data-bs-target="#gestionHidrica" aria-expanded="false" aria-controls="gestionHidrica"
+                style="color: black;">
+                <h5 class="m-0">Gestión Hídrica <i class="bi bi-chevron-down"></i></h5>
+              </button>
+            </div>
+            <p></p>
+            <div id="gestionHidrica" class="collapse">
+              <div class="row">
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Aguachicamiento</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/aguachinamiento/info}">
+                        <i class="bi bi-water" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Balance Hídrico</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/balanceHidrico/info}">
+                        <i class="bi bi-bar-chart-line" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Disponibilidad de Agua</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/disponibilidadAgua/info}">
+                        <i class="bi bi-droplet" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <p></p>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Deficit de Agua</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/deficitAgua/info}">
+                        <i class="bi bi-droplet-half" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Exceso de Agua</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/excesoAgua/info}">
+                        <i class="bi bi-cloud-rain-heavy" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Resumen Hidrico</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/regimenHidrico/info}">
+                        <i class="bi bi-cloud-drizzle" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Monitoreo y control -->
+          <div class="container mb-4">
+            <!-- Caja transparente para el botón -->
+            <div class="p-2"
+              style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
+              <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
+                data-bs-target="#monitoreoycontrol" aria-expanded="false" aria-controls="monitoreoycontrol"
+                style="color: black;">
+                <h5 class="m-0">Monitoreo y Control <i class="bi bi-chevron-down"></i></h5>
+              </button>
+            </div>
+            <p></p>
+            <div id="monitoreoycontrol" class="collapse">
+              <div class="row">
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-warning text-white mb-4">
+                    <div class="card-body">Notificaciones</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/administrador/notificacion/info}">
+                        <i class="bi bi-bell-fill" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-warning text-white mb-4">
+                    <div class="card-body">Usuarios ACTIVOS e INACTIVOS</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/administrador/usuario/info}">
+                        <i class="bi bi-gear" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <p></p>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-warning text-white mb-4">
+                    <div class="card-body">Historial</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/administrador/historial/info}">
+                        <i class="bi bi-hourglass-split" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                  <div class="card bg-warning text-white mb-4">
+                    <div class="card-body">Reportes</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a th:href="@{/administrador/reporte/info}">
+                        <i class="bi bi-flag" style="font-size: 40px;"></i>
+                      </a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
     </div>
-
-
-
-    <div id="layoutSidenav_content">
-      <main>
-        <p></p>
-        <div class="title bg-black text-center">
-          <h1> Bienvenido Administrador <span th:text="${usuario}"></span></h1>
-        </div>
-
-        <p></p>
-
-
-
-        <!-- Gestión de Clientes -->
-        <div class="container mb-4">
-          <div class="p-2"
-            style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
-            <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
-              data-bs-target="#gestionClientes" aria-expanded="false" aria-controls="gestionClientes"
-              style="color: black;">
-              <h5 class="m-0">Gestión de Clientes<i class="bi bi-chevron-down"></i></h5>
-            </button>
-          </div>
-          <p></p>
-          <div id="gestionClientes" class="collapse">
-            <div class="row">
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-secondary text-white mb-4">
-                  <div class="card-body">Agregar Cliente</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/administrador/cliente/crear}">
-                      <i class="bi bi-person-add" style="font-size: 40px; "></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-secondary text-white mb-4">
-                  <div class="card-body">Listar Clientes</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/administrador/lista}">
-                      <i class="bi bi-file-earmark-text-fill" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Gestión de Cultivos y Plantas -->
-        <div class="container mb-4">
-          <div class="p-2"
-            style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
-            <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
-              data-bs-target="#gestionCultivosPlantas" aria-expanded="false" aria-controls="gestionCultivosPlantas"
-              style="color: black;">
-              <h5 class="m-0">Gestión Cultivos y Plantas<i class="bi bi-chevron-down"></i></h5>
-            </button>
-          </div>
-          <p></p>
-          <div id="gestionCultivosPlantas" class="collapse">
-            <div class="row">
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                  <div class="card-body">Cultivo</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/administrador/cultivo}">
-                      <i class="bi bi-flower3" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                  <div class="card-body">Agregar Planta</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/administrador/planta/crear}">
-                      <i class="bi bi-flower1" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <p></p>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                  <div class="card-body">Listar Plantas</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/administrador/planta/lista}">
-                      <i class="bi bi-flower1" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                  <div class="card-body">Parcela</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/parcela/info}">
-                      <i class="bi bi-house" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <!-- Condiciones Climáticas -->
-        <div class="container mb-4">
-          <div class="p-2"
-            style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
-            <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
-              data-bs-target="#condicionesClimaticas" aria-expanded="false" aria-controls="condicionesClimaticas"
-              style="color: black;">
-              <h5 class="m-0">Condiciones Climáticas<i class="bi bi-chevron-down"></i></h5>
-            </button>
-          </div>
-          <p></p>
-          <div id="condicionesClimaticas" class="collapse">
-            <div class="row">
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                  <div class="card-body">Estaciones</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/estacion/info}" aria-label="Estaciones">
-                      <i class="bi bi-calendar" style="font-size: 40px;"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                  <div class="card-body">Fotoperiodo</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/fotoperiodo/info}">
-                      <i class="bi bi-sun" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                  <div class="card-body">Radiación Gobal</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/radiacion/info}">
-                      <i class="bi bi-brightness-high" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <p></p>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                  <div class="card-body">Temperatura Media</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/tmedia/info}">
-                      <i class="bi bi-thermometer-half" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                  <div class="card-body">Temperatura Máxima Media</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/tmaxmedia/info}">
-                      <i class="bi bi-thermometer-sun" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                  <div class="card-body">Temperatura Mínimo Media</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/tminmedia/info}">
-                      <i class="bi bi-thermometer-snow" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <p></p>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                  <div class="card-body">Precipitación</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/precipitacion/info}">
-                      <i class="bi bi-droplet" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                  <div class="card-body">Método de Estimación</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/estimacion/info}">
-                      <i class="bi bi-calculator" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                  <div class="card-body">ADT - Amplitud Diaria de Temperatura</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/amplitudDiariaTemperatura/info}">
-                      <i class="bi bi-thermometer" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <p></p>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                  <div class="card-body">Evaporación</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/evaporacion/info}">
-                      <i class="bi bi-cloud-drizzle" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                  <div class="card-body">Evapotranspiración</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/evapotranspiracion/info}">
-                      <i class="bi bi-cloud-rain" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <p></p>
-            </div>
-          </div>
-        </div>
-        <!-- Gestión Hídrica -->
-        <div class="container mb-4">
-          <!-- Caja transparente para el botón -->
-          <div class="p-2"
-            style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
-            <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse" data-bs-target="#gestionHidrica"
-              aria-expanded="false" aria-controls="gestionHidrica" style="color: black;">
-              <h5 class="m-0">Gestión Hídrica <i class="bi bi-chevron-down"></i></h5>
-            </button>
-          </div>
-          <p></p>
-          <div id="gestionHidrica" class="collapse">
-            <div class="row">
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-primary text-white mb-4">
-                  <div class="card-body">Aguachicamiento</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/aguachinamiento/info}">
-                      <i class="bi bi-water" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-primary text-white mb-4">
-                  <div class="card-body">Balance Hídrico</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/balanceHidrico/info}">
-                      <i class="bi bi-bar-chart-line" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-primary text-white mb-4">
-                  <div class="card-body">Disponibilidad de Agua</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/disponibilidadAgua/info}">
-                      <i class="bi bi-droplet" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <p></p>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-primary text-white mb-4">
-                  <div class="card-body">Deficit de Agua</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/deficitAgua/info}">
-                      <i class="bi bi-droplet-half" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-primary text-white mb-4">
-                  <div class="card-body">Exceso de Agua</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/excesoAgua/info}">
-                      <i class="bi bi-cloud-rain-heavy" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-primary text-white mb-4">
-                  <div class="card-body">Resumen Hidrico</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/regimenHidrico/info}">
-                      <i class="bi bi-cloud-drizzle" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Monitoreo y control -->
-        <div class="container mb-4">
-          <!-- Caja transparente para el botón -->
-          <div class="p-2"
-            style="background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; border: 1px solid #ddd;">
-            <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
-              data-bs-target="#monitoreoycontrol" aria-expanded="false" aria-controls="monitoreoycontrol"
-              style="color: black;">
-              <h5 class="m-0">Monitoreo y Control <i class="bi bi-chevron-down"></i></h5>
-            </button>
-          </div>
-          <p></p>
-          <div id="monitoreoycontrol" class="collapse">
-            <div class="row">
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">Notificaciones</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/administrador/notificacion/info}">
-                      <i class="bi bi-bell-fill" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">Usuarios ACTIVOS e INACTIVOS</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/administrador/usuario/info}">
-                      <i class="bi bi-gear" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <p></p>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">Historial</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/administrador/historial/info}">
-                      <i class="bi bi-hourglass-split" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">Reportes</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a th:href="@{/administrador/reporte/info}">
-                      <i class="bi bi-flag" style="font-size: 40px;"></i>
-                    </a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
+    </main>
   </div>
-  </main>
+  </div>
+
   <footer class="bg-dark text-white">
     <div class="container-fluid p-6">
       <div class="row">
@@ -638,8 +580,7 @@
       </div>
     </div>
   </footer>
-  </div>
-  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     crossorigin="anonymous"></script>
   <script src="js/scripts.js"></script>

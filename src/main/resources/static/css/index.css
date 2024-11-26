@@ -1,3 +1,20 @@
+body {
+  background-color: aliceblue;
+  /* Fondo suave y limpio */
+  font-family: 'Poppins', sans-serif;
+  /* Tipografía moderna */
+  color: #333;
+  min-height: 100vh;
+  /* Hace que el body tenga al menos el tamaño de la pantalla */
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex-grow: 1;
+  /* Hace que el contenedor principal ocupe todo el espacio disponible */
+}
+
 header {
   position: relative;
   text-align: center;
@@ -114,9 +131,6 @@ header {
   line-height: 1.5;
 }
 
-body {
-  background-color: #d3f9d8;
-}
 
 .bg-darkgreen {
   background-color: #388e3c;
@@ -136,6 +150,7 @@ nav {
   top: 0;
   z-index: 1;
   transition: background-color 0.5s;
+  font-weight: bold;
 }
 
 .nav-container {
@@ -171,8 +186,8 @@ nav ul li a {
   transition: color 0.3s;
 }
 
-nav ul li a:hover {
-  color: #85b6fb;
+nav .navbar-nav .nav-item .nav-link:hover {
+  color: #1b9423;
 }
 
 /* Estilos para la sección principal */
@@ -237,9 +252,17 @@ section {
 }
 
 /* Estilos para el pie de página */
-.footer {
-  background-color: #388e3c;
-  color: #fff;
-  padding: 2rem 0;
-  text-align: center;
+footer {
+  background-color: #245325;
+  color: #edf2f7;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #c6f6d5;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #68d391;
 }

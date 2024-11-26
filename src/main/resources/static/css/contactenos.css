@@ -1,0 +1,277 @@
+
+    /* Estilos generales del cuerpo */
+
+    body {
+      background-color: aliceblue;
+      /* Fondo suave y limpio */
+      font-family: "Poppins", sans-serif;
+      /* Tipografía moderna */
+      color: #333;
+      position: relative;
+      /* Necesario para la posición del pseudo-elemento */
+  
+    }
+  
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.pexels.com/photos/5852288/pexels-photo-5852288.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center fixed;
+      background-size: cover;
+      opacity: 0.1;
+      /* Ajusta la transparencia de la imagen */
+      z-index: -1;
+      /* Asegura que la imagen esté detrás del contenido */
+    }
+
+
+    /* Estilo de la cabecera */
+    header {
+      background-color: #388e3c;
+      /* Verde oscuro */
+      color: #fff;
+      padding: 4rem 0;
+      /* Espacio más grande */
+      text-align: center;
+    }
+
+    header .navbar-brand img {
+      max-width: 60%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    /* Barra de navegación */
+    .nav-container {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav {
+      background-color: #ffebee;
+      /* Rosa claro */
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    nav .navbar-nav .nav-item .nav-link {
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav .navbar-nav .nav-item .nav-link:hover {
+      color: #1b9423;
+    }
+
+
+
+    .contact-info {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .contact-info h1 {
+      color: #388e3c;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .contact-info p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .contact-info a {
+      color: #388e3c;
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-info ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .contact-info ul li {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    /* Estilo de las imágenes */
+    .img-fluid {
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      color: #fff;
+      padding: 6rem 0;
+      background-image: url("https://www.murgiplast.com/wp-content/uploads/2022/10/murgiplast-vivero-1536x1024.jpg.webp");
+      height: 150px;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .welcome-container {
+      position: relative;
+      color: #000;
+      padding: 5rem 0;
+      text-align: center;
+      font-weight: bold;
+    }
+
+
+    /* Estilos para la barra de navegación */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      transition: background-color 0.5s;
+    }
+
+    .nav-container {
+      position: sticky;
+      background-color: #85b6fb;
+      top: 0;
+      z-index: 3;
+    }
+
+    .navbar-dark .navbar-nav .nav-link {
+      font-weight: bold;
+    }
+
+    nav ul {
+      position: sticky;
+      margin: auto;
+      width: 50%;
+      text-align: center;
+    }
+
+    nav ul li {
+      display: inline-block;
+      width: 24%;
+      line-height: 40%;
+      list-style: none;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #85b6fb;
+    }
+
+    /* Estilos para la sección principal */
+    section {
+      position: relative;
+      text-align: center;
+    }
+
+    .section-title {
+      color: #fff;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .bg-image {
+      position: absolute;
+      height: 100%;
+      width: auto;
+      max-width: 20%;
+      top: 0;
+    }
+
+    .bg-image.left {
+      left: 0;
+    }
+
+    .bg-image.right {
+      right: 0;
+    }
+
+    /* Estilos para las imágenes pequeñas */
+    .img-thumbnail {
+      max-width: 75%;
+      height: auto;
+    }
+
+    /* Estilos para las secciones de productos */
+    .product-section {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 10px;
+    }
+
+    /* Estilos para las imágenes de productos */
+    .product-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    /* Estilos para los textos de productos */
+    .product-description {
+      margin-top: 1rem;
+    }
+
+    .btn-outline-success {
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      margin: 10px;
+      padding: 10px 20px;
+    }
+
+    /* Estilos para el pie de página */
+    footer {
+      background-color: #245325;
+      color: #edf2f7;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    footer a {
+      color: #c6f6d5;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #68d391;
+    }
+
+    /* Estilo para los medios */
+    @media (max-width: 768px) {
+      .contact-info {
+        padding: 20px;
+      }
+
+      .contact-info h1 {
+        font-size: 2rem;
+      }
+
+      .contact-info p {
+        font-size: 1rem;
+      }
+
+      .contact-info ul li {
+        font-size: 1rem;
+      }
+    }

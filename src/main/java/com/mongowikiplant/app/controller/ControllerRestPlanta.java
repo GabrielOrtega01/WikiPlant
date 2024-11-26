@@ -1,17 +1,14 @@
 package com.mongowikiplant.app.controller;
 
-import java.util.List;
-import java.util.Map;
-
+import com.mongowikiplant.app.entity.Planta;
+import com.mongowikiplant.app.repository.PlantaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mongowikiplant.app.entity.Planta;
-import com.mongowikiplant.app.exception.NotFoundException;
-import com.mongowikiplant.app.repository.PlantaRepository;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/plantas")
+@RequestMapping("/api/planta")
 public class ControllerRestPlanta {
 
     @Autowired
@@ -22,45 +19,19 @@ public class ControllerRestPlanta {
         return plantaRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Planta getPlantaById(@PathVariable String id) {
-        return plantaRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Planta no encontrada"));
-    }
-
     @PostMapping
     public Planta crearPlanta(@RequestBody Planta planta) {
         return plantaRepository.save(planta);
     }
 
-    @PostMapping("/map")
-    public Planta savePlantaFromMap(@RequestBody Map<String, Object> body) {
-        ObjectMapper mapper = new ObjectMapper();
-        Planta planta = mapper.convertValue(body, Planta.class);
-        return plantaRepository.save(planta);
-    }
-
     @PutMapping("/{id}")
-    public Planta actualizarPlanta(@PathVariable String id, @RequestBody Planta plantaActualizada) {
-        plantaActualizada.setId(id);
-        return plantaRepository.save(plantaActualizada);
+    public Planta actualizarPlanta(@PathVariable String id, @RequestBody Planta plantaActualizado) {
+        plantaActualizado.setId(id);
+        return plantaRepository.save(plantaActualizado);
     }
 
-    @PutMapping("/map/{id}")
-    public Planta updatePlantaFromMap(@PathVariable String id, @RequestBody Map<String, Object> body) {
-        ObjectMapper mapper = new ObjectMapper();
-        Planta planta = mapper.convertValue(body, Planta.class);
-        planta.setId(id);
-        return plantaRepository.save(planta);
+    @DeleteMapping("/{id}")
+    public void eliminarPlanta(@PathVariable String id) {
+        plantaRepository.deleteById(id);
     }
-
-    
-	@DeleteMapping("/{id}")
-	public Planta deletePlanta(@PathVariable String id) {
-		Planta planta = plantaRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Planta no encontrada"));
-		plantaRepository.deleteById(id);
-		return planta;
-	}
-
 }

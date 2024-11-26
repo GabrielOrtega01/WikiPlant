@@ -27,35 +27,38 @@ public class Planta {
 	private String drenaje;
 	private String ph;
 	
+	private int busquedas = 0;
 	
 	public Planta() {
 		super();
 	}
 
 	public Planta(String id, String nomCientifico, String nomComun, String imagen, String familia, String origen,
-			String distribucion, String adaptacion, String madurez, String altitud, String fotoperiodo,
-			String radiacion, String temperatura, String precipitacion, String humedad, String textura,
-			String drenaje, String ph) {
-		super();
-		this.id = id;
-		this.nomCientifico = nomCientifico;
-		this.nomComun = nomComun;
-		this.imagen = imagen;
-		this.familia = familia;
-		this.origen = origen;
-		this.distribucion = distribucion;
-		this.adaptacion = adaptacion;
-		this.madurez = madurez;
-		this.altitud = altitud;
-		this.fotoperiodo = fotoperiodo;
-		this.radiacion = radiacion;
-		this.temperatura = temperatura;
-		this.precipitacion = precipitacion;
-		this.humedad = humedad;
-		this.textura = textura;
-		this.drenaje = drenaje;
-		this.ph = ph;
-	}
+            String distribucion, String adaptacion, String madurez, String altitud, String fotoperiodo,
+            String radiacion, String temperatura, String precipitacion, String humedad, String textura,
+            String drenaje, String ph, int busquedas) {
+  super();
+  this.id = id;
+  this.nomCientifico = nomCientifico;
+  this.nomComun = nomComun;
+  this.imagen = imagen;
+  this.familia = familia;
+  this.origen = origen;
+  this.distribucion = distribucion;
+  this.adaptacion = adaptacion;
+  this.madurez = madurez;
+  this.altitud = altitud;
+  this.fotoperiodo = fotoperiodo;
+  this.radiacion = radiacion;
+  this.temperatura = temperatura;
+  this.precipitacion = precipitacion;
+  this.humedad = humedad;
+  this.textura = textura;
+  this.drenaje = drenaje;
+  this.ph = ph;
+  this.busquedas = busquedas; // Valor inicial predeterminado
+}
+
 	public String getId() {
 		return id;
 	}
@@ -164,6 +167,18 @@ public class Planta {
 	public void setPh(String ph) {
 		this.ph = ph;
 	}
+	
+	 public int getBusquedas() {
+	        return busquedas;
+	    }
+
+	    public void setBusquedas(int busquedas) {
+	        this.busquedas = busquedas;
+	    }
+
+	    public void incrementarBusquedas() {
+	        this.busquedas++;
+	    }
 	
 }
 

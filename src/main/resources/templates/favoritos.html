@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link type="png" sizes="32x32" rel="icon"
+    href="https://lh3.googleusercontent.com/a/ACg8ocJq9wVRTMQaBGhOzSAkpqNfFOBkn7f398iktNR4gVTLteTXhNU=s288-c-no">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto+Slab:wght@300;400&display=swap"
+    rel="stylesheet">
+  <title>Plantas Favoritas</title>
+  <style>
+    body {
+      font-family: 'Roboto Slab', serif;
+      position: relative;
+      background: #f8f4e8;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.pexels.com/photos/4641453/pexels-photo-4641453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center fixed;
+      background-size: cover;
+      opacity: 0.4;
+      z-index: -1;
+    }
+
+    h2 {
+      font-family: 'Cinzel', serif;
+      text-align: center;
+      color: #6b5e51;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .card {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      background: linear-gradient(135deg, #f5ebdc, #ebe2d4);
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      color: #574d3d;
+      font-size: 1.2rem;
+    }
+
+    .card-text {
+      color: #766c62;
+      font-style: italic;
+    }
+
+    .btn-primary {
+      background-color: #9bb090;
+      border-color: #9bb090;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #82977a;
+      border-color: #82977a;
+    }
+
+    .btn-danger {
+      background-color: #d88a8a;
+      border-color: #d88a8a;
+    }
+
+    .btn-danger:hover {
+      background-color: #c77474;
+      border-color: #c77474;
+    }
+
+    .btn-secondary {
+      background-color: #b3a897;
+      border-color: #b3a897;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: #9e8e7f;
+      border-color: #9e8e7f;
+    }
+
+    .footer p {
+      font-family: 'Roboto Slab', serif;
+
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="sb-topnav navbar navbar-expand-lg shadow">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+      <!-- Logo centrado -->
+      <div class="text-center mx-auto">
+        <a class="navbar-brand d-flex align-items-center" th:href="@{/cliente/index}">
+          <img th:src="@{/img/wikiplant.png}" alt="Logo WikiPlant" width="60px" height="60px" class="me-2"
+            style="border: none;">
+        </a>
+      </div>
+
+      <!-- Menú de navegación sin collapse -->
+      <div class="navbar-nav">
+        <!-- Botón de Logout visible en todos los tamaños -->
+        <li class="nav-item">
+          <a class="btn btn-outline-light rounded-pill d-flex align-items-center px-3" th:href="@{/}">
+            <i class="bi bi-box-arrow-right me-2"></i>
+            <span>Salir</span>
+          </a>
+        </li>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container mt-5">
+    <h2>Plantas Favoritas</h2>
+    <div class="row">
+      <!-- Cards de las plantas favoritas -->
+      <div class="col-md-4 mb-4" th:each="planta : ${plantasFavoritas}">
+        <div class="card">
+          <img th:src="${planta.imagen}" alt="Imagen de la planta" class="card-img-top"
+            style="max-height: 200px; object-fit: cover; border-radius: 10px 10px 0 0;">
+          <div class="card-body text-center">
+            <h5 class="card-title" th:text="${planta.nomComun}"></h5>
+            <p class="card-text text-muted" th:text="${planta.nomCientifico}"></p>
+            <a th:href="@{/cliente/plantaDetalle(plantaId=${planta.id})}" class="btn btn-primary">Ver Detalles</a>
+
+            <!-- Botón para eliminar de favoritos -->
+            <form th:action="@{/cliente/eliminarDeFavoritos}" method="post" class="mt-2">
+              <input type="hidden" name="plantaId" th:value="${planta.id}" />
+              <button type="submit" class="btn btn-danger">Eliminar de Favoritos</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="/cliente/index" class="btn btn-secondary mt-3">Regresar</a>
+  </div>
+  <br>
+  <footer class="text-center py-3">
+    <p>&copy; 2024 WikiPlant. Todos los derechos reservados.</p>
+  </footer>
+</body>
+
+</html>

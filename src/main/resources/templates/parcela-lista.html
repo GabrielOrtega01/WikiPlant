@@ -1,25 +1,193 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Lista de Parcelas</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Parcela</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: url('https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/8983/production/_109730253_gettyimages-658291850.jpg.webp') no-repeat center center fixed;
+      background-size: cover;
+      color: #f8f9fa;
+    }
+
+    .header,
+    .footer {
+      background-color: rgba(38, 31, 89, 0.8);
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .table {
+      background-color: rgba(0, 0, 0, 0.75);
+    }
+
+    .table th,
+    .table td {
+      color: #f8f9fa;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .button-custom {
+      background-color: #216923;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s;
+      width: 100%;
+      max-width: 200px;
+    }
+
+    .button-custom:hover {
+      background-color: #45a049;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .button-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <h1>Lista de Parcelas</h1>
-    <a th:href="@{/parcela/crear}">Crear Nueva Parcela</a>
-    <table>
+  <header class="header">
+    <h1>Lista de Registros de Parcela</h1>
+  </header>
+  <div class="button-container mt-4">
+    <button th:onclick="|history.back()|" class="button-custom">Volver a la página anterior</button>
+  </div>
+  <div class="container mt-4">
+    <!-- Dropdown para filtrar estaciones -->
+    <div class="mb-3">
+      <label for="estacion" class="form-label">Filtrar por estación:</label>
+      <select id="estacion" class="form-control">
+        <option value="">Todas las estaciones</option>
+        <option th:each="parcela : ${parcelas}" th:value="${parcela.estacion.nombre}"
+          th:text="${parcela.estacion.nombre}"></option>
+      </select>
+    </div>
+
+    <!-- Tabla de parcelas -->
+    <table class="table table-dark table-hover table-bordered">
+      <thead>
         <tr>
-            <th>Ubicación</th>
-            <th>Tamaño</th>
-            <th>Acciones</th>
+          <th>Estación</th>
+          <th style="color:blueviolet;">Fecha</th>
+          <th>Ene</th>
+          <th>Feb</th>
+          <th>Mar</th>
+          <th>Abr</th>
+          <th>May</th>
+          <th>Jun</th>
+          <th>Jul</th>
+          <th>Ago</th>
+          <th>Sep</th>
+          <th>Oct</th>
+          <th>Nov</th>
+          <th>Dic</th>
+          <th>Anual</th>
+          <th style="color:rgb(0, 0, 255);">Acciones</th>
         </tr>
+      </thead>
+      <tbody>
+        <!-- Bucle para iterar sobre los registros de parcela -->
         <tr th:each="parcela : ${parcelas}">
-            <td th:text="${parcela.ubicacion}">Ubicación</td>
-            <td th:text="${parcela.tamano}">Tamaño</td>
-            <td>
-                <a th:href="@{/parcela/editar/{id}(id=${parcela.id})}">Editar</a>
-                <a th:href="@{/parcela/eliminar/{id}(id=${parcela.id})}">Eliminar</a>
-            </td>
+          <td th:text="${parcela.estacion.nombre}">Estación</td>
+          <td th:text="${parcela.fecha}">2024</td>
+          <td th:text="${parcela.enero}">0.0</td>
+          <td th:text="${parcela.febrero}">0.0</td>
+          <td th:text="${parcela.marzo}">0.0</td>
+          <td th:text="${parcela.abril}">0.0</td>
+          <td th:text="${parcela.mayo}">0.0</td>
+          <td th:text="${parcela.junio}">0.0</td>
+          <td th:text="${parcela.julio}">0.0</td>
+          <td th:text="${parcela.agosto}">0.0</td>
+          <td th:text="${parcela.septiembre}">0.0</td>
+          <td th:text="${parcela.octubre}">0.0</td>
+          <td th:text="${parcela.noviembre}">0.0</td>
+          <td th:text="${parcela.diciembre}">0.0</td>
+          <td th:text="${parcela.calcularPromedioAnual()}">0.0</td>
+          <td>
+            <div class="d-flex justify-content-start flex-wrap gap-2">
+              <a class="btn btn-info btn-sm" th:href="@{'/parcela/edit/' + ${parcela.id}}"
+                aria-label="Editar parcela">Editar</a>
+              <a class="btn btn-danger btn-sm" th:href="@{'/parcela/delete/' + ${parcela.id}}"
+                aria-label="Eliminar parcela"
+                onclick="return confirm('¿Estás seguro de eliminar este parcela?');">Eliminar</a>
+            </div>
+          </td>
         </tr>
+      </tbody>
     </table>
+
+    <!-- Tabla Adicional -->
+    <div class="tabla-adicional">
+      <h3 class="text-center text-white">Resumen de Cálculos</h3>
+      <table class="table table-dark table-bordered">
+        <thead>
+          <tr>
+            <th>Estación</th>
+            <th>N</th>
+            <th>Media</th>
+            <th>D.S.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="parcela : ${parcelas}">
+            <td th:text="${parcela.estacion.nombre}">Estación</td>
+            <td th:text="${parcela.calcularN()}">28</td>
+            <td th:text="${parcela.calcularMedia()}">31.7</td>
+            <td th:text="${parcela.calcularDesviacionEstandar()}">0.7</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white text-center py-3">
+    <p>© 2024 Sistema de Gestión de Parcela. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    document.getElementById("estacion").addEventListener("change", function () {
+      const selectedEstacion = this.value.toLowerCase(); // Obtiene el valor seleccionado en minúsculas
+      const rows = document.querySelectorAll("tbody tr"); // Obtiene todas las filas de la tabla
+
+      rows.forEach(row => {
+        const estacion = row.querySelector("td:first-child").textContent.toLowerCase(); // Obtiene el texto de la primera celda (estación) en minúsculas
+        if (selectedEstacion === "" || estacion === selectedEstacion) {
+          row.style.display = ""; // Muestra la fila
+        } else {
+          row.style.display = "none"; // Oculta la fila
+        }
+      });
+    });
+  </script>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

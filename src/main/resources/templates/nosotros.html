@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -7,114 +7,524 @@
   <title>Nosotros - WikiPlant</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-	<link rel="stylesheet" href="/WEBMVC/style.css">
-	 <link type="image/png" sizes="32x32" rel="icon" href="https://cdn-icons-png.flaticon.com/128/628/628324.png">
-	 <link rel="stylesheet" type="text/css" href="static/css/index.css" 	th:href="@{/css/index.css}">
+  <link type="image/png" sizes="32x32" rel="icon" href="https://cdn-icons-png.flaticon.com/128/628/628324.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-
-
-  </head>
   <style>
-  	body{
-  		background-color: aliceblue;
-  	}
+    /* General */
+    html,
+    body {
+      overflow-x: hidden;
+      /* Esto desactiva el desplazamiento horizontal */
+    }
+
+    body {
+      background-color: aliceblue;
+      /* Fondo suave y limpio */
+      font-family: "Poppins", sans-serif;
+      /* Tipografía moderna */
+      color: #333;
+      position: relative;
+      /* Necesario para la posición del pseudo-elemento */
+
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.pexels.com/photos/5852288/pexels-photo-5852288.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center fixed;
+      background-size: cover;
+      opacity: 0.1;
+      /* Ajusta la transparencia de la imagen */
+      z-index: -1;
+      /* Asegura que la imagen esté detrás del contenido */
+    }
+
+
+    h1,
+    h2 {
+      color: #2f855a;
+      /* Verde oscuro para títulos */
+      font-weight: bold;
+    }
+
+    p,
+    ul {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    a.nav-link {
+      color: #2d3748;
+      /* Gris oscuro para enlaces */
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a.nav-link:hover {
+      color: #2f855a;
+      /* Verde al pasar el ratón */
+    }
+
+    /* Header */
+    header {
+      position: relative;
+      text-align: center;
+      color: #fff;
+      padding: 6rem 0;
+      background-image: url("https://www.murgiplast.com/wp-content/uploads/2022/10/murgiplast-vivero-1536x1024.jpg.webp");
+      height: 150px;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    header img {
+      max-width: 150px;
+      border-radius: 50%;
+      /* Estilo redondeado para el logo */
+    }
+
+    /* Estilos para la barra de navegación */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      transition: background-color 0.5s;
+    }
+
+    .nav-container {
+      position: sticky;
+      background-color: #fff3f6;
+      top: 0;
+      z-index: 3;
+    }
+
+    .navbar-dark .navbar-nav .nav-link {
+      font-weight: bold;
+    }
+
+    nav ul {
+      position: sticky;
+      margin: auto;
+      width: 50%;
+      text-align: center;
+    }
+
+    nav ul li {
+      display: inline-block;
+      width: 24%;
+      line-height: 40%;
+      list-style: none;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav .navbar-nav .nav-item .nav-link:hover {
+      color: #1b9423;
+    }
+
+    /* Contenido principal */
+    .nosotros-container {
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    .nosotros-container h1 {
+      font-size: 2.5rem;
+      margin-bottom: -25px;
+    }
+
+    .container img {
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Tarjeta */
+    /* Aseguramos que las tarjetas estén visibles inicialmente */
+    /* Aumentar altura de las tarjetas que quieras */
+    .card:not(.mission-card):not(.sonrie-card) {
+      position: relative;
+      width: 100%;
+      height: 450px;
+      /* Altura más grande para las otras tarjetas */
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    /* Estilos específicos para la tarjeta de Misión, manteniéndola con tamaño normal */
+    .mission-card {
+      height: auto;
+      /* Mantiene el tamaño normal de la tarjeta */
+    }
+
+    /* Estilos específicos para la tarjeta de ¡S.O.N.R.I.E. con nosotros!, manteniéndola con tamaño normal */
+    .sonrie-card {
+      height: auto;
+      /* Mantiene el tamaño normal de la tarjeta */
+    }
+
+    /* Contenedor de la rotación en 3D */
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      /* Habilita el efecto de rotación 3D */
+      transition: transform 0.6s ease-in-out;
+      /* Animación de la rotación */
+    }
+
+    /* Habilitamos la rotación al hacer hover */
+    .card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+      /* Rotamos la tarjeta */
+    }
+
+    /* Cara frontal */
+    .flip-card-front {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      /* Oculta la parte posterior cuando la cara frontal está visible */
+      background-color: white;
+      /* Fondo blanco para la parte frontal */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* Cara posterior con la imagen */
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      /* Oculta la parte frontal cuando la cara posterior está visible */
+      transform: rotateY(180deg);
+      /* Rotación de la cara posterior */
+      background-color: #f7fafc;
+      /* Fondo para la parte posterior */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      /* Asegura que la imagen no se desborde */
+    }
+
+    /* Imagen de la cara posterior */
+    .flip-card-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Hace que la imagen cubra toda la parte posterior */
+      border-radius: 10px;
+      opacity: 0.9;
+      /* Da un toque sutil de opacidad */
+    }
+
+    /* Aseguramos que las tarjetas se muestren desde el principio sin rotar */
+    .flip-card-inner {
+      transform: rotateY(0deg);
+      /* Mantiene las tarjetas en su posición inicial */
+    }
+
+    /* Estilo adicional para la tarjeta */
+    .card:hover {
+      transform: translateY(-1px);
+      /* Eleva ligeramente la tarjeta al hacer hover */
+      box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.15);
+      /* Sombra más intensa */
+    }
+
+    .card {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .mission-card:hover,
+    .sonrie-card:hover {
+      transform: none;
+      /* No aplicar el hover */
+    }
+
+    /* Personaliza el estilo de las listas */
+    .list-group-item {
+      position: relative;
+      padding-left: 1.5rem;
+      list-style-type: disc;
+      /* Esto agrega un puntito al lado de cada ítem */
+    }
+
+    .list-group-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #2f855a;
+      /* Color verde para el punto */
+    }
+
+    .text-success {
+      color: #2f855a;
+      /* Verde para títulos */
+    }
+
+    /* Footer */
+    footer {
+      background-color: #245325;
+      color: #edf2f7;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #c6f6d5;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #68d391;
+    }
+
+    /* Botón flotante */
+    .boton-flotante {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .boton-flotante:hover {
+      background-color: #3e8e41;
+      transform: scale(1.1);
+    }
+
+    .boton-flotante i {
+      font-size: 24px;
+    }
+
+    .boton-flotante img {
+      width: 70px;
+      height: 70px;
+    }
   </style>
+
+</head>
+
 <body>
   <header class="bg-darkgreen text-light text-center py-3">
     <div class="container">
-      <a class="navbar-brand" >
-        <img src="https://lh4.googleusercontent.com/proxy/heN60yvGR-WbvVyaBKdAp_uQ3092mUF34lhm2ITvC2HPxA0rqko5RwFifTeT_iBwvi3scg"  class="img-fluid" style="max-width: 100%;">
+      <a class="navbar-brand">
+        <img
+          src="https://lh4.googleusercontent.com/proxy/heN60yvGR-WbvVyaBKdAp_uQ3092mUF34lhm2ITvC2HPxA0rqko5RwFifTeT_iBwvi3scg"
+          class="img-fluid" style="max-width: 100%;">
       </a>
     </div>
-  </header> 
-<div class="nav-container">
-  <nav class="navbar navbar-expand-md navbar-light bg-pink">
-    <div class="container"> <!-- Agregado un contenedor para centrar el contenido -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-			<ul class="navbar-nav">
-			               <li class="nav-item"><a class="nav-link" th:href="@{/}"><i class="fas fa-home"></i> Inicio</a></li>
-			               <li class="nav-item"><a class="nav-link" th:href="@{/nosotros}"><i class="fas fa-users"></i> Nosotros</a></li>
-			               <li class="nav-item"><a class="nav-link" th:href="@{/servicios}"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
-			               <li class="nav-item"><a class="nav-link" th:href="@{/administrador/login}"><i class="fas fa-user-shield"></i> Admin</a></li>
-			               <li class="nav-item"><a class="nav-link" th:href="@{/cliente/login}"><i class="fas fa-user"></i> Cliente</a></li>
-			               <li class="nav-item"><a class="nav-link" th:href="@{/contactenos}"><i class="fas fa-envelope"></i> Contáctenos</a></li>
-			           </ul>
+  </header>
+  <div class="nav-container">
+    <nav class="navbar navbar-expand-md navbar-light bg-pink">
+      <div class="container"> <!-- Agregado un contenedor para centrar el contenido -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" th:href="@{/}"><i class="fas fa-home"></i> Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/nosotros}"><i class="fas fa-users"></i> Nosotros</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/servicios}"><i class="fas fa-concierge-bell"></i>
+                Servicios</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/administrador/login}"><i
+                  class="fas fa-user-shield"></i> Admin</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/cliente/login}"><i class="fas fa-user"></i> Cliente</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/contactenos}"><i class="fas fa-envelope"></i>
+                Contáctenos</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/wikiplant}"><i
+                  class="fas fa-envelope"></i>WikiPlant</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="nosotros-container">
+    <div class="row">
+      <div class="col-md-8">
+        <h1 class="text-lg text-center">Nosotros</h1>
       </div>
     </div>
-  </nav>
-</div>
-
-<div class="nosotros-container">
-  <div class="row">
-    <div class="col-md-8">
-      <h1 class="text-lg">Nosotros</h1>
-    </div>
   </div>
-</div>
-
 
   <div class="container mt-5">
     <div class="row">
       <div class="col-lg-6">
-        <p class="lead">		Bienvenido a WikiPlant, una plataforma web diseñada para simplificar y optimizar la planificación de cultivos. Nuestro objetivo es brindar a estudiantes de agronomía, botánicos, agricultores y profesionales del sector agrícola una herramienta integral que facilite el acceso a información botánica detallada y condiciones climáticas específicas para cada tipo de planta. En WikiPlant, encontrarás recursos útiles para cada fase del proceso agrícola, desde la elección de las especies vegetales y la preparación del suelo hasta la cosecha.
-		
-	    </div>
+        <p class="lead" style="text-align: justify;"> Bienvenido a WikiPlant, una plataforma web diseñada para
+          simplificar y optimizar la
+          planificación de cultivos. Nuestro objetivo es brindar a estudiantes de agronomía, botánicos, agricultores y
+          profesionales del sector agrícola una herramienta integral que facilite el acceso a información botánica
+          detallada y condiciones climáticas específicas para cada tipo de planta. En WikiPlant, encontrarás recursos
+          útiles para cada fase del proceso agrícola, desde la elección de las especies vegetales y la preparación del
+          suelo hasta la cosecha.
+
+      </div>
       <div class="col-lg-6">
-        <img src="		https://sopo.info/wp-content/uploads/2019/02/viveroelnativo4.jpg" alt="Logotipo WikiPlant" class="img-fluid">
+        <img src="		https://sopo.info/wp-content/uploads/2019/02/viveroelnativo4.jpg" alt="Logotipo WikiPlant"
+          class="img-fluid">
       </div>
     </div>
 
-    <div class="row mt-4">
-      <div class="col-lg-6">
-        <h2>Nuestros Productos Destacados</h2>
-        <ul>
-          <li>Plantas de alta calidad</li>
-          <li>Semillas para tu próximo cultivo</li>
-          <li>Vitaminas especializadas para un crecimiento óptimo</li>
-          <li>Tierra y abono de primera calidad</li>
-          <li>Fertilizantes innovadores</li>
-        </ul>
-      </div>
-      <div class="col-lg-6">
-        <h2>Destacados Especiales</h2>
-        <p>Descubre nuestros productos especiales:</p>
-        <ul>
-          <li>Lombriz californiana - Guardianas del equilibrio ecológico</li>
-          <li>Humus de lombriz - Un tesoro orgánico para enriquecer tu suelo</li>
-        </ul>
-      </div>
-    </div>
+    <div class="container my-5">
 
-    <div class="row mt-4">
-      <div class="col-lg-12">
-        <h2>Misión</h2>
-        <p>	Aplicación web accesible y eficaz que facilite la planificación del cultivo de plantas para estudiantes de agronomía, botánicos y profesionales afines. </p>
+      <!-- Tarjeta 3: Misión -->
+      <div class="row justify-content-center">
+        <div class="col-md-7 mb-4 text-center">
+          <div class="card shadow-sm mission-card">
+            <div class="card-body">
+              <h3 class="card-title text-success">Misión</h3>
+              <p>Aplicación web accesible y eficaz que facilite la planificación del cultivo de plantas para estudiantes
+                de
+                agronomía, botánicos y profesionales afines.</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="row mt-4">
-      <div class="col-lg-12">
-        <h2>¡S.O.N.R.I.E. con nosotros!</h2>
-        <p class="text-center">En WikiPlant, ¡S.O.N.R.I.E. con nosotros mientras construimos juntos un futuro más verde y lleno de vida!</p>
+      <div class="row">
+        <!-- Tarjeta 1: Productos Destacados -->
+        <!-- Tarjeta 1: Productos Destacados -->
+        <div class="col-md-6 mb-4 productos-destacados">
+          <div class="card shadow-sm">
+            <div class="flip-card-inner">
+              <!-- Cara frontal -->
+              <div class="flip-card-front">
+                <div class="card-body">
+                  <h3 class="card-title text-success">Nuestros Productos Destacados</h3>
+                  <p>Descubre nuestros productos destacados:</p>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Plantas de alta calidad</li>
+                    <li class="list-group-item">Semillas para tu próximo cultivo</li>
+                    <li class="list-group-item">Vitaminas especializadas para un crecimiento óptimo</li>
+                    <li class="list-group-item">Tierra y abono de primera calidad</li>
+                    <li class="list-group-item">Fertilizantes innovadores</li>
+                  </ul>
+                </div>
+              </div>
+              <!-- Cara posterior con imagen -->
+              <div class="flip-card-back">
+                <img src="https://img.interempresas.net/fotos/3808415.jpeg" alt="Productos Destacados">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2: Destacados Especiales -->
+        <div class="col-md-6 mb-4 destacados-especiales">
+          <div class="card shadow-sm">
+            <div class="flip-card-inner">
+              <!-- Cara frontal -->
+              <div class="flip-card-front">
+                <div class="card-body">
+                  <h3 class="card-title text-success">Destacados Especiales</h3>
+                  <p>Descubre nuestros productos especiales:</p>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Lombriz californiana - Guardianas del equilibrio ecológico</li>
+                    <li class="list-group-item">Humus de lombriz - Un tesoro orgánico para enriquecer tu suelo</li>
+                    <li class="list-group-item">Composta de café - Energía natural para tus plantas</li>
+                    <li class="list-group-item">Abono orgánico de gallinaza - Potencia natural para tus cultivos</li>
+                  </ul>
+                </div>
+              </div>
+              <!-- Cara posterior con imagen -->
+              <div class="flip-card-back">
+                <img src="https://i.blogs.es/191520/plantas/1366_2000.jpeg" alt="Destacados Especiales">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta 4: ¡S.O.N.R.I.E. con nosotros! -->
+      <div class="row">
+        <div class="col-md-12 mb-4">
+          <div class="card shadow-sm text-center sonrie-card">
+            <div class="card-body">
+              <h3 class="card-title text-success">¡S.O.N.R.I.E. con nosotros!</h3>
+              <p>En WikiPlant, ¡S.O.N.R.I.E. con nosotros mientras construimos juntos un futuro más verde y lleno de
+                vida!</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <p></p>
-  <footer class="bg-dark text-light text-center py-3">
+  <footer class="text-light text-center py-3">
     <div class="container">
       <p>&copy; 2024 WikiPlant. Todos los derechos reservados.</p>
     </div>
-</footer>
+  </footer>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <button class="boton-flotante" id="botonSubir">
+    <img src="https://i.pinimg.com/originals/7f/6f/1f/7f6f1f5bbdb893acec35f67285b0e102.png" alt="Planta"
+      class="icono-planta">
+  </button>
 
+  <script>
+    // Script para el botón flotante
+    const botonSubir = document.getElementById("botonSubir");
 
+    // Mostrar u ocultar el botón según el scroll
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 350) {
+        botonSubir.style.display = "flex";
+      } else {
+        botonSubir.style.display = "none";
+      }
+    });
+
+    // Función para subir al inicio de la página con efecto suave
+    botonSubir.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" defer></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" defer></script>
 
 </body>
 

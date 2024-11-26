@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -7,143 +7,439 @@
   <title>Servicios WikiPlant</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-	<link rel="stylesheet" href="/WEBMVC/style.css">
-	 <link type="image/png" sizes="32x32" rel="icon" href="https://cdn-icons-png.flaticon.com/128/628/628324.png">
-	 <link rel="stylesheet" type="text/css" href="static/css/index.css" 	th:href="@{/css/index.css}">
-
-
-
-  </head>
+  <link type="image/png" sizes="32x32" rel="icon" href="https://cdn-icons-png.flaticon.com/128/628/628324.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
 <style>
-	body{
-		background-color: aliceblue;
-	}
+  /* General */
+  html,
+  body {
+    overflow-x: hidden;
+    /* Esto desactiva el desplazamiento horizontal */
+  }
+
+  body {
+    background-color: aliceblue;
+    /* Fondo suave y limpio */
+    font-family: "Poppins", sans-serif;
+    /* Tipografía moderna */
+    color: #333;
+    position: relative;
+    /* Necesario para la posición del pseudo-elemento */
+
+  }
+
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://images.pexels.com/photos/5852288/pexels-photo-5852288.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center fixed;
+    background-size: cover;
+    opacity: 0.1;
+    /* Ajusta la transparencia de la imagen */
+    z-index: -1;
+    /* Asegura que la imagen esté detrás del contenido */
+  }
+
+
+  h1,
+  h2 {
+    color: #2f855a;
+    /* Verde oscuro para títulos */
+    font-weight: bold;
+  }
+
+  p,
+  ul {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  a.nav-link {
+    color: #2d3748;
+    /* Gris oscuro para enlaces */
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  a.nav-link:hover {
+    color: #2f855a;
+    /* Verde al pasar el ratón */
+  }
+
+  /* Header */
+  header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    padding: 3rem 0;
+    /* Reduce el padding para subir el contenido */
+    background-image: url("https://www.murgiplast.com/wp-content/uploads/2022/10/murgiplast-vivero-1536x1024.jpg.webp");
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  header img {
+    max-width: 150px;
+    border-radius: 50%;
+  }
+
+
+  /* Estilos para la barra de navegación */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    transition: background-color 0.5s;
+  }
+
+  .nav-container {
+    position: sticky;
+    background-color: #fff3f6;
+    top: 0;
+    z-index: 3;
+  }
+
+  .navbar-dark .navbar-nav .nav-link {
+    font-weight: bold;
+  }
+
+  nav ul {
+    position: sticky;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+  }
+
+  nav ul li {
+    display: inline-block;
+    width: 24%;
+    line-height: 40%;
+    list-style: none;
+  }
+
+  nav ul li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+
+  nav .navbar-nav .nav-item .nav-link:hover {
+    color: #1b9423;
+  }
+
+  /* Secciones de los servicios */
+  .servicios-container {
+    margin-top: 35px;
+  }
+
+  .servicio-section {
+    margin-bottom: 50px;
+    padding: 20px 0;
+  }
+
+  .servicio-section img {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .servicio-section h2 {
+    font-size: 2rem;
+    color: #2f855a;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .servicio-section p {
+    font-size: 1rem;
+    color: #5d6d7e;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+
+  .btn-outline-success {
+    border-color: #4caf50;
+    color: #4caf50;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .btn-outline-success:hover {
+    background-color: #4caf50;
+    color: white;
+  }
+
+  /* Footer */
+  footer {
+    background-color: #245325;
+
+    color: white;
+    padding: 20px 0;
+    margin-top: 50px;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  footer p {
+    margin: 0;
+  }
+
+  /* Imagenes */
+  .img-fluid {
+    border-radius: 8px;
+  }
+
+  /* Asegurar que las imágenes se ajusten correctamente a la pantalla */
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Uniformizar el tamaño de las imágenes */
+  .servicio-section img {
+    width: 100%;
+    height: 300px;
+    /* Ajusta la altura según el tamaño que prefieras */
+    object-fit: cover;
+    /* Esto asegura que la imagen cubra el área sin distorsionarse */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Asegurarse de que las imágenes de servicio estén bien alineadas y en el tamaño correcto */
+  .servicio-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .servicio-section img {
+    max-width: 100%;
+    object-fit: cover;
+    /* Para evitar distorsión de la imagen */
+  }
+
+  /* Botón flotante */
+  .boton-flotante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .boton-flotante:hover {
+    background-color: #3e8e41;
+    transform: scale(1.1);
+  }
+
+  .boton-flotante i {
+    font-size: 24px;
+  }
+
+  .boton-flotante img {
+    width: 70px;
+    height: 70px;
+  }
 </style>
+
 <body>
-  <header class="bg-darkgreen text-light text-center py-3">
+  <header class="text-center">
     <div class="container">
-      <a class="navbar-brand" >
-        <img src="https://lh4.googleusercontent.com/proxy/heN60yvGR-WbvVyaBKdAp_uQ3092mUF34lhm2ITvC2HPxA0rqko5RwFifTeT_iBwvi3scg"  class="img-fluid" style="max-width: 100%;">
+      <a class="navbar-brand">
+        <img
+          src="https://lh4.googleusercontent.com/proxy/heN60yvGR-WbvVyaBKdAp_uQ3092mUF34lhm2ITvC2HPxA0rqko5RwFifTeT_iBwvi3scg"
+          class="img-fluid" style="max-width: 100%;">
       </a>
     </div>
-  </header> 
-<div class="nav-container">
-  <nav class="navbar navbar-expand-md navbar-light bg-pink">
-    <div class="container"> <!-- Agregado un contenedor para centrar el contenido -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-		<ul class="navbar-nav">
-		               <li class="nav-item"><a class="nav-link" th:href="@{/}"><i class="fas fa-home"></i> Inicio</a></li>
-		               <li class="nav-item"><a class="nav-link" th:href="@{/nosotros}"><i class="fas fa-users"></i> Nosotros</a></li>
-		               <li class="nav-item"><a class="nav-link" th:href="@{/servicios}"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
-		               <li class="nav-item"><a class="nav-link" th:href="@{/administrador/login}"><i class="fas fa-user-shield"></i> Admin</a></li>
-		               <li class="nav-item"><a class="nav-link" th:href="@{/cliente/login}"><i class="fas fa-user"></i> Cliente</a></li>
-		               <li class="nav-item"><a class="nav-link" th:href="@{/contactenos}"><i class="fas fa-envelope"></i> Contáctenos</a></li>
-		           </ul>
-      </div>
-    </div>
-  </nav>
-</div>
+  </header>
 
-<div class="servicios-container">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <h1 class="text-lg">Servicios</h1>
+  <div class="nav-container">
+    <nav class="navbar navbar-expand-md navbar-light bg-pink">
+      <div class="container"> <!-- Agregado un contenedor para centrar el contenido -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" th:href="@{/}"><i class="fas fa-home"></i> Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/nosotros}"><i class="fas fa-users"></i> Nosotros</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/servicios}"><i class="fas fa-concierge-bell"></i>
+                Servicios</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/administrador/login}"><i
+                  class="fas fa-user-shield"></i> Admin</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/cliente/login}"><i class="fas fa-user"></i> Cliente</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/contactenos}"><i class="fas fa-envelope"></i>
+                Contáctenos</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/wikiplant}"><i
+                  class="fas fa-envelope"></i>WikiPlant</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="servicios-container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h1>Servicios</h1>
+          <p class="lead text-muted">Ofrecemos una variedad de productos para enriquecer tu jardín y huerto.</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-  <div class="container mt-5">
+  <div class="container">
     <!-- Sección de Plantas -->
-    <div class="row servicio-section" id="plantas">
+    <div class="row servicio-section">
       <div class="col-md-6">
-        <img src="https://www.murgiplast.com/wp-content/uploads/2022/10/murgiplast-vivero-1536x1024.jpg.webp" alt="Plantas" class="img-fluid">
+        <img src="https://www.murgiplast.com/wp-content/uploads/2022/10/murgiplast-vivero-1536x1024.jpg.webp"
+          alt="Plantas" class="img-fluid">
       </div>
       <div class="col-md-6">
         <h2>Plantas de Alta Calidad</h2>
-        <p>Descubre nuestra amplia variedad de plantas de alta calidad. Ofrecemos una selección única para embellecer tu jardín. Desde flores coloridas hasta árboles majestuosos, nuestras plantas son cultivadas con cuidado y dedicación para brindarte la mejor experiencia botánica.</p>
-        <button type="button" th:href="@{/cliente/login}" class="btn btn-outline-success">Ver más</button>
-      </div>
-    </div>
-    <p></p>
-    <!-- Sección de Semillas -->
-    <div class="row servicio-section" id="semillas">
-      <div class="col-md-6 order-md-2">
-        <img src="https://www.lamastore.es/blog/wp-content/uploads/2021/10/lama-monocultivo.jpg" alt="Semillas" class="img-fluid">
-      </div>
-      <div class="col-md-6 order-md-1">
-        <h2>Semillas para Tu Próximo Cultivo</h2>
-        <p>Explora nuestras semillas especializadas para cultivar tus propios alimentos. Calidad garantizada desde la siembra hasta la cosecha. Nuestras semillas provienen de fuentes confiables y están seleccionadas para ofrecerte la mejor calidad y variedad para tu huerto o jardín.</p>
-        <button type="button" th:href="@{/cliente/login}" class="btn btn-outline-success">Ver más</button>
+        <p>Descubre nuestra amplia variedad de plantas de alta calidad. Ofrecemos una selección única para embellecer tu
+          jardín. Desde flores coloridas hasta árboles majestuosos, nuestras plantas son cultivadas con cuidado y
+          dedicación para brindarte la mejor experiencia botánica.</p>
+        <button type="button" class="btn btn-outline-success">Ver más</button>
       </div>
     </div>
 
-    <p></p>
+    <!-- Sección de Semillas -->
+    <div class="row servicio-section">
+      <div class="col-md-6 order-md-2">
+        <img src="https://www.lamastore.es/blog/wp-content/uploads/2021/10/lama-monocultivo.jpg" alt="Semillas"
+          class="img-fluid">
+      </div>
+      <div class="col-md-6 order-md-1">
+        <h2>Semillas para Tu Próximo Cultivo</h2>
+        <p>Explora nuestras semillas especializadas para cultivar tus propios alimentos. Calidad garantizada desde la
+          siembra hasta la cosecha. Nuestras semillas provienen de fuentes confiables y están seleccionadas para
+          ofrecerte la mejor calidad y variedad para tu huerto o jardín.</p>
+        <button type="button" class="btn btn-outline-success">Ver más</button>
+      </div>
+    </div>
+
     <!-- Sección de Vitaminas -->
-    <div class="row servicio-section" id="vitaminas">
+    <div class="row servicio-section">
       <div class="col-md-6">
-        <img src="https://img.freepik.com/vector-gratis/concepto-biotecnologia-plana_23-2148906613.jpg?t=st=1730766405~exp=1730770005~hmac=5a3bcedc8f8be369049ebb798eae7dcb8c8512749052c6affa1d53f6e1747e47&w=740" alt="Vitaminas" class="img-fluid">
+        <img
+          src="https://img.freepik.com/vector-gratis/concepto-biotecnologia-plana_23-2148906613.jpg?t=st=1730766405~exp=1730770005~hmac=5a3bcedc8f8be369049ebb798eae7dcb8c8512749052c6affa1d53f6e1747e47&w=740"
+          alt="Vitaminas" class="img-fluid">
       </div>
       <div class="col-md-6">
         <h2>Vitaminas Especializadas para un Crecimiento Óptimo</h2>
-        <p>Optimiza el crecimiento de tus plantas con nuestras vitaminas especializadas. Nuestra gama de productos incluye mezclas equilibradas de nutrientes esenciales que aseguran un desarrollo saludable y un florecimiento vibrante. Descubre el secreto para un jardín exuberante y lleno de vida.</p>
-        <button type="button" th:href="@{/cliente/login}" class="btn btn-outline-success">Ver más</button>
+        <p>Optimiza el crecimiento de tus plantas con nuestras vitaminas especializadas. Nuestra gama de productos
+          incluye mezclas equilibradas de nutrientes esenciales que aseguran un desarrollo saludable y un florecimiento
+          vibrante.</p>
+        <button type="button" class="btn btn-outline-success">Ver más</button>
       </div>
     </div>
-    <p></p>
+
     <!-- Sección de Tierra y Abono -->
-    <div class="row servicio-section" id="tierra-abono">
+    <div class="row servicio-section">
       <div class="col-md-6 order-md-2">
-        <img src="https://agrolearning.org/wp-content/uploads/2024/08/imagen-destacada.png" alt="Tierra y Abono" class="img-fluid">
+        <img src="https://agrolearning.org/wp-content/uploads/2024/08/imagen-destacada.png" alt="Tierra y Abono"
+          class="img-fluid">
       </div>
       <div class="col-md-6 order-md-1">
         <h2>Tierra y Abono de Primera Calidad</h2>
-        <p>Proporcionamos tierra y abono de la más alta calidad para asegurar un entorno propicio para el crecimiento de tus plantas. Nuestros productos han sido cuidadosamente seleccionados y elaborados para ofrecerte la base perfecta para un suelo fértil y saludable. Garantiza el éxito de tus cultivos con nuestra línea premium de tierra y abono.</p>
-        <button type="button" th:href="@{/cliente/login}" class="btn btn-outline-success">Ver más</button>
+        <p>Proporcionamos tierra y abono de la más alta calidad para asegurar un entorno propicio para el crecimiento de
+          tus plantas. Nuestros productos han sido cuidadosamente seleccionados para ofrecerte la base perfecta para un
+          suelo fértil y saludable.</p>
+        <button type="button" class="btn btn-outline-success">Ver más</button>
       </div>
     </div>
-    <p></p>
+
     <!-- Sección de Humus de Lombriz -->
-    <div class="row servicio-section" id="humus-lombriz">
+    <div class="row servicio-section">
       <div class="col-md-6">
-        <img src="https://lombricultura.net/wp-content/uploads/2018/11/003_proceso-del-compostaje.jpg" alt="Humus de Lombriz" class="img-fluid">
+        <img src="https://lombricultura.net/wp-content/uploads/2018/11/003_proceso-del-compostaje.jpg"
+          alt="Humus de Lombriz" class="img-fluid">
       </div>
       <div class="col-md-6">
         <h2>Humus de Lombriz</h2>
-        <p>Descubre los beneficios del humus de lombriz, un tesoro orgánico que enriquecerá tu suelo y mejorará la salud de tus plantas. Este valioso compost es el resultado del trabajo conjunto con las lombrices, creando un producto natural, rico en nutrientes y microorganismos beneficiosos. Transforma tu suelo y potencia el crecimiento de tus cultivos.</p>
-        <button type="button" th:href="@{/cliente/login}" class="btn btn-outline-success">Ver más</button>
+        <p>Descubre los beneficios del humus de lombriz, un tesoro orgánico que enriquecerá tu suelo y mejorará la salud
+          de tus plantas. Este valioso compost es el resultado del trabajo conjunto con las lombrices, creando un
+          producto natural y rico en nutrientes.</p>
+        <button type="button" class="btn btn-outline-success">Ver más</button>
       </div>
     </div>
-<p></p>
+
     <!-- Sección de Lixiviado -->
-    <div class="row servicio-section" id="lixiviado">
+    <div class="row servicio-section">
       <div class="col-md-6 order-md-2">
-        <img src="https://nutricionvegetal.co/wp-content/uploads/2022/11/Fertilizantesss-1024x576.jpg.webp" alt="Lixiviado" class="img-fluid">
+        <img src="https://nutricionvegetal.co/wp-content/uploads/2022/11/Fertilizantesss-1024x576.jpg.webp"
+          alt="Lixiviado" class="img-fluid">
       </div>
       <div class="col-md-6 order-md-1">
         <h2>Lixiviado</h2>
-        <p>Ofrecemos lixiviado de alta calidad, un líquido nutritivo que potenciará el crecimiento y la vitalidad de tus plantas. Este valioso extracto contiene nutrientes esenciales que impulsarán la salud de tus cultivos. Descubre el poder del lixiviado para maximizar la productividad de tu jardín o cultivo.</p>
-        <button type="button" th:href="@{/cliente/login}" class="btn btn-outline-success">Ver más</button>
+        <p>Ofrecemos lixiviado de alta calidad, un líquido nutritivo que potenciará el crecimiento y la vitalidad de tus
+          plantas. Este valioso extracto contiene nutrientes esenciales que impulsarán la salud de tus cultivos.</p>
+        <button type="button" class="btn btn-outline-success">Ver más</button>
       </div>
     </div>
   </div>
 
-  <p></p>
-  <footer class="bg-dark text-light text-center py-3">
+  <footer class="text-center">
     <div class="container">
       <p>&copy; 2024 WikiPlant. Todos los derechos reservados.</p>
     </div>
-</footer>
+  </footer>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <button class="boton-flotante" id="botonSubir">
+    <img src="https://i.pinimg.com/originals/7f/6f/1f/7f6f1f5bbdb893acec35f67285b0e102.png" alt="Planta"
+      class="icono-planta">
+  </button>
 
+  <script>
+    // Seleccionamos el botón
+    const botonSubir = document.getElementById("botonSubir");
 
+    // Evento para mostrar el botón cuando se hace scroll
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 500) {  // Cambia 500 por el número que desees
+        botonSubir.style.display = "flex";  // Muestra el botón
+      } else {
+        botonSubir.style.display = "none";  // Manténlo oculto si no se hace scroll
+      }
+    });
+
+    // Acción para volver al inicio cuando se hace click en el botón
+    botonSubir.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });  // Hace un scroll suave al inicio
+    });
+  </script>
+</body>
+
+</html>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 

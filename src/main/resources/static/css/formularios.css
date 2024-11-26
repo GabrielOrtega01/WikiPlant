@@ -1,0 +1,266 @@
+/* Configuración global */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('https://images.pexels.com/photos/1151418/pexels-photo-1151418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center fixed;
+    background-size: cover;
+    color: #1d1f21;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0; /* Quitar márgenes por defecto */
+    /* Asegura que el cuerpo ocupe al menos la altura de la ventana */
+  }
+  
+  h1, h2 {
+    font-weight: bold;
+    color: #2c3e50;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem;
+    flex: 1; /* Expande este contenedor para ocupar el espacio disponible */
+
+  }
+
+  .sb-topnav {
+    background: linear-gradient(110deg, #29693a 60%, rgba(245, 110, 0, 0.8) 100%);
+}
+
+
+/* Efecto de iluminación en el logo */
+.navbar-brand img {
+    transition: all 0.3s ease; /* Transición suave */
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); /* Resplandor inicial */
+    width: 90px;
+    height: 90px;
+  }
+  
+  .navbar-brand img:hover {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1)) brightness(1.2); /* Resplandor al pasar el mouse */
+    transform: scale(1.1); /* Pequeño aumento */
+  }
+
+  
+  .back {
+    background-color: #fff;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Inputs y etiquetas */
+  label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+ /* Estilo para el select */
+.form-select {
+    border: 2px solid #ddd; /* Borde claro */
+    border-radius: 12px; /* Bordes redondeados */
+    padding: 0.8rem 1rem; /* Espaciado interno */
+    font-size: 1rem; /* Tamaño del texto */
+    background-color: #f9f9f9; /* Fondo claro */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%233498db" d="M2 0L0 2h4z"/></svg>'); /* Flecha de selección */
+    background-repeat: no-repeat;
+    background-position: right 1.5rem center; /* Posición de la flecha */
+    background-size: 0.8rem;
+    transition: all 0.3s ease-in-out; /* Suavizar las transiciones */
+    appearance: none; /* Eliminar el estilo por defecto */
+  }
+  
+  /* Cambios al enfocar */
+  .form-select:focus {
+    border-color: #6ece42; /* Borde verde al seleccionar */
+    box-shadow: 0 0 10px rgba(110, 206, 66, 0.5); /* Efecto de sombra */
+    background-color: #fff; /* Fondo blanco al enfocar */
+    color: #333; /* Color oscuro para el texto */
+  }
+  
+  /* Cambios en la opción seleccionada */
+  select.form-control option:checked {
+    background-color: #3498db; /* Fondo azul al estar seleccionado */
+    color: white; /* Texto blanco para la opción seleccionada */
+  }
+  
+  textarea.form-control {
+    resize: none;
+    height: 120px;
+  }
+  
+  select.form-control {
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%233498db" d="M2 0L0 2h4z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 1.5rem center;
+    background-size: 0.8rem;
+  }
+  
+  /* Botones */
+
+  .button-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;    /* Centra verticalmente si es necesario */
+    margin-top: 20px;       /* Espaciado adicional desde otros elementos */
+  }
+
+  .btn-primary {
+    background-color: #6ece42;
+    border-color: #6ece42;
+    font-size: 1rem; /* Reducir el tamaño de la fuente */
+    font-weight: 600; /* Opcional: menor grosor */
+    padding: 0.4rem 1rem; /* Reducir padding vertical y horizontal */
+    border-radius: 8px; /* Menos redondeo */
+    transition: all 0.3s ease;
+    justify-content: center;
+  }
+  
+  .btn-primary:hover {
+    background-color: #b99f29;
+    border-color: #b99f29;
+    transform: translateY(-1px); /* Reducir efecto de elevación */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* Sombra más sutil */
+  }
+  
+  .button-custom {
+    background-color: #3d833a;
+    color: white;
+    border-color: #3d833a;
+    font-size: 1rem; /* Tamaño de fuente reducido */
+    font-weight: 600;
+    border-radius: 8px; /* Menor curvatura */
+    padding: 0.5rem 1.5rem; /* Espaciado reducido */
+
+}
+
+.button-custom:hover {
+    background-color: #b99f29;
+    border-color: #b99f29;
+    color: white;
+    transform: translateY(-1px); /* Reducir efecto de elevación */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* Sombra más sutil */
+  }
+
+
+  /* Diseño de filas */
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+  }
+  
+  .form-row .col-md-4 {
+    padding: 10px;
+    flex: 1 1 30%; /* Tamaño responsivo de las columnas */
+    max-width: 100%;
+  }
+
+
+  /* Contenedor del campo */
+.form-label {
+  font-weight: 600; /* Negrita para el texto */
+  font-size: 1rem; /* Tamaño del texto */
+  color: #333; /* Color oscuro para el texto */
+  margin-bottom: 0.5rem; /* Espacio debajo del label */
+}
+
+/* Estilo para el select */
+.form-select {
+  border: 2px solid #ddd; /* Borde claro */
+  border-radius: 12px; /* Bordes redondeados */
+  padding: 0.8rem 1rem; /* Espaciado interno */
+  font-size: 1rem; /* Tamaño del texto */
+  background-color: #f9f9f9; /* Fondo claro */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%233498db" d="M2 0L0 2h4z"/></svg>'); /* Flecha de selección */
+  background-repeat: no-repeat;
+  background-position: right 1.5rem center; /* Posición de la flecha */
+  background-size: 0.8rem;
+  transition: all 0.3s ease-in-out; /* Suavizar las transiciones */
+  appearance: none; /* Eliminar el estilo por defecto */
+}
+
+/* Cambios al enfocar */
+.form-select:focus {
+  border-color: #6ece42; /* Borde verde al seleccionar */
+  box-shadow: 0 0 10px rgba(110, 206, 66, 0.5); /* Efecto de sombra */
+  background-color: #fff; /* Fondo blanco al enfocar */
+}
+
+/* Mensaje de error */
+.form-text.text-danger {
+  font-size: 0.85rem; /* Texto más pequeño */
+  color: #e74c3c; /* Rojo claro para el mensaje */
+  margin-top: 0.5rem; /* Espaciado superior */
+}
+
+
+/* Contenedor del campo */
+.form-label {
+    font-weight: 600; /* Negrita para el texto */
+    font-size: 1rem; /* Tamaño del texto */
+    color: #333; /* Color oscuro para el texto */
+    margin-bottom: 0.5rem; /* Espacio debajo del label */
+  }
+  
+  /* Estilo para el select */
+  .form-select {
+    border: 2px solid #ddd; /* Borde claro */
+    border-radius: 12px; /* Bordes redondeados */
+    padding: 0.8rem 1rem; /* Espaciado interno */
+    font-size: 1rem; /* Tamaño del texto */
+    background-color: #f9f9f9; /* Fondo claro */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%233498db" d="M2 0L0 2h4z"/></svg>'); /* Flecha de selección */
+    background-repeat: no-repeat;
+    background-position: right 1.5rem center; /* Posición de la flecha */
+    background-size: 0.8rem;
+    transition: all 0.3s ease-in-out; /* Suavizar las transiciones */
+    appearance: none; /* Eliminar el estilo por defecto */
+  }
+  
+  /* Cambios al enfocar */
+  .form-select:focus {
+    border-color: #6ece42; /* Borde verde al seleccionar */
+    box-shadow: 0 0 10px rgba(110, 206, 66, 0.5); /* Efecto de sombra */
+    background-color: #fff; /* Fondo blanco al enfocar */
+  }
+  
+  /* Mensaje de error */
+  .form-text.text-danger {
+    font-size: 0.85rem; /* Texto más pequeño */
+    color: #e74c3c; /* Rojo claro para el mensaje */
+    margin-top: 0.5rem; /* Espaciado superior */
+  }
+
+
+
+
+
+
+
+
+  footer {
+    height: auto; /* Asegúrate de que la altura no esté fija */
+    padding: 5px; /* Controla el espacio interior */
+    margin: 0; /* Evita márgenes innecesarios */
+    font-size: 0.9rem; /* Controla el tamaño del texto */
+  }
+
+
+  
+  
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+    }
+  
+    .form-control {
+      width: 100%;
+    }
+  }
+  

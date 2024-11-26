@@ -1,31 +1,55 @@
 package com.mongowikiplant.app.entity;
 
-
-
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 @Document(collection = "tmedia")
-
-//Temperatura media
-
-
 public class Tmedia {
-
 
     @Id
     private String id;
-    private String estacionId;  // ID de la estación a la que pertenece este fotoperiodo
-    private int year;  // Año al que corresponde el fotoperiodo
-    private List<MesCantidad> registros;  // Lista de registros mensuales
-    private Map<String, Double> mesCantidadMap = new HashMap<>();  // Mapa de mes -> cantidad
 
-    // Getters y Setters
+    @Min(1900)
+    @Max(2100)
+    private int fecha; // Año al que corresponde el tmedia
+
+    private Double enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre;
+
+    @DBRef
+    private Estacion estacion; // Referencia a la estación
+
+    public Tmedia() {
+        // Constructor por defecto
+    }
+
+    public Tmedia(String id, int fecha, Estacion estacion, Double enero, Double febrero,
+            Double marzo, Double abril, Double mayo, Double junio, Double julio, Double agosto, Double septiembre,
+            Double octubre, Double noviembre, Double diciembre) {
+        super();
+        this.id = id;
+        this.fecha = fecha;
+        this.estacion = estacion;
+        this.enero = enero;
+        this.febrero = febrero;
+        this.marzo = marzo;
+        this.abril = abril;
+        this.mayo = mayo;
+        this.junio = junio;
+        this.julio = julio;
+        this.agosto = agosto;
+        this.septiembre = septiembre;
+        this.octubre = octubre;
+        this.noviembre = noviembre;
+        this.diciembre = diciembre;
+    }
+
     public String getId() {
         return id;
     }
@@ -33,132 +57,154 @@ public class Tmedia {
     public void setId(String id) {
         this.id = id;
     }
-    
-    public String getEstacionId() {
-        return estacionId;
+
+    public int getFecha() {
+        return fecha;
     }
 
-    public void setEstacionId(String estacionId) {
-        this.estacionId = estacionId;
-    }
-    
-    public int getYear() {
-        return year;
+    public void setFecha(int fecha) {
+        this.fecha = fecha;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public Double getEnero() {
+        return enero;
     }
 
-    public List<MesCantidad> getRegistros() {
-        return registros;
+    public void setEnero(Double enero) {
+        this.enero = enero;
     }
 
-    public void setRegistros(List<MesCantidad> registros) {
-        this.registros = registros;
+    public Double getFebrero() {
+        return febrero;
     }
 
-    public Map<String, Double> getMesCantidadMap() {
-        return mesCantidadMap;
+    public void setFebrero(Double febrero) {
+        this.febrero = febrero;
     }
 
-    public void setMesCantidadMap(Map<String, Double> mesCantidadMap) {
-        this.mesCantidadMap = mesCantidadMap;
+    public Double getMarzo() {
+        return marzo;
     }
 
-    // Método para calcular el promedio anual
-    public double calcularPromedioAnual() {
-        double suma = 0;
-        int count = 0;
-        for (String mes : List.of("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")) {
-            Double valor = mesCantidadMap.get(mes);
-            if (valor != null) {
-                suma += valor;
-                count++;
-            }
-        }
-        return count > 0 ? suma / count : 0;
+    public void setMarzo(Double marzo) {
+        this.marzo = marzo;
     }
 
-    // Clase estática embebida para representar un registro de mes y cantidad
-    public static class MesCantidad {
-        private String mes;
-        private Double cantidad;
-
-        // Constructores
-        public MesCantidad() {}
-
-        public MesCantidad(String mes, Double cantidad) {
-            this.mes = mes;
-            this.cantidad = cantidad;
-        }
-
-        // Getters y Setters
-        public String getMes() {
-            return mes;
-        }
-
-        public void setMes(String mes) {
-            this.mes = mes;
-        }
-
-        public Double getCantidad() {
-            return cantidad;
-        }
-
-        public void setCantidad(Double cantidad) {
-            this.cantidad = cantidad;
-        }
+    public Double getAbril() {
+        return abril;
     }
 
-    // Método para actualizar el mapa mesCantidadMap
-    public void actualizarMesCantidadMap() {
-        mesCantidadMap = new HashMap<>();
-        for (MesCantidad registro : registros) {
-            mesCantidadMap.put(registro.getMes(), registro.getCantidad());
-        }
-    }
-    
-    
-        // Método para calcular Desviación Estándar
-        public double calcularDesviacionEstandar() {
-            double promedio = calcularPromedioAnual();
-            double sumaCuadrados = 0;
-            int count = 0;
-
-            for (Double cantidad : mesCantidadMap.values()) {
-                if (cantidad != null) {
-                    sumaCuadrados += Math.pow(cantidad - promedio, 2);
-                    count++;
-                }
-            }
-
-            return count > 0 ? Math.sqrt(sumaCuadrados / count) : 0;
-        }
-
-        // Método para calcular Coeficiente de Variación (CV%)
-        public double calcularCoeficienteVariacion() {
-            double promedio = calcularPromedioAnual();
-            double desviacionEstandar = calcularDesviacionEstandar();
-            return promedio > 0 ? (desviacionEstandar / promedio) * 100 : 0;
-        }
-
-        // Método para calcular el valor máximo
-        public double calcularMaximo() {
-            return mesCantidadMap.values().stream()
-                    .filter(cantidad -> cantidad != null)
-                    .max(Double::compare)
-                    .orElse(0.0);
-        }
-
-        // Método para calcular el valor mínimo
-        public double calcularMinimo() {
-            return mesCantidadMap.values().stream()
-                    .filter(cantidad -> cantidad != null)
-                    .min(Double::compare)
-                    .orElse(0.0);
-        }
+    public void setAbril(Double abril) {
+        this.abril = abril;
     }
 
+    public Double getMayo() {
+        return mayo;
+    }
 
+    public void setMayo(Double mayo) {
+        this.mayo = mayo;
+    }
 
+    public Double getJunio() {
+        return junio;
+    }
+
+    public void setJunio(Double junio) {
+        this.junio = junio;
+    }
+
+    public Double getJulio() {
+        return julio;
+    }
+
+    public void setJulio(Double julio) {
+        this.julio = julio;
+    }
+
+    public Double getAgosto() {
+        return agosto;
+    }
+
+    public void setAgosto(Double agosto) {
+        this.agosto = agosto;
+    }
+
+    public Double getSeptiembre() {
+        return septiembre;
+    }
+
+    public void setSeptiembre(Double septiembre) {
+        this.septiembre = septiembre;
+    }
+
+    public Double getOctubre() {
+        return octubre;
+    }
+
+    public void setOctubre(Double octubre) {
+        this.octubre = octubre;
+    }
+
+    public Double getNoviembre() {
+        return noviembre;
+    }
+
+    public void setNoviembre(Double noviembre) {
+        this.noviembre = noviembre;
+    }
+
+    public Double getDiciembre() {
+        return diciembre;
+    }
+
+    public void setDiciembre(Double diciembre) {
+        this.diciembre = diciembre;
+    }
+
+    public Estacion getEstacion() {
+        return estacion;
+    }
+
+    public void setEstacion(Estacion estacion) {
+        this.estacion = estacion;
+    }
+
+    // Tu clase permanece igual excepto por el método calcularPromedioAnual
+    public Double calcularPromedioAnual() {
+        return Stream
+                .of(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre)
+                .filter(Objects::nonNull) // Filtra los valores nulos
+                .mapToDouble(Double::doubleValue) // Convierte los valores a double
+                .average() // Calcula el promedio
+                .orElse(0.0); // Devuelve 0.0 si no hay valores
+    }
+
+    public long calcularN() {
+        return Stream
+                .of(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre)
+                .filter(Objects::nonNull)
+                .count();
+    }
+
+    public Double calcularMedia() {
+        return Stream
+                .of(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre)
+                .filter(Objects::nonNull)
+                .mapToDouble(Double::doubleValue)
+                .average()
+                .orElse(0.0); // Devuelve 0.0 si no hay valores
+    }
+
+    public Double calcularDesviacionEstandar() {
+        double media = calcularMedia();
+        return Math.sqrt(Stream
+                .of(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre)
+                .filter(Objects::nonNull)
+                .mapToDouble(Double::doubleValue)
+                .map(valor -> Math.pow(valor - media, 2))
+                .average()
+                .orElse(0.0)); // Devuelve 0.0 si no hay valores
+    }
+
+}

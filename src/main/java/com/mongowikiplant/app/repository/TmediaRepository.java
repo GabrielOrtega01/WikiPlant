@@ -7,5 +7,5 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface TmediaRepository extends MongoRepository<Tmedia, String> {
-    List<Tmedia> findByEstacionId(String estacionId);
+  /*  List<Tmedia> findByEstacionId(String estacionId);*/
 }

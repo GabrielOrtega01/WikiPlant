@@ -1,19 +1,240 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Formulario de Planificación</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Planificación</title>
+  <!-- Enlaces a los archivos CSS de Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('https://image.slidesdocs.com/responsive-images/background/green-spring-grass-peach-blossom-plants-beautiful-powerpoint-background_f546f2a72b__960_540.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #1d1f21;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    label {
+      margin-bottom: 0.2rem;
+    }
+
+    .form-control {
+      width: calc(50% - 5px);
+    }
+
+    .back {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 2%;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar {
+      padding: 8px 16px !important;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .btn-primary {
+      background-color: #0026ff;
+      border: none;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      background-color: #6045a0;
+      transform: scale(1.05);
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .button-custom {
+      background-color: #216923;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s;
+      width: 100%;
+      max-width: 200px;
+    }
+
+    .button-custom:hover {
+      background-color: #45a049;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+    }
+
+    #successMessage {
+      display: none;
+      color: green;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    input.focused {
+      border: 2px solid #0056b3;
+    }
+  </style>
 </head>
+
 <body>
-    <h1>Formulario de Planificación</h1>
-    <form th:action="@{/planificacion/guardar}" th:object="${planificacion}" method="post">
-        <label>Nombre:</label>
-        <input type="text" th:field="*{nombre}" />
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{/administrador/index}"></a>
+    <div class="navbar-title">
+      <h1>Formulario Planificación</h1>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="btn btn-outline-danger my-2 my-sm-0" href="@{/}">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-        <label>Fecha:</label>
-        <input type="date" th:field="*{fecha}" />
+  <div class="back container">
+    <h2 class="mt-4 mb-4">Formulario de Registro de Planificación</h2>
 
-        <button type="submit">Guardar</button>
-        <a th:href="@{/planificacion/listar}">Cancelar</a>
+    <div th:if="${successMessage != null}" class="alert alert-success">
+      <p th:text="${successMessage}">¡Planificación registrado con éxito!</p>
+    </div>
+
+    <form id="registrationForm" th:action="@{/planificacion/save}" th:object="${planificacion}" method="post">
+      <!-- Selección de la estación y Año -->
+      <input type="hidden" th:field="*{id}" />
+
+      <div class="row">
+        <!-- Estación -->
+        <div class="col-md-6 mb-3">
+          <label for="estacion" class="form-label">Estación</label>
+          <select id="estacion" th:field="*{estacion}" class="form-select" required>
+            <option value="" disabled selected>Seleccione una estación</option>
+            <option th:each="estacion : ${listaEstaciones}" th:text="${estacion.nombre}" th:value="${estacion.id}">
+            </option>
+          </select>
+          <small class="form-text text-danger" th:if="${#fields.hasErrors('estacion')}" th:errors="*{estacion}"></small>
+        </div>
+
+        <!-- Año -->
+        <div class="col-md-6 mb-3">
+          <label for="fecha" class="form-label">Año:</label>
+          <input type="number" th:field="*{fecha}" placeholder="Ingrese el año" class="form-control" required min="1900"
+            max="2099">
+        </div>
+      </div>
+
+      <!-- Meses -->
+      <div class="row">
+        <div class="col-md-3 mb-3">
+          <label for="enero" class="form-label">Enero:</label>
+          <input type="number" th:field="*{enero}" placeholder="Cantidad para enero" class="form-control" step="0.01">
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="febrero" class="form-label">Febrero:</label>
+          <input type="number" th:field="*{febrero}" placeholder="Cantidad para febrero" class="form-control"
+            step="0.01">
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="marzo" class="form-label">Marzo:</label>
+          <input type="number" th:field="*{marzo}" placeholder="Cantidad para marzo" class="form-control" step="0.01">
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="abril" class="form-label">Abril:</label>
+          <input type="number" th:field="*{abril}" placeholder="Cantidad para abril" class="form-control" step="0.01">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3 mb-3">
+          <label for="mayo" class="form-label">Mayo:</label>
+          <input type="number" th:field="*{mayo}" placeholder="Cantidad para mayo" class="form-control" step="0.01">
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="junio" class="form-label">Junio:</label>
+          <input type="number" th:field="*{junio}" placeholder="Cantidad para junio" class="form-control" step="0.01">
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="julio" class="form-label">Julio:</label>
+          <input type="number" th:field="*{julio}" placeholder="Cantidad para julio" class="form-control" step="0.01">
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="agosto" class="form-label">Agosto:</label>
+          <input type="number" th:field="*{agosto}" placeholder="Cantidad para agosto" class="form-control" step="0.01">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3 mb-3">
+          <label for="septiembre" class="form-label">Septiembre:</label>
+          <input type="number" th:field="*{septiembre}" placeholder="Cantidad para septiembre" class="form-control"
+            step="0.01">
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="octubre" class="form-label">Octubre:</label>
+          <input type="number" th:field="*{octubre}" placeholder="Cantidad para octubre" class="form-control"
+            step="0.01">
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="noviembre" class="form-label">Noviembre:</label>
+          <input type="number" th:field="*{noviembre}" placeholder="Cantidad para noviembre" class="form-control"
+            step="0.01">
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="diciembre" class="form-label">Diciembre:</label>
+          <input type="number" th:field="*{diciembre}" placeholder="Cantidad para diciembre" class="form-control"
+            step="0.01">
+        </div>
+      </div>
+
+      <!-- Botón de envío -->
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <button type="submit" class="btn btn-primary w-100">Guardar Planificación</button>
+        </div>
+      </div>
     </form>
+
+    <div class="button-container mt-4">
+      <button th:onclick="|history.back()|" class="button-custom">Volver a la página anterior</button>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-light text-center py-3">
+    <div class="container">
+      <p>&copy; 2024 WikiPlant. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mostrar mensaje de éxito tras envío
+    const form = document.getElementById('registrationForm');
+    form.onsubmit = () => {
+      document.getElementById('successMessage').style.display = 'block';
+    }
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

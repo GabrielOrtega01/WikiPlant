@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plantas Más Buscadas</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4CAF50;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .card h2 {
+      font-size: 20px;
+      margin: 10px 0;
+      color: #333;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      margin: 5px 0;
+      color: #777;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .card .detail-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .card .detail-btn:hover {
+      background-color: #45a049;
+    }
+
+    .back-link {
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+      text-decoration: none;
+      color: #4CAF50;
+      font-size: 16px;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /*nav */
+    .sb-topnav .navbar-brand {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .sb-topnav .navbar-nav {
+      margin-right: 0;
+      /* Asegura que no empuje el logo */
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Plantas Más Buscadas</h1>
+
+  <div th:if="${mensaje != null}" style="text-align: center;">
+    <p th:text="${mensaje}" style="color: red; font-size: 18px;"></p>
+  </div>
+
+  <div class="container" th:if="${plantasMasBuscadas != null}">
+    <div class="card" th:each="planta : ${plantasMasBuscadas}">
+      <img th:src="${planta.imagen}" alt="Imagen de planta" th:alt="'Imagen de ' + ${planta.nomComun}">
+      <h2 th:text="${planta.nomComun}">Nombre Común</h2>
+      <h3 th:text="${planta.nomCientifico}">Nombre Científico</h3>
+      <p>Búsquedas: <span th:text="${planta.busquedas}"></span></p>
+      <a th:href="@{/cliente/plantaDetalle(plantaId=${planta.id})}" class="detail-btn">Ver Detalle</a>
+    </div>
+  </div>
+
+  <a href="/cliente/index" class="back-link">Volver al inicio</a>
+  <br>
+  <footer class="text-center py-3">
+    <p>&copy; 2024 WikiPlant. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+
+
+</html>
