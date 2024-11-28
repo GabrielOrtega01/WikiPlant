@@ -1,367 +1,368 @@
 /* === ADMIN.CSS - MEJORADO Y ESTILIZADO === */
-
 /* Variables de color */
 :root {
-    --primary: #0d6efd;
-    --secondary: #6c757d;
-    --success: #198754;
-    --info: #0dcaf0;
-    --warning: #ffc107;
-    --danger: #dc3545;
-    --light: #f8f9fa;
-    --dark: #212529;
-    --background-light: #f5f5f5;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+  --primary: #0d6efd;
+  --secondary: #6c757d;
+  --success: #198754;
+  --info: #0dcaf0;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #212529;
+  --background-light: #f5f5f5;
+  --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
-html, body {
-    height: 100%; /* Asegura que el body tenga al menos el tamaño de la ventana */
-    margin: 0; /* Elimina los márgenes por defecto */
+html,
+body {
+  height: 100%;
+  /* Asegura que el body tenga al menos el tamaño de la ventana */
+  margin: 0;
+  /* Elimina los márgenes por defecto */
 }
 
 /* Tipografía general */
 body {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--dark);
-    background-color: var(--background-light);
-    display: flex;
-    flex-direction: column; /* Hace que los elementos se organicen verticalmente */
-    justify-content: flex-start; /* Alinea el contenido al principio */
-	background-image: url("https://cdn.pixabay.com/photo/2020/01/10/10/19/leaves-4754980_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--dark);
+  background-color: var(--background-light);
+  display: flex;
+  flex-direction: column;
+  /* Hace que los elementos se organicen verticalmente */
+  justify-content: flex-start;
+  /* Alinea el contenido al principio */
+  background-image: url("https://cdn.pixabay.com/photo/2020/01/10/10/19/leaves-4754980_1280.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#layoutSidenav_content {
+  margin-right: 20px;
+  /* Aplica un margen izquierdo */
 }
 
 .main-content {
-    flex-grow: 1; /* Hace que el contenido ocupe el espacio disponible */
+  flex-grow: 1;
+  margin-right: 20px;
+  /* Aplica un margen izquierdo */
+}
+
+.container {
+  margin-right: 20px;
+  /* Aplica un margen izquierdo a cada contenedor */
 }
 
 /* Navbar */
 .navbar {
-    box-shadow: 0 4px 6px var(--shadow-color);
-    font-family: 'Poppins', sans-serif;
-    
+  box-shadow: 0 4px 6px var(--shadow-color);
+  font-family: "Poppins", sans-serif;
 }
 
 .navbar-brand img {
-    transition: all 0.3s ease; /* Transición suave */
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); /* Resplandor inicial */
-  }
-  
-  .navbar-brand img:hover {
-    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1)) brightness(1.2); /* Resplandor al pasar el mouse */
-    transform: scale(1.1); /* Pequeño aumento */
-  }
+  transition: all 0.3s ease;
+  /* Transición suave */
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+  /* Resplandor inicial */
+}
+
+.navbar-brand img:hover {
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1)) brightness(1.2);
+  /* Resplandor al pasar el mouse */
+  transform: scale(1.1);
+  /* Pequeño aumento */
+}
 
 .navbar-brand {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary) !important;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary) !important;
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    font-size: 1.1rem;
-    color: var(--light);
+  font-size: 1.1rem;
+  color: var(--light);
 }
 
 .navbar-dark .navbar-nav .nav-link:hover {
-    color: var(--info);
-    text-decoration: underline;
+  color: var(--info);
+  text-decoration: underline;
 }
 
 /* Sidebar */
 .sb-sidenav {
-    background: var(--dark);
-    box-shadow: 2px 0 5px var(--shadow-color);
+  background: var(--dark);
+  box-shadow: 2px 0 5px var(--shadow-color);
 }
 
 .sb-sidenav .nav-link {
-    color: var(--light);
-    font-size: 1rem;
+  color: var(--light);
+  font-size: 1rem;
 }
 
 .sb-sidenav .nav-link:hover {
-    background-color: var(--primary);
-    color: var(--light);
+  background-color: var(--primary);
+  color: var(--light);
 }
 
 .sb-sidenav .sb-sidenav-footer {
-    background-color: var(--secondary);
-    color: var(--light);
-    font-size: 0.9rem;
+  background-color: var(--secondary);
+  color: var(--light);
+  font-size: 0.9rem;
 }
 
 /* Botones */
 button,
 .btn {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 button:hover,
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px var(--shadow-color);
-}
-
-/* Contenedores */
-.container {
-    margin-top: 20px;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px var(--shadow-color);
 }
 
 .container .card {
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px var(--shadow-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .container .card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 16px var(--shadow-color);
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px var(--shadow-color);
 }
 
 /* Botones de colapso */
 button[data-bs-toggle="collapse"] {
-    color: var(--dark);
-    font-weight: bold;
+  color: var(--dark);
+  font-weight: bold;
 }
 
 button[data-bs-toggle="collapse"]:hover {
-    color: var(--primary);
+  color: var(--primary);
 }
 
 /* Tarjetas */
 .card-body {
-    font-size: 1rem;
-    font-weight: 500;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .card-footer {
-    background-color: transparent;
-    border-top: none;
+  background-color: transparent;
+  border-top: none;
 }
 
 .card-footer i {
-    color: var(--light);
-    font-size: 1.2rem;
+  color: var(--light);
+  font-size: 1.2rem;
 }
-
 
 .welcome-title {
-    margin-top: -30px;
-    /* Ajusta este valor según lo que necesites */
-
-
+  margin-top: -30px;
+  /* Ajusta este valor según lo que necesites */
 }
-
-
-
 
 /* Contenedor general del sidebar */
 .sb-sidenav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 250px;
-    /* Ajusta el tamaño según tu diseño */
-    background: linear-gradient(135deg, #29693a, #1a553a);
-    /* Puedes cambiar este degradado */
-    color: #ffffff;
-    z-index: 999;
-    /* Asegura que la barra lateral esté encima de otros elementos */
-    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
-    /* Sombras para profundidad */
-    overflow-y: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  /* Ajusta el tamaño según tu diseño */
+  background: linear-gradient(135deg, #29693a, #1a553a);
+  /* Puedes cambiar este degradado */
+  color: #ffffff;
+  z-index: 999;
+  /* Asegura que la barra lateral esté encima de otros elementos */
+  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
+  /* Sombras para profundidad */
+  overflow-y: hidden;
 }
 
 /* Encabezados de sección */
 .sb-sidenav .sb-sidenav-menu-heading {
-    font-size: 1.3rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #8edb61;
-    padding: 15px 20px;
-    margin: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #8edb61;
+  padding: 15px 20px;
+  margin: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Links del sidebar */
 .sb-sidenav .nav-link {
-    display: flex;
-    align-items: center;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #ffffff;
-    padding: 12px 20px;
-    margin: 5px 0;
-    border-radius: 8px;
-    width: 100%;
-    transition: background 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  padding: 12px 20px;
+  margin: 5px 0;
+  border-radius: 8px;
+  width: 100%;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
-
 
 /* Hover y foco en links */
 .sb-sidenav .nav-link {
-    display: flex;
-    /* Asegura que el contenido dentro del enlace sea flexible */
-    align-items: center;
-    /* Centra los íconos y el texto */
-    padding: 12px 20px;
-    /* Relleno adecuado para que ocupe todo el cuadro */
-    border-radius: 8px;
-    /* Bordes redondeados */
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 100%;
+  display: flex;
+  /* Asegura que el contenido dentro del enlace sea flexible */
+  align-items: center;
+  /* Centra los íconos y el texto */
+  padding: 12px 20px;
+  /* Relleno adecuado para que ocupe todo el cuadro */
+  border-radius: 8px;
+  /* Bordes redondeados */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
 }
 
 /* Hover que cubre todo el cuadro */
 .sb-sidenav .nav-link:hover {
-    background-color: rgba(255, 0, 0, 0.2);
-    /* Fondo rojo cuando se pasa el mouse */
-    transform: scale(1.05);
-    /* Escala ligeramente el enlace */
-    color: #ffffff;
-    /* Cambia el color del texto a blanco */
-    width: 100%;
-    /* Asegura que el fondo cubra todo el ancho */
+  background-color: rgba(255, 0, 0, 0.2);
+  /* Fondo rojo cuando se pasa el mouse */
+  transform: scale(1.05);
+  /* Escala ligeramente el enlace */
+  color: #ffffff;
+  /* Cambia el color del texto a blanco */
+  width: 100%;
+  /* Asegura que el fondo cubra todo el ancho */
 }
-
-
 
 /* Links activos */
 .sb-sidenav .nav-link.active {
-    background-color: #e63946;
-    color: #ffffff;
-    font-weight: bold;
+  background-color: #e63946;
+  color: #ffffff;
+  font-weight: bold;
 }
 
 /* Links anidados */
 .sb-sidenav-menu-nested .nav-link {
-    padding: 8px 40px;
-    font-size: 0.9rem;
-    color: #ffd900;
-    border-radius: 4px;
+  padding: 8px 40px;
+  font-size: 0.9rem;
+  color: #ffd900;
+  border-radius: 4px;
 }
 
 .sb-sidenav-menu-nested .nav-link:hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* Flechas en colapsables */
 .sb-sidenav .nav-link.collapsed::after {
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    margin-left: auto;
-    transition: transform 0.3s ease;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  margin-left: auto;
+  transition: transform 0.3s ease;
 }
 
 /* Rotación en colapsables expandidos */
 .sb-sidenav .nav-link[aria-expanded="true"]::after {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 /* Footer del sidebar */
 .sb-sidenav-footer {
-    background-color: #198754; 
-    text-align: center;
-    padding: 15px;
-    font-size: 0.9rem;
-    color: #00f7ff;
-    
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #198754;
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9rem;
+  color: #00f7ff;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* === Transiciones === */
 .sb-sidenav,
 .sb-sidenav .nav-link,
 .sb-sidenav .sb-sidenav-footer {
-    transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
-
 
 .sb-topnav {
-    background: linear-gradient(110deg, #29693a 60%, rgba(245, 110, 0, 0.8) 100%);
+  background: linear-gradient(110deg, #29693a 60%, rgba(245, 110, 0, 0.8) 100%);
 }
 
-
 .navbar-brand img {
-    transition: all 0.3s ease; /* Transición suave */
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); /* Resplandor inicial */
-  }
-  
-  .navbar-brand img:hover {
-    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1)) brightness(1.2); /* Resplandor al pasar el mouse */
-    transform: scale(1.1); /* Pequeño aumento */
-  }
+  transition: all 0.3s ease;
+  /* Transición suave */
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+  /* Resplandor inicial */
+}
 
-
-
-
+.navbar-brand img:hover {
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1)) brightness(1.2);
+  /* Resplandor al pasar el mouse */
+  transform: scale(1.1);
+  /* Pequeño aumento */
+}
 
 /* Encabezado */
 /* Estilo para el contenedor */
 .welcome-title {
-    background: linear-gradient(135deg, #29693a, #1a553a);
-    /* Degradado elegante */
-    color: #ffffff;
-    /* Texto blanco para contraste */
-    padding: 20px 15px;
-    border-radius: 8px;
-    /* Bordes redondeados */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    /* Sombra para darle profundidad */
-    margin-bottom: 20px;
-    /* Separación inferior */
+  background: linear-gradient(135deg, #29693a, #1a553a);
+  /* Degradado elegante */
+  color: #ffffff;
+  /* Texto blanco para contraste */
+  padding: 20px 15px;
+  border-radius: 8px;
+  /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  /* Sombra para darle profundidad */
+  margin-bottom: 20px;
+  /* Separación inferior */
 }
 
 /* Estilo para el texto principal */
 .welcome-title h1 {
-    font-family: 'Poppins', sans-serif;
-    /* Tipografía moderna */
-    font-size: 2rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    /* Texto en mayúsculas */
-    letter-spacing: 1.5px;
-    /* Espaciado entre letras */
-    margin: 0;
-    /* Elimina márgenes por defecto */
+  font-family: "Poppins", sans-serif;
+  /* Tipografía moderna */
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  /* Texto en mayúsculas */
+  letter-spacing: 1.5px;
+  /* Espaciado entre letras */
+  margin: 0;
+  /* Elimina márgenes por defecto */
 }
 
 /* Estilo para el texto dinámico */
 .welcome-title h1 span {
-    font-weight: 700;
-    /* Mayor peso para destacar */
-    color: #f4a261;
-    /* Color complementario */
-    text-transform: none;
-    /* Mantener texto dinámico en su estilo original */
+  font-weight: 700;
+  /* Mayor peso para destacar */
+  color: #f4a261;
+  /* Color complementario */
+  text-transform: none;
+  /* Mantener texto dinámico en su estilo original */
 }
-
-
 
 /* Footer */
 footer {
-    background-color: var(--dark);
-    color: var(--light);
-    text-align: center;
-    padding: 20px 0;
-    font-size: 0.9rem;
-    margin-top: auto; /* Hace que el footer se empuje al final */
+  background-color: var(--dark);
+  color: var(--light);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.9rem;
+  margin-top: auto;
+  /* Hace que el footer se empuje al final */
 }
 
 /* Responsividad */
 @media (max-width: 768px) {
-    .sb-sidenav {
-        display: none;
-    }
+  .sb-sidenav {
+    display: none;
+  }
 
-    .container .card {
-        margin-bottom: 20px;
-    }
+  .container .card {
+    margin-bottom: 20px;
+  }
 }
