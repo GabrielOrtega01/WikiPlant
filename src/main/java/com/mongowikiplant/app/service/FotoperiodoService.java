@@ -77,51 +77,60 @@ public class FotoperiodoService {
   // Métodos para cálculos de promedios
   // =====================================
   public Map<String, Double> calcularPromedioTotales() {
-    List<Fotoperiodo> fotoperiodos = fotoperiodoRepository.findAll();
-    Map<String, Double> promedios = inicializarMapaPromedios();
+	    List<Fotoperiodo> fotoperiodos = fotoperiodoRepository.findAll();
+	    Map<String, Double> promedios = inicializarMapaPromedios();
 
-    for (Fotoperiodo fotoperiodo : fotoperiodos) {
-      actualizarPromediosMensuales(fotoperiodo, promedios);
-    }
+	    for (Fotoperiodo fotoperiodo : fotoperiodos) {
+	        actualizarPromediosMensuales(fotoperiodo, promedios);
+	    }
 
-    int totalFotoperiodos = fotoperiodos.size();
-    if (totalFotoperiodos > 0) {
-      ajustarPromediosMensuales(promedios, totalFotoperiodos);
-    }
+	    int totalFotoperiodos = fotoperiodos.size();
+	    if (totalFotoperiodos > 0) {
+	        ajustarPromediosMensuales(promedios, totalFotoperiodos);
+	        ajustarPromedioAnual(promedios); // Agregamos el cálculo del promedio anual
+	    }
 
-    return promedios;
-  }
+	    return promedios;
+	}
 
-  private Map<String, Double> inicializarMapaPromedios() {
-    Map<String, Double> promedios = new HashMap<>();
-    for (String mes : obtenerMeses()) {
-      promedios.put(mes, 0.0);
-    }
-    promedios.put("anual", 0.0);
-    return promedios;
-  }
+	private Map<String, Double> inicializarMapaPromedios() {
+	    Map<String, Double> promedios = new HashMap<>();
+	    for (String mes : obtenerMeses()) {
+	        promedios.put(mes, 0.0);
+	    }
+	    promedios.put("anual", 0.0); // Inicializamos el promedio anual en 0.0
+	    return promedios;
+	}
 
-  private void actualizarPromediosMensuales(Fotoperiodo fotoperiodo, Map<String, Double> promedios) {
-    promedios.put("enero", promedios.get("enero") + fotoperiodo.getEnero());
-    promedios.put("febrero", promedios.get("febrero") + fotoperiodo.getFebrero());
-    promedios.put("febrero", promedios.get("febrero") + fotoperiodo.getFebrero());
-    promedios.put("marzo", promedios.get("marzo") + fotoperiodo.getMarzo());
-    promedios.put("abril", promedios.get("abril") + fotoperiodo.getAbril());
-    promedios.put("mayo", promedios.get("mayo") + fotoperiodo.getMayo());
-    promedios.put("junio", promedios.get("junio") + fotoperiodo.getJunio());
-    promedios.put("julio", promedios.get("julio") + fotoperiodo.getJulio());
-    promedios.put("agosto", promedios.get("agosto") + fotoperiodo.getAgosto());
-    promedios.put("septiembre", promedios.get("septiembre") + fotoperiodo.getSeptiembre());
-    promedios.put("octubre", promedios.get("octubre") + fotoperiodo.getOctubre());
-    promedios.put("noviembre", promedios.get("noviembre") + fotoperiodo.getNoviembre());
-    promedios.put("diciembre", promedios.get("diciembre") + fotoperiodo.getDiciembre());
-  }
+	private void actualizarPromediosMensuales(Fotoperiodo fotoperiodo, Map<String, Double> promedios) {
+	    promedios.put("enero", promedios.get("enero") + fotoperiodo.getEnero());
+	    promedios.put("febrero", promedios.get("febrero") + fotoperiodo.getFebrero());
+	    promedios.put("marzo", promedios.get("marzo") + fotoperiodo.getMarzo());
+	    promedios.put("abril", promedios.get("abril") + fotoperiodo.getAbril());
+	    promedios.put("mayo", promedios.get("mayo") + fotoperiodo.getMayo());
+	    promedios.put("junio", promedios.get("junio") + fotoperiodo.getJunio());
+	    promedios.put("julio", promedios.get("julio") + fotoperiodo.getJulio());
+	    promedios.put("agosto", promedios.get("agosto") + fotoperiodo.getAgosto());
+	    promedios.put("septiembre", promedios.get("septiembre") + fotoperiodo.getSeptiembre());
+	    promedios.put("octubre", promedios.get("octubre") + fotoperiodo.getOctubre());
+	    promedios.put("noviembre", promedios.get("noviembre") + fotoperiodo.getNoviembre());
+	    promedios.put("diciembre", promedios.get("diciembre") + fotoperiodo.getDiciembre());
+	}
 
-  private void ajustarPromediosMensuales(Map<String, Double> promedios, int totalFotoperiodos) {
-    for (String mes : obtenerMeses()) {
-      promedios.put(mes, redondearAUnDecimal(promedios.get(mes) / totalFotoperiodos));
-    }
-  }
+	private void ajustarPromediosMensuales(Map<String, Double> promedios, int totalFotoperiodos) {
+	    for (String mes : obtenerMeses()) {
+	        promedios.put(mes, redondearAUnDecimal(promedios.get(mes) / totalFotoperiodos));
+	    }
+	}
+
+	private void ajustarPromedioAnual(Map<String, Double> promedios) {
+	    double sumaMensual = 0.0;
+	    for (String mes : obtenerMeses()) {
+	        sumaMensual += promedios.get(mes);
+	    }
+	    promedios.put("anual", redondearAUnDecimal(sumaMensual / 12)); // Calculamos y redondeamos el promedio anual
+	}
+
 
   // =====================================
   // Métodos para cálculos de desviación estándar
@@ -191,88 +200,69 @@ public class FotoperiodoService {
 
   }
 
-
   // Método auxiliar para redondear a un decimal
   private double redondearAUnDecimal(double valor) {
     return Math.round(valor * 10.0) / 10.0;
   }
-  
+
   public Map<String, Double> calcularDesviaciones() {
-	    List<Fotoperiodo> fotoperiodos = fotoperiodoRepository.findAll();
-	    Map<String, Double> desviaciones = inicializarMapaPromedios(); // Reutiliza este método para inicializar
+    List<Fotoperiodo> fotoperiodos = fotoperiodoRepository.findAll();
+    Map<String, Double> desviaciones = inicializarMapaPromedios(); // Reutiliza este método para inicializar
 
-	    for (String mes : obtenerMeses()) {
-	        double promedio = calcularPromedioPorMes(mes, fotoperiodos);
-	        double sumaDiferenciasCuadradas = 0.0;
-	        for (Fotoperiodo fotoperiodo : fotoperiodos) {
-	            double valorMes = obtenerValorMes(fotoperiodo, mes);
-	            sumaDiferenciasCuadradas += Math.pow(valorMes - promedio, 2);
-	        }
-	        desviaciones.put(mes, redondearAUnDecimal(Math.sqrt(sumaDiferenciasCuadradas / fotoperiodos.size())));
-	    }
+    for (String mes : obtenerMeses()) {  
+      double promedio = calcularPromedioPorMes(mes, fotoperiodos);
+      double sumaDiferenciasCuadradas = 0.0;
+      for (Fotoperiodo fotoperiodo : fotoperiodos) {
+        double valorMes = obtenerValorMes(fotoperiodo, mes);
+        sumaDiferenciasCuadradas += Math.pow(valorMes - promedio, 2);
+      }
+      desviaciones.put(mes, redondearAUnDecimal(Math.sqrt(sumaDiferenciasCuadradas / fotoperiodos.size())));
+    }
 
-	    return desviaciones;
-	}
+    return desviaciones;
+  }
 
-	private double calcularPromedioPorMes(String mes, List<Fotoperiodo> fotoperiodos) {
-	    double suma = 0.0;
-	    for (Fotoperiodo fotoperiodo : fotoperiodos) {
-	        suma += obtenerValorMes(fotoperiodo, mes);
-	    }
-	    return suma / fotoperiodos.size();
-	}
+  private double calcularPromedioPorMes(String mes, List<Fotoperiodo> fotoperiodos) {
+    double suma = 0.0;
+    for (Fotoperiodo fotoperiodo : fotoperiodos) {
+      suma += obtenerValorMes(fotoperiodo, mes);
+    }
+    return suma / fotoperiodos.size();
+  }
 
-	private double obtenerValorMes(Fotoperiodo fotoperiodo, String mes) {
-	    switch (mes) {
-	        case "enero": return fotoperiodo.getEnero();
-	        case "febrero": return fotoperiodo.getFebrero();
-	        // Repite para los demás meses
-	        default: return 0.0;
-	    }
-	}
-	
-	
-	private void agregarValor(Map<String, Double> sumaValores, Map<String, Integer> conteoMensual, double valor, String mes) {
-	    if (valor > 0) {
-	        sumaValores.put(mes, sumaValores.get(mes) + valor);
-	        conteoMensual.put(mes, conteoMensual.get(mes) + 1);
-	    }
-	}
-
-	public Map<String, Double> calcularCoeficienteDeVariacion() {
-	    List<Fotoperiodo> fotoperiodos = fotoperiodoRepository.findAll();
-	    Map<String, Double> sumaValores = new HashMap<>();
-	    Map<String, Double> sumaCuadrados = new HashMap<>();
-	    Map<String, Integer> conteoMensual = new HashMap<>();
-	    Map<String, Double> coeficienteDeVariacion = new HashMap<>();
-
-	    for (String mes : obtenerMeses()) {
-	        sumaValores.put(mes, 0.0);
-	        sumaCuadrados.put(mes, 0.0);
-	        conteoMensual.put(mes, 0);
-	    }
-
-	    for (Fotoperiodo fotoperiodo : fotoperiodos) {
-	        for (String mes : obtenerMeses()) {
-	            double valorMes = getValorMes(fotoperiodo, mes);
-	            agregarValor(sumaValores, conteoMensual, valorMes, mes);
-	            sumaCuadrados.put(mes, sumaCuadrados.get(mes) + Math.pow(valorMes, 2));
-	        }
-	    }
-
-	    for (String mes : obtenerMeses()) {
-	        int conteo = conteoMensual.get(mes);
-	        if (conteo > 0) {
-	            double promedio = sumaValores.get(mes) / conteo;
-	            double desviacion = Math.sqrt((sumaCuadrados.get(mes) / conteo) - Math.pow(promedio, 2));
-	            coeficienteDeVariacion.put(mes, redondearAUnDecimal(desviacion / promedio * 100));
-	        } else {
-	            coeficienteDeVariacion.put(mes, 0.0); // Si no hay datos, el coeficiente es 0.
-	        }
-	    }
-
-	    return coeficienteDeVariacion;
-	}
+  private double obtenerValorMes(Fotoperiodo fotoperiodo, String mes) {
+    switch (mes) {
+      case "enero":
+        return fotoperiodo.getEnero();
+      case "febrero":
+        return fotoperiodo.getFebrero();
+      // Repite para los demás meses
+      default:
+        return 0.0;
+    }
+  }
 
 
+  public Map<String, Double> calcularCoeficienteVariacion() {
+    List<Fotoperiodo> fotoperiodos = fotoperiodoRepository.findAll();
+    Map<String, Double> coeficienteDeVariacion = new HashMap<>();
+    Map<String, Double> promedios = calcularPromedioTotales();
+    Map<String, Double> desviaciones = calcularDesviacionEstandar();
+
+    // Calcular el coeficiente de variación para cada mes
+    for (String mes : obtenerMeses()) {
+      double desviacion = desviaciones.get(mes);
+      double promedio = promedios.get(mes);
+      double cv = (promedio != 0) ? (desviacion / promedio) * 100 : 0; // Evitar división por cero
+      coeficienteDeVariacion.put(mes, redondearAUnDecimal(cv));
+    }
+
+    // Calcular el coeficiente de variación anual
+    double promedioAnual = promedios.get("anual");
+    double desviacionAnual = desviaciones.get("anual");
+    double cvAnual = (promedioAnual != 0) ? (desviacionAnual / promedioAnual) * 100 : 0;
+    coeficienteDeVariacion.put("anual", redondearAUnDecimal(cvAnual));
+
+    return coeficienteDeVariacion;
+  }
 }

@@ -46,7 +46,7 @@ public class ControllerWebFotoperiodo {
       Map<String, Integer> conteosTotales = fotoperiodoService.calcularConteosTotales();
       Map<String, Double> promedios = fotoperiodoService.calcularPromedioTotales();
       Map<String, Double> sumaDiferenciasCuadradoAnual = fotoperiodoService.calcularDesviacionEstandar();
-      Map<String, Double> coeficienteDeVariacion = fotoperiodoService.calcularCoeficienteDeVariacion();
+      Map<String, Double> coeficienteDeVariacion = fotoperiodoService.calcularCoeficienteVariacion();
       Map<String, Double> desviaciones = fotoperiodoService.calcularDesviaciones(); // Completa este método en tu servicio
 
       model.addAttribute("fotoperiodos", fotoperiodos);
